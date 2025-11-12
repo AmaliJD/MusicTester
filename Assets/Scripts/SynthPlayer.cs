@@ -80,6 +80,7 @@ public class SynthPlayer : MonoBehaviour
     {
         float value = 0;
         float gain = .15f;
+        double k = -3;
         foreach (var entry in notes)
         {
             Note note = entry.Value;
@@ -93,8 +94,9 @@ public class SynthPlayer : MonoBehaviour
                 }
                 else if (time - note.refTime < note.attack + note.decay)
                 {
-                    float t = (float)MathF.InverseLerpClamped(note.refTime + note.attack, note.refTime + note.attack + note.decay, time);
-                    envelope = (float)MathF.Lerp(note.velocity, note.sustain, t);
+                    double t = MathF.InverseLerpClamped(note.refTime + note.attack, note.refTime + note.attack + note.decay, time);
+                    double expT = Math.Exp(k * t);
+                    envelope = (float)MathF.Lerp(note.sustain, note.velocity, expT);
                 }
 
                 note.lastEnvelopeValue = envelope;
@@ -103,7 +105,10 @@ public class SynthPlayer : MonoBehaviour
             {
                 if (time - note.refTime < note.release)
                 {
-                    envelope = (1 - (float)MathF.InverseLerpClamped(note.refTime, note.refTime + note.release, time)) * note.lastEnvelopeValue;
+                    double t = MathF.InverseLerpClamped(note.refTime, note.refTime + note.release, time);
+                    double expT = Math.Exp(k * t);
+                    envelope = (float)MathF.Lerp(0, note.lastEnvelopeValue, expT);
+                    //envelope = (1 - (float)MathF.InverseLerpClamped(note.refTime, note.refTime + note.release, time)) * note.lastEnvelopeValue;
                 }
                 else
                 {
@@ -111,7 +116,7 @@ public class SynthPlayer : MonoBehaviour
                 }    
             }
 
-            value += Saw(note.phase) * envelope * gain;
+            value += Square(note.phase) * envelope * gain;
         }
 
         return value;
@@ -126,10 +131,18 @@ public class SynthPlayer : MonoBehaviour
         {
             if (keys[i].wasPressedThisFrame)
             {
-                notes.Add(i, new(1, i, edo, a: .5f, d: 1f, s: .3f, r: 1f, v: 1f));
+                if (notes.ContainsKey(i))
+                {
+                    notes.Remove(i);
+
+                    if (offNoteIDs.Contains(i))
+                        offNoteIDs.Remove(i);
+                }
+
+                notes.Add(i, new(1, i, edo, .05f, .5f, .3f, .5f, 1f));
                 Debug.Log($"{notes[i].frequency} Hz");
             }
-            else if (keys[i].wasReleasedThisFrame)
+            else if (keys[i].wasReleasedThisFrame && notes.ContainsKey(i))
             {
                 notes[i].TurnOff();
                 offNoteIDs.Add(i);
