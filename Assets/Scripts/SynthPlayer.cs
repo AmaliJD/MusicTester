@@ -13,8 +13,9 @@ public class SynthPlayer : MonoBehaviour
     private AudioSource audioSource;
 
     public static float sampleRate = 0;
-    public static float baseFrequency = 110;
+    public static float baseFrequency = 55;
     private double time;
+    int edo = 1;
     float maxValue = 0;
     List<KeyControl> keys = new();
 
@@ -44,8 +45,8 @@ public class SynthPlayer : MonoBehaviour
             Keyboard.current.digit1Key,
             Keyboard.current.digit2Key,
             Keyboard.current.digit3Key,
-            Keyboard.current.digit4Key,
-            Keyboard.current.digit5Key,
+            //Keyboard.current.digit4Key,
+            //Keyboard.current.digit5Key,
             //Keyboard.current.digit6Key,
             //Keyboard.current.digit7Key,
             //Keyboard.current.digit8Key,
@@ -54,6 +55,7 @@ public class SynthPlayer : MonoBehaviour
             //Keyboard.current.minusKey,
             //Keyboard.current.equalsKey,
         };
+        edo = keys.Count - 1;
     }
 
     private void OnAudioFilterRead(float[] data, int channels)
@@ -126,26 +128,16 @@ public class SynthPlayer : MonoBehaviour
     {
         time = AudioSettings.dspTime;
 
-        int edo = keys.Count - 1;
         for (int i = 0; i < keys.Count; i++)
         {
             if (keys[i].wasPressedThisFrame)
             {
-                if (notes.ContainsKey(i))
-                {
-                    notes.Remove(i);
-
-                    if (offNoteIDs.Contains(i))
-                        offNoteIDs.Remove(i);
-                }
-
-                notes.Add(i, new(1, i, edo, .05f, .5f, .3f, .5f, 1f));
-                Debug.Log($"{notes[i].frequency} Hz");
+                AddNote(i);
+                //Debug.Log($"{notes[i].frequency} Hz");
             }
-            else if (keys[i].wasReleasedThisFrame && notes.ContainsKey(i))
+            else if (keys[i].wasReleasedThisFrame)
             {
-                notes[i].TurnOff();
-                offNoteIDs.Add(i);
+                ReleaseNote(i);
             }
         }
 
@@ -153,8 +145,7 @@ public class SynthPlayer : MonoBehaviour
         {
             if (time >= notes[offNoteIDs[i]].refTime + notes[offNoteIDs[i]].release)
             {
-                notes.Remove(offNoteIDs[i]);
-                offNoteIDs.RemoveAt(i);
+                RemoveNote(offNoteIDs[i]);
                 i--;
             }
         }
@@ -167,6 +158,34 @@ public class SynthPlayer : MonoBehaviour
         {
             audioSource.Stop();
         }
+    }
+
+    void AddNote(int key)
+    {
+        if (notes.ContainsKey(key))
+        {
+            notes.Remove(key);
+
+            if (offNoteIDs.Contains(key))
+                offNoteIDs.Remove(key);
+        }
+
+        notes.Add(key, new(2, key, edo, .05f, .5f, .3f, .5f, 1f));
+    }
+
+    void ReleaseNote(int key)
+    {
+        if (!notes.ContainsKey(key))
+            return;
+
+        notes[key].TurnOff();
+        offNoteIDs.Add(key);
+    }
+
+    void RemoveNote(int key)
+    {
+        notes.Remove(key);
+        offNoteIDs.Remove(key);
     }
     
 
