@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -49,8 +50,8 @@ public class SynthPlayer : MonoBehaviour
 
         public void UpdatePhase()
         {
-            this.phase += frequency / sampleRate;
-            if (phase >= 1) phase -= 1;
+            phase += frequency / sampleRate;
+            phase = Mathf.Repeat(phase, 1);
         }
 
     }
@@ -91,6 +92,7 @@ public class SynthPlayer : MonoBehaviour
         };
     }
 
+    float maxValue = 0;
     private void OnAudioFilterRead(float[] data, int channels)
     {
         for (int i = 0; i < data.Length; i += channels)
@@ -99,6 +101,9 @@ public class SynthPlayer : MonoBehaviour
 
             for (int c = 0; c < channels; c++)
                 data[i + c] = value;
+
+            maxValue = Mathf.Max(maxValue, value);
+            Debug.Log($"Audio Value: {maxValue}");
 
             foreach (int index in new List<int>(notes.Keys))
             {
@@ -119,7 +124,7 @@ public class SynthPlayer : MonoBehaviour
             if (keys[i].wasPressedThisFrame)
             {
                 notes.Add(i, new(1, i, edo));
-                Debug.Log($"{notes[i].frequency} Hz");
+                //Debug.Log($"{notes[i].frequency} Hz");
             }
             else if (keys[i].wasReleasedThisFrame)
             {
@@ -140,28 +145,18 @@ public class SynthPlayer : MonoBehaviour
     float CombineNotes()
     {
         float value = 0;
+        float gain = .15f;
         foreach (var entry in notes)
         {
             Note note = entry.Value;
-            value += Triangle(note.phase);
+            value += Triangle(note.phase) * gain;
         }
-        value /= notes.Count;
 
         return value;
     }
 
-    float Sine(float phase)
-    {
-        return Mathf.Sin(2 * Mathf.PI * phase);
-    }
-
-    float Saw(float phase)
-    {
-        return phase * 2 - 1;
-    }
-
-    float Triangle(float phase)
-    {
-        return Mathf.Abs(phase * 4.0f - 2.0f) - 1.0f;
-    }
+    float Sine(float phase) => Mathf.Sin(2 * Mathf.PI * phase);
+    float Saw(float phase) => phase * 2 - 1;
+    float Triangle(float phase) => Mathf.Abs(phase * 4.0f - 2.0f) - 1.0f;
+    float Square(float phase) => phase >= .5f ? 1 : 0;
 }
