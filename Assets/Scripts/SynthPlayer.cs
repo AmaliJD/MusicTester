@@ -19,6 +19,7 @@ public class SynthPlayer : MonoBehaviour
     List<KeyControl> keys = new();
 
     public Dictionary<int, Note> notes = new();
+    public List<int> offNoteIDs = new();
 
     private void Awake()
     {
@@ -95,13 +96,19 @@ public class SynthPlayer : MonoBehaviour
                     float t = (float)MathF.InverseLerpClamped(note.refTime + note.attack, note.refTime + note.attack + note.decay, time);
                     envelope = (float)MathF.Lerp(note.velocity, note.sustain, t);
                 }
+
+                note.lastEnvelopeValue = envelope;
             }
             else
             {
                 if (time - note.refTime < note.release)
                 {
-                    envelope = (1 - (float)MathF.InverseLerpClamped(note.refTime, note.refTime + note.release, time)) * note.sustain;
+                    envelope = (1 - (float)MathF.InverseLerpClamped(note.refTime, note.refTime + note.release, time)) * note.lastEnvelopeValue;
                 }
+                else
+                {
+                    envelope = 0;
+                }    
             }
 
             value += Saw(note.phase) * envelope * gain;
@@ -112,17 +119,30 @@ public class SynthPlayer : MonoBehaviour
 
     private void Update()
     {
+        time = AudioSettings.dspTime;
+
         int edo = keys.Count - 1;
         for (int i = 0; i < keys.Count; i++)
         {
             if (keys[i].wasPressedThisFrame)
             {
-                notes.Add(i, new(1, i, edo, a: 1, d: 1, s: .2f, v: 1f));
+                notes.Add(i, new(1, i, edo, a: .5f, d: 1f, s: .3f, r: 1f, v: 1f));
                 Debug.Log($"{notes[i].frequency} Hz");
             }
             else if (keys[i].wasReleasedThisFrame)
             {
-                notes.Remove(i);
+                notes[i].TurnOff();
+                offNoteIDs.Add(i);
+            }
+        }
+
+        for (int i = 0; i < offNoteIDs.Count; i++)
+        {
+            if (time >= notes[offNoteIDs[i]].refTime + notes[offNoteIDs[i]].release)
+            {
+                notes.Remove(offNoteIDs[i]);
+                offNoteIDs.RemoveAt(i);
+                i--;
             }
         }
 

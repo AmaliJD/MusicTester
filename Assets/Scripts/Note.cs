@@ -5,6 +5,7 @@ public class Note
     public float phase;
     public float frequency;
     public float attack = 0, decay = 0, sustain = 1, release = 0, velocity = 1;
+    public float lastEnvelopeValue;
     public bool on = true;
     public double refTime = AudioSettings.dspTime;
 
@@ -51,6 +52,12 @@ public class Note
         sustain = s ?? v ?? sustain;
         release = r ?? release;
         velocity = v ?? s ?? velocity;
+    }
+
+    public void TurnOff()
+    {
+        refTime = AudioSettings.dspTime;
+        on = false;
     }
 
     public void UpdatePhase()
