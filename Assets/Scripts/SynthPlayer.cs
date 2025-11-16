@@ -1,3 +1,4 @@
+using GLG;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,14 +14,14 @@ public class SynthPlayer : MonoBehaviour
     private AudioSource audioSource;
 
     public static float sampleRate = 0;
-    public static float baseFrequency = 55;
+    public static float baseFrequency = 220;//55;
     private double time;
     int edo = 1;
     float maxValue = 0;
     List<KeyControl> keys = new();
 
-    public Dictionary<int, Note> notes = new();
-    public List<int> offNoteIDs = new();
+    Dictionary<int, Note> notes = new();
+    List<int> offNoteIDs = new();
 
     private void Awake()
     {
@@ -42,9 +43,9 @@ public class SynthPlayer : MonoBehaviour
             Keyboard.current.f10Key,
             Keyboard.current.f11Key,
             Keyboard.current.f12Key,
-            Keyboard.current.digit1Key,
-            Keyboard.current.digit2Key,
-            Keyboard.current.digit3Key,
+            //Keyboard.current.digit1Key,
+            //Keyboard.current.digit2Key,
+            //Keyboard.current.digit3Key,
             //Keyboard.current.digit4Key,
             //Keyboard.current.digit5Key,
             //Keyboard.current.digit6Key,
@@ -115,10 +116,10 @@ public class SynthPlayer : MonoBehaviour
                 else
                 {
                     envelope = 0;
-                }    
+                }
             }
 
-            value += Square(note.phase) * envelope * gain;
+            value += Saw(note.phase) * envelope * gain;
         }
 
         return value;
@@ -128,18 +129,38 @@ public class SynthPlayer : MonoBehaviour
     {
         time = AudioSettings.dspTime;
 
+        // keyboard
         for (int i = 0; i < keys.Count; i++)
         {
             if (keys[i].wasPressedThisFrame)
             {
                 AddNote(i);
-                //Debug.Log($"{notes[i].frequency} Hz");
+                Debug.Log($"{notes[i].frequency} Hz");
             }
             else if (keys[i].wasReleasedThisFrame)
             {
                 ReleaseNote(i);
             }
         }
+
+        // mouse
+        //float cents = 200 * Mathf.Round(Mathf.Clamp((Camera.main.ScreenToWorldPoint(Mouse.current.position.value).y + Camera.main.orthographicSize) / 10, 0, 1) * 24);
+
+        //if (Mouse.current.leftButton.wasPressedThisFrame)
+        //    AddNote(-1, (int)cents);
+        //else if  (Mouse.current.leftButton.wasReleasedThisFrame)
+        //    ReleaseNote(-1);
+
+        // FILTER
+        //// In Note
+        //public float filterOut = 0f;
+        //public float filterCutoff = 1000f;
+
+        //// In CombineNotes(), per Note
+        //float raw = GetSaw(note.phase);
+        //float alpha = Mathf.Exp(-2f * Mathf.PI * note.filterCutoff / sampleRate);
+        //note.filterOut = note.filterOut + alpha* (raw - note.filterOut);
+        //float value = note.filterOut * GetEnvelope(note);
 
         for (int i = 0; i < offNoteIDs.Count; i++)
         {
@@ -170,7 +191,20 @@ public class SynthPlayer : MonoBehaviour
                 offNoteIDs.Remove(key);
         }
 
-        notes.Add(key, new(2, key, edo, .05f, .5f, .3f, .5f, 1f));
+        notes.Add(key, new(0, key, edo, .05f, .5f, .3f, .5f, 1f, octaveRatio: 3f));
+    }
+
+    void AddNote(int key, int cents)
+    {
+        if (notes.ContainsKey(key))
+        {
+            notes.Remove(key);
+
+            if (offNoteIDs.Contains(key))
+                offNoteIDs.Remove(key);
+        }
+
+        notes.Add(key, new(0, cents, .05f, .5f, .3f, .5f, 1f));
     }
 
     void ReleaseNote(int key)
