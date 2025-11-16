@@ -14,7 +14,7 @@ public class SynthPlayer : MonoBehaviour
     private AudioSource audioSource;
 
     public static float sampleRate = 0;
-    public static float baseFrequency = 220;//55;
+    public static float baseFrequency = 55;
     private double time;
     int edo = 1;
     float maxValue = 0;
@@ -42,7 +42,7 @@ public class SynthPlayer : MonoBehaviour
             Keyboard.current.f9Key,
             Keyboard.current.f10Key,
             Keyboard.current.f11Key,
-            Keyboard.current.f12Key,
+            //Keyboard.current.f12Key,
             //Keyboard.current.digit1Key,
             //Keyboard.current.digit2Key,
             //Keyboard.current.digit3Key,
@@ -191,7 +191,7 @@ public class SynthPlayer : MonoBehaviour
                 offNoteIDs.Remove(key);
         }
 
-        notes.Add(key, new(0, key, edo, .05f, .5f, .3f, .5f, 1f, octaveRatio: 3f));
+        notes.Add(key, new(2, key, edo, .05f, .5f, .3f, .5f, 1f, octaveRatio: 1.6f, octaveStartRatio: 2));
     }
 
     void AddNote(int key, int cents)

@@ -10,7 +10,7 @@ public class Note
     public bool on = true;
     public double refTime = AudioSettings.dspTime;
 
-    public Note(uint octave, int index, int edo, float? a = null, float? d = null, float? s = null, float? r = null, float? v = null, float octaveRatio = 2)
+    public Note(uint octave, int index, int edo, float? a = null, float? d = null, float? s = null, float? r = null, float? v = null, float octaveRatio = 2, float? octaveStartRatio = null)
     {
         if (edo < 1)
             edo = 1;
@@ -19,30 +19,30 @@ public class Note
             octaveRatio = 1;
 
         phase = 0;
-        frequency = SynthPlayer.baseFrequency * Mathf.Pow(octaveRatio, octave) * Mathf.Pow(Mathf.Pow(octaveRatio, 1 / (float)edo), (float)index);
+        frequency = SynthPlayer.baseFrequency * Mathf.Pow(octaveStartRatio ?? octaveRatio, octave) * Mathf.Pow(Mathf.Pow(octaveRatio, 1 / (float)edo), (float)index);
 
         SetASDRV(a, d, s, r, v);
     }
 
-    public Note(uint octave, float ratio, float? a = null, float? d = null, float? s = null, float? r = null, float? v = null, float octaveRatio = 2)
+    public Note(uint octave, float ratio, float? a = null, float? d = null, float? s = null, float? r = null, float? v = null, float octaveRatio = 2, float? octaveStartRatio = null)
     {
         if (ratio < 0)
             ratio = 1;
 
         phase = 0;
-        frequency = SynthPlayer.baseFrequency * Mathf.Pow(octaveRatio, octave) * ratio;
+        frequency = SynthPlayer.baseFrequency * Mathf.Pow(octaveStartRatio ?? octaveRatio, octave) * ratio;
 
         SetASDRV(a, d, s, r, v);
     }
 
-    public Note(uint octave, int cents, float? a = null, float? d = null, float? s = null, float? r = null, float? v = null, float octaveRatio = 2)
+    public Note(uint octave, int cents, float? a = null, float? d = null, float? s = null, float? r = null, float? v = null, float octaveRatio = 2, float? octaveStartRatio = null)
     {
         phase = 0;
 
         if (cents != 0)
-            frequency = SynthPlayer.baseFrequency * Mathf.Pow(octaveRatio, octave) * Mathf.Pow(2, 1 / (1200 / (float)cents));
+            frequency = SynthPlayer.baseFrequency * Mathf.Pow(octaveStartRatio ?? octaveRatio, octave) * Mathf.Pow(2, 1 / (1200 / (float)cents));
         else
-            frequency = SynthPlayer.baseFrequency * Mathf.Pow(octaveRatio, octave);
+            frequency = SynthPlayer.baseFrequency * Mathf.Pow(octaveStartRatio ?? octaveRatio, octave);
 
         SetASDRV(a, d, s, r, v);
     }
