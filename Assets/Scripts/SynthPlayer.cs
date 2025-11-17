@@ -32,9 +32,9 @@ public class SynthPlayer : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
         synths.Add(new(Synth.Waveform.Saw, adsr));
-        synths.Add(new(Synth.Waveform.Square, adsr.Modify(true, attack: .2f)));
-        synths.Add(new(Synth.Waveform.Triangle, adsr.Modify(true, release: 0)));
-        synths.Add(new(Synth.Waveform.Sine, adsr.Modify(true, attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
+        synths.Add(new(Synth.Waveform.Square, adsr.Clone(attack: .2f)));
+        synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
+        synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
 
         keys = new()
         {
