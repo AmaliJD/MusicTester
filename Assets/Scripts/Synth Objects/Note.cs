@@ -1,5 +1,6 @@
 using Unity.Mathematics;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.Arm;
 
 public class Note
 {
@@ -42,6 +43,12 @@ public class Note
         this.synth = synth;
     }
 
+    public void TurnOn()
+    {
+        refTime = AudioSettings.dspTime;
+        on = true;
+    }
+
     public void TurnOff()
     {
         refTime = AudioSettings.dspTime;
@@ -59,6 +66,28 @@ public class Note
         if (cents != 0)
             frequency *= Mathf.Pow(2, 1 / (1200 / (float)cents));
     }
-
+    
     public ADSR GetADSR() => adsr ?? synth.adsr;
+}
+
+public static class NoteExtensions
+{
+    public static Note On(this Note note)
+    {
+        note.TurnOn();
+        return note;
+    }
+
+    public static Note Off(this Note note)
+    {
+        note.TurnOff();
+        return note;
+    }
+
+    public static Note Synth(this Note note, Synth synth)
+    {
+        note.synth = synth;
+        return note;
+    }
+
 }

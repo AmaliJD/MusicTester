@@ -17,7 +17,6 @@ public class SynthPlayer : MonoBehaviour
     public static float baseFrequency = 55;
     private double time;
     int edo = 1;
-    float maxValue = 0;
     List<KeyControl> keys = new();
 
     Dictionary<int, Note> notes = new();
@@ -27,6 +26,10 @@ public class SynthPlayer : MonoBehaviour
     int synthIndex;
     ADSR adsr = new(.05f, .5f, .3f, .5f, 1f);
 
+    // test variables
+    float maxValue = 0;
+    Note freeNote;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -35,6 +38,7 @@ public class SynthPlayer : MonoBehaviour
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(attack: .2f)));
         synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
         synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
+        freeNote = new(baseFrequency * 4, synths[synthIndex]);
 
         keys = new()
         {
@@ -50,7 +54,7 @@ public class SynthPlayer : MonoBehaviour
             Keyboard.current.f9Key,
             Keyboard.current.f10Key,
             Keyboard.current.f11Key,
-            //Keyboard.current.f12Key,
+            Keyboard.current.f12Key,
             //Keyboard.current.digit1Key,
             //Keyboard.current.digit2Key,
             //Keyboard.current.digit3Key,
@@ -150,13 +154,28 @@ public class SynthPlayer : MonoBehaviour
         {
             if (keys[i].wasPressedThisFrame)
             {
-                AddNote(i);
+                AddNote(i, new Note(/*(2, 1.67f, 2)*/2, i, edo, synths[synthIndex]).On());
                 Debug.Log($"{notes[i].frequency} Hz");
             }
             else if (keys[i].wasReleasedThisFrame)
             {
                 ReleaseNote(i);
             }
+        }
+
+        // free note
+        float mouseScrollY = Mouse.current.scroll.value.y;
+        if (mouseScrollY != 0)
+            freeNote.AddCents(mouseScrollY);
+
+        if (Keyboard.current.backquoteKey.wasPressedThisFrame)
+        {
+            AddNote(-1, freeNote.Synth(synths[synthIndex]).On());
+            Debug.Log($"{notes[-1].frequency} Hz");
+        }
+        else if (Keyboard.current.backquoteKey.wasReleasedThisFrame)
+        {
+            ReleaseNote(-1);
         }
 
         // remove finished notes
@@ -180,7 +199,7 @@ public class SynthPlayer : MonoBehaviour
         }
     }
 
-    void AddNote(int key)
+    void AddNote(int key, Note note)
     {
         if (notes.ContainsKey(key))
         {
@@ -190,7 +209,7 @@ public class SynthPlayer : MonoBehaviour
                 offNoteIDs.Remove(key);
         }
 
-        notes.Add(key, new Note((2, 1.67f, 2), key, edo, synths[synthIndex]));
+        notes.Add(key, note);
     }
 
     void ReleaseNote(int key)
