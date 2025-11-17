@@ -31,10 +31,10 @@ public class SynthPlayer : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
-        synths.Add(new(Synth.Waveform.Saw));
-        synths.Add(new(Synth.Waveform.Square));
-        synths.Add(new(Synth.Waveform.Triangle));
-        synths.Add(new(Synth.Waveform.Sine));
+        synths.Add(Synth.Waveform.Saw);
+        synths.Add(Synth.Waveform.Square);
+        synths.Add(Synth.Waveform.Triangle);
+        synths.Add(Synth.Waveform.Sine);
 
         keys = new()
         {
@@ -158,25 +158,6 @@ public class SynthPlayer : MonoBehaviour
                 ReleaseNote(i);
             }
         }
-
-        // mouse
-        //float cents = 200 * Mathf.Round(Mathf.Clamp((Camera.main.ScreenToWorldPoint(Mouse.current.position.value).y + Camera.main.orthographicSize) / 10, 0, 1) * 24);
-
-        //if (Mouse.current.leftButton.wasPressedThisFrame)
-        //    AddNote(-1, (int)cents);
-        //else if  (Mouse.current.leftButton.wasReleasedThisFrame)
-        //    ReleaseNote(-1);
-
-        // FILTER
-        //// In Note
-        //public float filterOut = 0f;
-        //public float filterCutoff = 1000f;
-
-        //// In CombineNotes(), per Note
-        //float raw = GetSaw(note.phase);
-        //float alpha = Mathf.Exp(-2f * Mathf.PI * note.filterCutoff / sampleRate);
-        //note.filterOut = note.filterOut + alpha* (raw - note.filterOut);
-        //float value = note.filterOut * GetEnvelope(note);
 
         // remove finished notes
         for (int i = 0; i < offNoteIDs.Count; i++)

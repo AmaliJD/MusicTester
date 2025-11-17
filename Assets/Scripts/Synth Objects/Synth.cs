@@ -16,6 +16,8 @@ public class Synth
         this.waveform = baseWaveform;
     }
 
+    public static implicit operator Synth(Waveform baseWaveform) => new Synth(baseWaveform);
+
     public float GetWaveformValue(float phase)
     {
         return waveform switch

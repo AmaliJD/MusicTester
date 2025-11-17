@@ -16,7 +16,7 @@ public class Octave
         this.root = root ?? scale;
     }
 
-    public static implicit operator Octave(uint octave) => new Octave(octave);
-    public static implicit operator Octave((uint octave, float scale) octave_scale) => new Octave(octave_scale.octave, octave_scale.scale);
-    public static implicit operator Octave((uint octave, float scale, float root) octave_scale_root) => new Octave(octave_scale_root.octave, octave_scale_root.scale, octave_scale_root.root);
+    public static implicit operator Octave(uint o) => new Octave(o);
+    public static implicit operator Octave((uint octave, float scale) os) => new Octave(os.octave, os.scale);
+    public static implicit operator Octave((uint octave, float scale, float root) osr) => new Octave(osr.octave, osr.scale, osr.root);
 }
