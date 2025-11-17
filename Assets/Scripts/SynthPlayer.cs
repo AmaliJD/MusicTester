@@ -23,10 +23,18 @@ public class SynthPlayer : MonoBehaviour
     Dictionary<int, Note> notes = new();
     List<int> offNoteIDs = new();
 
+    List<Synth> synths = new();
+    int synthIndex;
+    ADSR adsr = new(.05f, .5f, .3f, .5f, 1f);
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
+        synths.Add(new(Synth.Waveform.Saw));
+        synths.Add(new(Synth.Waveform.Square));
+        synths.Add(new(Synth.Waveform.Triangle));
+        synths.Add(new(Synth.Waveform.Sine));
 
         keys = new()
         {
@@ -87,28 +95,30 @@ public class SynthPlayer : MonoBehaviour
         foreach (var entry in notes)
         {
             Note note = entry.Value;
-            float envelope = note.sustain;
+            ADSR adsr = note.adsr;
+            Synth synth = note.synth;
+            float envelope = adsr.sustain;
 
             if (note.on)
             {
-                if (time - note.refTime < note.attack)
+                if (time - note.refTime < adsr.attack)
                 {
-                    envelope = (float)MathF.InverseLerpClamped(note.refTime, note.refTime + note.attack, time) * note.velocity;
+                    envelope = (float)MathF.InverseLerpClamped(note.refTime, note.refTime + adsr.attack, time) * adsr.velocity;
                 }
-                else if (time - note.refTime < note.attack + note.decay)
+                else if (time - note.refTime < adsr.attack + adsr.decay)
                 {
-                    double t = MathF.InverseLerpClamped(note.refTime + note.attack, note.refTime + note.attack + note.decay, time);
+                    double t = MathF.InverseLerpClamped(note.refTime + adsr.attack, note.refTime + adsr.attack + adsr.decay, time);
                     double expT = Math.Exp(k * t);
-                    envelope = (float)MathF.Lerp(note.sustain, note.velocity, expT);
+                    envelope = (float)MathF.Lerp(adsr.sustain, adsr.velocity, expT);
                 }
 
                 note.lastEnvelopeValue = envelope;
             }
             else
             {
-                if (time - note.refTime < note.release)
+                if (time - note.refTime < adsr.release)
                 {
-                    double t = MathF.InverseLerpClamped(note.refTime, note.refTime + note.release, time);
+                    double t = MathF.InverseLerpClamped(note.refTime, note.refTime + adsr.release, time);
                     double expT = Math.Exp(k * t);
                     envelope = (float)MathF.Lerp(0, note.lastEnvelopeValue, expT);
                     //envelope = (1 - (float)MathF.InverseLerpClamped(note.refTime, note.refTime + note.release, time)) * note.lastEnvelopeValue;
@@ -119,7 +129,7 @@ public class SynthPlayer : MonoBehaviour
                 }
             }
 
-            value += Saw(note.phase) * envelope * gain;
+            value += synth.GetWaveformValue(note.phase) * envelope * gain;
         }
 
         return value;
@@ -128,6 +138,12 @@ public class SynthPlayer : MonoBehaviour
     private void Update()
     {
         time = AudioSettings.dspTime;
+
+        // change synth index
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            synthIndex = (synthIndex + 1) % synths.Count;
+        }
 
         // keyboard
         for (int i = 0; i < keys.Count; i++)
@@ -162,15 +178,17 @@ public class SynthPlayer : MonoBehaviour
         //note.filterOut = note.filterOut + alpha* (raw - note.filterOut);
         //float value = note.filterOut * GetEnvelope(note);
 
+        // remove finished notes
         for (int i = 0; i < offNoteIDs.Count; i++)
         {
-            if (time >= notes[offNoteIDs[i]].refTime + notes[offNoteIDs[i]].release)
+            if (time >= notes[offNoteIDs[i]].refTime + notes[offNoteIDs[i]].adsr.release)
             {
                 RemoveNote(offNoteIDs[i]);
                 i--;
             }
         }
 
+        // enable/disable AudioSource
         if (notes.Count > 0 && !audioSource.isPlaying)
         {
             audioSource.Play();
@@ -191,20 +209,7 @@ public class SynthPlayer : MonoBehaviour
                 offNoteIDs.Remove(key);
         }
 
-        notes.Add(key, new(2, key, edo, .05f, .5f, .3f, .5f, 1f, octaveRatio: 1.6f, octaveStartRatio: 2));
-    }
-
-    void AddNote(int key, int cents)
-    {
-        if (notes.ContainsKey(key))
-        {
-            notes.Remove(key);
-
-            if (offNoteIDs.Contains(key))
-                offNoteIDs.Remove(key);
-        }
-
-        notes.Add(key, new(0, cents, .05f, .5f, .3f, .5f, 1f));
+        notes.Add(key, new((2, 1.6f, 2), key, edo, synths[synthIndex], adsr));
     }
 
     void ReleaseNote(int key)
@@ -221,10 +226,4 @@ public class SynthPlayer : MonoBehaviour
         notes.Remove(key);
         offNoteIDs.Remove(key);
     }
-    
-
-    float Sine(float phase) => Mathf.Sin(2 * Mathf.PI * phase);
-    float Saw(float phase) => phase * 2 - 1;
-    float Triangle(float phase) => Mathf.Abs(phase * 4.0f - 2.0f) - 1.0f;
-    float Square(float phase) => phase >= .5f ? 1 : 0;
 }
