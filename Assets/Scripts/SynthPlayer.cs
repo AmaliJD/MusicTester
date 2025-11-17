@@ -31,10 +31,10 @@ public class SynthPlayer : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
-        synths.Add(Synth.Waveform.Saw);
-        synths.Add(Synth.Waveform.Square);
-        synths.Add(Synth.Waveform.Triangle);
-        synths.Add(Synth.Waveform.Sine);
+        synths.Add(new(Synth.Waveform.Saw, adsr));
+        synths.Add(new(Synth.Waveform.Square, adsr.Modify(true, attack: .2f)));
+        synths.Add(new(Synth.Waveform.Triangle, adsr.Modify(true, release: 0)));
+        synths.Add(new(Synth.Waveform.Sine, adsr.Modify(true, attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
 
         keys = new()
         {
@@ -95,8 +95,8 @@ public class SynthPlayer : MonoBehaviour
         foreach (var entry in notes)
         {
             Note note = entry.Value;
-            ADSR adsr = note.adsr;
             Synth synth = note.synth;
+            ADSR adsr = note.GetADSR();
             float envelope = adsr.sustain;
 
             if (note.on)
@@ -162,7 +162,7 @@ public class SynthPlayer : MonoBehaviour
         // remove finished notes
         for (int i = 0; i < offNoteIDs.Count; i++)
         {
-            if (time >= notes[offNoteIDs[i]].refTime + notes[offNoteIDs[i]].adsr.release)
+            if (time >= notes[offNoteIDs[i]].refTime + notes[offNoteIDs[i]].GetADSR().release)
             {
                 RemoveNote(offNoteIDs[i]);
                 i--;
@@ -190,7 +190,7 @@ public class SynthPlayer : MonoBehaviour
                 offNoteIDs.Remove(key);
         }
 
-        notes.Add(key, new((2, 1.6f, 2), key, edo, synths[synthIndex], adsr));
+        notes.Add(key, new Note((2, 1.67f, 2), key, edo, synths[synthIndex]));
     }
 
     void ReleaseNote(int key)

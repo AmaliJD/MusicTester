@@ -10,13 +10,13 @@ public class Synth
         Saw
     }
     protected Waveform waveform;
+    public ADSR adsr;
 
-    public Synth(Waveform baseWaveform)
+    public Synth(Waveform shape, ADSR adsr = null)
     {
-        this.waveform = baseWaveform;
+        this.waveform = shape;
+        this.adsr = adsr ?? new();
     }
-
-    public static implicit operator Synth(Waveform baseWaveform) => new Synth(baseWaveform);
 
     public float GetWaveformValue(float phase)
     {

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ADSR
@@ -15,5 +16,32 @@ public class ADSR
         sustain = s ?? v ?? sustain;
         release = r ?? release;
         velocity = v ?? s ?? velocity;
+    }
+}
+
+public static class ADSRExtensions
+{
+    public static ADSR Modify(this ADSR adsr, bool clone, float? attack = null, float? decay = null, float? sustain = null, float? release = null, float? velocity = null)
+    {
+        if (clone)
+        {
+            return new ADSR(
+            attack ?? adsr.attack,
+            decay ?? adsr.decay,
+            sustain ?? adsr.sustain,
+            release ?? adsr.release,
+            velocity ?? adsr.velocity
+            );
+        }
+        else
+        {
+            adsr.attack = attack ?? adsr.attack;
+            adsr.decay = decay ?? adsr.decay;
+            adsr.sustain = sustain ?? adsr.sustain;
+            adsr.release = release ?? adsr.release;
+            adsr.velocity = velocity ?? adsr.velocity;
+            return adsr;
+        }
+        
     }
 }

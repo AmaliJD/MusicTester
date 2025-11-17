@@ -12,7 +12,7 @@ public class Note
     public float lastEnvelopeValue;
     public bool on = true;
 
-    public Note(Octave octave, int index, int edo, Synth synth, ADSR adsr)
+    public Note(Octave octave, int index, int edo, Synth synth, ADSR adsr = null)
     {
         if (edo < 1)
             edo = 1;
@@ -23,7 +23,7 @@ public class Note
         this.synth = synth;
     }
 
-    public Note(Octave octave, float ratio, Synth synth, ADSR adsr)
+    public Note(Octave octave, float ratio, Synth synth, ADSR adsr = null)
     {
         if (ratio < 0)
             ratio = 1;
@@ -34,7 +34,7 @@ public class Note
         this.synth = synth;
     }
 
-    public Note(float freq, Synth synth, ADSR adsr)
+    public Note(float freq, Synth synth, ADSR adsr = null)
     {
         phase = 0;
         frequency = freq;
@@ -59,4 +59,6 @@ public class Note
         if (cents != 0)
             frequency *= Mathf.Pow(2, 1 / (1200 / (float)cents));
     }
+
+    public ADSR GetADSR() => adsr ?? synth.adsr;
 }
