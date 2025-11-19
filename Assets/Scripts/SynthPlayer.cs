@@ -14,7 +14,7 @@ public class SynthPlayer : MonoBehaviour
     private AudioSource audioSource;
 
     public static float sampleRate = 0;
-    public static float baseFrequency = 55;
+    public static float baseFrequency = 220;
     private double time;
     int edo = 1;
     List<KeyControl> keys = new();
@@ -35,10 +35,11 @@ public class SynthPlayer : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
         synths.Add(new(Synth.Waveform.Saw, adsr));
+        synths.Add(new(Synth.Waveform.Saw, adsr.Clone(release: .8f), 5, 8));
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(attack: .2f)));
         synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
         synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
-        freeNote = new(baseFrequency * 4, synths[synthIndex]);
+        freeNote = new(baseFrequency, synths[synthIndex]);
 
         keys = new()
         {
@@ -82,7 +83,6 @@ public class SynthPlayer : MonoBehaviour
                 data[i + c] = value;
 
             maxValue = Mathf.Max(maxValue, value);
-            //Debug.Log($"Audio Value: {maxValue}");
 
             foreach (var note in notes)
             {
@@ -133,7 +133,7 @@ public class SynthPlayer : MonoBehaviour
                 }
             }
 
-            value += synth.GetWaveformValue(note.phase) * envelope * gain;
+            value += note.GetValue() * envelope * gain;
         }
 
         return value;
@@ -142,11 +142,13 @@ public class SynthPlayer : MonoBehaviour
     private void Update()
     {
         time = AudioSettings.dspTime;
+        //Debug.Log($"Audio Value: {maxValue}");
 
         // change synth index
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             synthIndex = (synthIndex + 1) % synths.Count;
+            freeNote = new(baseFrequency, synths[synthIndex]);
         }
 
         // keyboard
@@ -154,7 +156,7 @@ public class SynthPlayer : MonoBehaviour
         {
             if (keys[i].wasPressedThisFrame)
             {
-                AddNote(i, new Note(/*(2, 1.67f, 2)*/2, i, edo, synths[synthIndex]).On());
+                AddNote(i, new Note(/*(0, 1.67f, 2)*/0, i, edo, synths[synthIndex]).On());
                 Debug.Log($"{notes[i].frequency} Hz");
             }
             else if (keys[i].wasReleasedThisFrame)

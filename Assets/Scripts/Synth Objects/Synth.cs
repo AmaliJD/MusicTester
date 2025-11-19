@@ -11,11 +11,15 @@ public class Synth
     }
     protected Waveform waveform;
     public ADSR adsr;
+    public int voiceCount;
+    public float detune;
 
-    public Synth(Waveform shape, ADSR adsr = null)
+    public Synth(Waveform shape, ADSR adsr = null, int unison = 1, float detune = 12)
     {
         this.waveform = shape;
         this.adsr = adsr ?? new();
+        this.voiceCount = Mathf.Max(unison, 1);
+        this.detune = Mathf.Max(detune, 0);
     }
 
     public float GetWaveformValue(float phase)
