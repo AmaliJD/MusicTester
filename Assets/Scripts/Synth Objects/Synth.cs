@@ -5,15 +5,18 @@ public class Synth
     public enum Waveform
     {
         Sine,
-        Square,
         Triangle,
-        Saw
+        Square,
+        Saw,
+        White
     }
     protected Waveform waveform;
     public ADSR adsr;
     public int voiceCount;
     public float detune;
     public int octaveShift;
+    public float noise;
+    AltRandom rand = new();
 
     public Synth(Waveform shape, ADSR adsr = null, int octaveShift = 0, int unison = 1, float detune = 12)
     {
@@ -26,17 +29,32 @@ public class Synth
 
     public float GetWaveformValue(float phase)
     {
-        return waveform switch
+        float value = waveform switch
         {
             Waveform.Sine => Sine(phase),
-            Waveform.Square => Square(phase),
+            Waveform.Square => Square(phase) * .5f,
             Waveform.Triangle => Triangle(phase),
             Waveform.Saw => Saw(phase),
+            Waveform.White => rand.Roll(),
+            _ => Test(phase),
         };
+
+        // added noise
+        //if (noise > 0)
+        //    value = Mathf.Lerp(value, rand.Roll(), noise);
+
+        return value;
     }
 
     float Sine(float phase) => Mathf.Sin(2 * Mathf.PI * phase);
-    float Square(float phase) => phase >= .5f ? 1 : 0;
     float Triangle(float phase) => Mathf.Abs(phase * 4.0f - 2.0f) - 1.0f;
+    float Step(float phase) => phase >= .5f ? 1 : 0; // same as square but half amplitude
+    float Square(float phase) => phase >= .5f ? 1 : -1;
     float Saw(float phase) => phase * 2 - 1;
+
+    // TEST
+    float Test(float phase)
+    {
+        return 0;
+    }
 }

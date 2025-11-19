@@ -11,6 +11,7 @@ public class Note
     public Synth synth;
 
     public double refTime = AudioSettings.dspTime;
+    public double timeOn;
     public float lastEnvelopeValue;
     public bool on = true;
 
@@ -89,8 +90,7 @@ public class Note
 
     public void AddCents(float cents)
     {
-        if (cents != 0)
-            frequency *= Mathf.Pow(2, 1 / (1200 / (float)cents));
+        frequency *= Mathf.Pow(2, cents / 1200);
     }
     
     public ADSR GetADSR() => adsr ?? synth.adsr;
@@ -118,10 +118,7 @@ public static class NoteExtensions
 
     public static float AddCents(this float frequency, float cents)
     {
-        if (cents != 0)
-            return frequency * Mathf.Pow(2, 1 / (1200 / (float)cents));
-        else
-            return frequency;
+        return frequency * Mathf.Pow(2, cents / 1200);
     }
 
     public static float AddOctaves(this float frequency, int octaves)

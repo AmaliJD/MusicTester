@@ -17,10 +17,10 @@ public class SynthPlayer : MonoBehaviour
     public static float baseFrequency = 220;
     private double time;
     int edo = 1;
-    List<KeyControl> keys = new();
 
-    Dictionary<int, Note> notes = new();
-    List<int> offNoteIDs = new();
+    List<KeyControl> keys = new();
+    Dictionary<int, Note> keyNotes = new();
+    List<Note> notes = new();
 
     List<Synth> synths = new();
     int synthIndex;
@@ -35,7 +35,9 @@ public class SynthPlayer : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
         synths.Add(new(Synth.Waveform.Saw, adsr));
-        synths.Add(new(Synth.Waveform.Saw, adsr.Clone(release: .8f), -1, 5, 8));
+        //synths.Add(new(Synth.Waveform.White, new ADSR(.02f, .2f, .3f, .7f, 1)));
+        synths.Add(new(Synth.Waveform.Saw, adsr.Clone(attack: .08f, release: .8f), -1, 5, 8));
+        synths.Add(new(Synth.Waveform.Square, adsr.Clone(decay: .2f, release: .75f), 0, 3, 700));
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(attack: .2f)));
         synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
         synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
@@ -84,9 +86,9 @@ public class SynthPlayer : MonoBehaviour
 
             maxValue = Mathf.Max(maxValue, value);
 
-            foreach (var note in notes)
+            foreach (Note note in notes)
             {
-                note.Value.UpdatePhase();
+                note.UpdatePhase();
             }
         }
     }
@@ -96,12 +98,24 @@ public class SynthPlayer : MonoBehaviour
         float value = 0;
         float gain = .15f;
         double k = -3;
-        foreach (var entry in notes)
+
+        for (int i = notes.Count - 1; i >= 0; i--)
         {
-            Note note = entry.Value;
+            Note note = notes[i];
             Synth synth = note.synth;
             ADSR adsr = note.GetADSR();
             float envelope = adsr.sustain;
+
+            // if completed
+            if (!note.on && time >= note.refTime + note.GetADSR().release)
+            {
+                notes.Remove(note);
+                continue;
+            }
+
+            // note reached end
+            if (note.on && note.timeOn > 0 && time >= note.refTime + note.timeOn)
+                note.TurnOff();
 
             if (note.on)
             {
@@ -156,12 +170,12 @@ public class SynthPlayer : MonoBehaviour
         {
             if (keys[i].wasPressedThisFrame)
             {
-                AddNote(i, new Note(/*(0, 1.67f, 2)*/0, i, edo, synths[synthIndex]).On());
-                Debug.Log($"{notes[i].frequency} Hz");
+                AddNote(new Note(/*(0, 1.67f, 2)*/0, i, edo, synths[synthIndex]), i);
+                Debug.Log($"{keyNotes[i].frequency} Hz");
             }
             else if (keys[i].wasReleasedThisFrame)
             {
-                ReleaseNote(i);
+                ReleaseNote(keyNotes[i]);
             }
         }
 
@@ -172,22 +186,12 @@ public class SynthPlayer : MonoBehaviour
 
         if (Keyboard.current.backquoteKey.wasPressedThisFrame)
         {
-            AddNote(-1, freeNote.Synth(synths[synthIndex]).On());
-            Debug.Log($"{notes[-1].frequency} Hz");
+            AddNote(freeNote.Synth(synths[synthIndex]), -1);
+            Debug.Log($"{keyNotes[-1].frequency} Hz");
         }
         else if (Keyboard.current.backquoteKey.wasReleasedThisFrame)
         {
-            ReleaseNote(-1);
-        }
-
-        // remove finished notes
-        for (int i = 0; i < offNoteIDs.Count; i++)
-        {
-            if (time >= notes[offNoteIDs[i]].refTime + notes[offNoteIDs[i]].GetADSR().release)
-            {
-                RemoveNote(offNoteIDs[i]);
-                i--;
-            }
+            ReleaseNote(keyNotes[-1]);
         }
 
         // enable/disable AudioSource
@@ -201,30 +205,35 @@ public class SynthPlayer : MonoBehaviour
         }
     }
 
-    void AddNote(int key, Note note)
+    void AddNote(Note note, int? key = null)
     {
-        if (notes.ContainsKey(key))
+        if (notes.Contains(note))
+            note.TurnOn();
+        else
+            notes.Add(note.On());
+
+        if (key != null)
+            AddKeyNote(key.Value, note);
+    }
+
+    void AddKeyNote(int key, Note note)
+    {
+        if (keyNotes.ContainsKey(key))
         {
-            notes.Remove(key);
-
-            if (offNoteIDs.Contains(key))
-                offNoteIDs.Remove(key);
+            keyNotes[key].TurnOff();
+            keyNotes.Remove(key);
         }
-        notes.Add(key, note);
+
+        keyNotes.Add(key, note.On());
     }
 
-    void ReleaseNote(int key)
+    void ReleaseNote(Note note)
     {
-        if (!notes.ContainsKey(key))
-            return;
-
-        notes[key].TurnOff();
-        offNoteIDs.Add(key);
+        note.TurnOff();
     }
 
-    void RemoveNote(int key)
+    void RemoveNote(Note note)
     {
-        notes.Remove(key);
-        offNoteIDs.Remove(key);
+        notes.Remove(note);
     }
 }
