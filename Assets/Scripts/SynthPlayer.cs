@@ -35,7 +35,7 @@ public class SynthPlayer : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
         synths.Add(new(Synth.Waveform.Saw, adsr));
-        synths.Add(new(Synth.Waveform.Saw, adsr.Clone(release: .8f), 5, 8));
+        synths.Add(new(Synth.Waveform.Saw, adsr.Clone(release: .8f), -1, 5, 8));
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(attack: .2f)));
         synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
         synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
@@ -210,7 +210,6 @@ public class SynthPlayer : MonoBehaviour
             if (offNoteIDs.Contains(key))
                 offNoteIDs.Remove(key);
         }
-
         notes.Add(key, note);
     }
 

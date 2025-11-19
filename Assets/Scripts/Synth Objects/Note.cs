@@ -1,6 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class Note
 {
@@ -59,7 +60,7 @@ public class Note
     {
         if (phases.Count == 1)
         {
-            phases[0] += frequency / SynthPlayer.sampleRate;
+            phases[0] += frequency.AddOctaves(synth.octaveShift) / SynthPlayer.sampleRate;
             phases[0] = Mathf.Repeat(phases[0], 1);
         }
         else
@@ -68,7 +69,7 @@ public class Note
             float detuneStep = (detune * 2) / (phases.Count - 1);
             for (int i = 0; i < phases.Count; i++)
             {
-                phases[i] += frequency.AddCents(-detune + detuneStep * i) / SynthPlayer.sampleRate;
+                phases[i] += frequency.AddCents(-detune + detuneStep * i).AddOctaves(synth.octaveShift) / SynthPlayer.sampleRate;
                 phases[i] = Mathf.Repeat(phases[i], 1);
             }
         }
@@ -121,6 +122,11 @@ public static class NoteExtensions
             return frequency * Mathf.Pow(2, 1 / (1200 / (float)cents));
         else
             return frequency;
+    }
+
+    public static float AddOctaves(this float frequency, int octaves)
+    {
+        return frequency * Mathf.Pow(2, octaves);
     }
 
     public static List<float> Randomize(this List<float> list)
