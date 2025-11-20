@@ -11,11 +11,11 @@ public class Note
     public Synth synth;
 
     public double refTime = AudioSettings.dspTime;
-    public double timeOn;
+    public double duration;
     public float lastEnvelopeValue;
     public bool on = true;
 
-    public Note(Octave octave, int index, int edo, Synth synth, ADSR adsr = null)
+    public Note(Octave octave, int index, int edo, float duration, Synth synth, ADSR adsr = null)
     {
         if (edo < 1)
             edo = 1;
@@ -24,9 +24,10 @@ public class Note
         frequency = SynthPlayer.baseFrequency * Mathf.Pow(octave.root, octave.value) * Mathf.Pow(Mathf.Pow(octave.scale, 1 / (float)edo), (float)index);
         this.adsr = adsr;
         this.synth = synth;
+        this.duration = duration;
     }
 
-    public Note(Octave octave, float ratio, Synth synth, ADSR adsr = null)
+    public Note(Octave octave, float ratio, float duration, Synth synth, ADSR adsr = null)
     {
         if (ratio < 0)
             ratio = 1;
@@ -35,14 +36,16 @@ public class Note
         frequency = SynthPlayer.baseFrequency * Mathf.Pow(octave.root, octave.value) * ratio;
         this.adsr = adsr;
         this.synth = synth;
+        this.duration = duration;
     }
 
-    public Note(float freq, Synth synth, ADSR adsr = null)
+    public Note(float freq, float duration, Synth synth, ADSR adsr = null)
     {
         phases = new List<float>(new float[synth.voiceCount]).Randomize();
         frequency = freq;
         this.adsr = adsr;
         this.synth = synth;
+        this.duration = duration;
     }
 
     public void TurnOn()

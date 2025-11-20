@@ -41,7 +41,7 @@ public class SynthPlayer : MonoBehaviour
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(attack: .2f)));
         synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
         synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
-        freeNote = new(baseFrequency, synths[synthIndex]);
+        freeNote = new(baseFrequency, 0, synths[synthIndex]);
 
         keys = new()
         {
@@ -114,7 +114,7 @@ public class SynthPlayer : MonoBehaviour
             }
 
             // note reached end
-            if (note.on && note.timeOn > 0 && time >= note.refTime + note.timeOn)
+            if (note.on && note.duration > 0 && time >= note.refTime + note.duration)
                 note.TurnOff();
 
             if (note.on)
@@ -162,7 +162,7 @@ public class SynthPlayer : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             synthIndex = (synthIndex + 1) % synths.Count;
-            freeNote = new(baseFrequency, synths[synthIndex]);
+            freeNote = new(baseFrequency, 0, synths[synthIndex]);
         }
 
         // keyboard
@@ -170,7 +170,7 @@ public class SynthPlayer : MonoBehaviour
         {
             if (keys[i].wasPressedThisFrame)
             {
-                AddNote(new Note(/*(0, 1.67f, 2)*/0, i, edo, synths[synthIndex]), i);
+                AddNote(new Note(/*(0, 1.67f, 2)*/0, i, edo, 0, synths[synthIndex]), i);
                 Debug.Log($"{keyNotes[i].frequency} Hz");
             }
             else if (keys[i].wasReleasedThisFrame)
