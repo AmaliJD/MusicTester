@@ -34,6 +34,7 @@ public class SynthPlayer : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
+        //synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: 0.02f), 0, 4, 8));
         synths.Add(new(Synth.Waveform.Saw, adsr));
         //synths.Add(new(Synth.Waveform.White, new ADSR(.02f, .2f, .3f, .7f, 1)));
         synths.Add(new(Synth.Waveform.Saw, adsr.Clone(attack: .08f, release: .8f), -1, 5, 8));
