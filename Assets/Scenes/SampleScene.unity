@@ -362,9 +362,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1639903254}
+  - component: {fileID: 1639903257}
   - component: {fileID: 1639903255}
   - component: {fileID: 1639903256}
-  - component: {fileID: 1639903257}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -505,9 +505,191 @@ MonoBehaviour:
   m_GameObject: {fileID: 1639903253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ce9d2da91a91649b152a6b682daab1, type: 3}
+  m_Script: {fileID: 11500000, guid: be4211171b093144eaf70d574fa179ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  edo: 12
+--- !u!1 &2094046471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2094046473}
+  - component: {fileID: 2094046472}
+  m_Layer: 0
+  m_Name: UI Layout
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2094046472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094046471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    space: 7
+    space2: 7
+    positionType: 0
+    positionType2: 0
+    scaleSizeType: 0
+    initialized: 1
+    positionTransform: {fileID: 0}
+    positionOffset: {x: 0, y: 0}
+    positionTransform2: {fileID: 0}
+    positionOffset2: {x: 0, y: 0}
+    size: {x: 20.59, y: 10}
+    angle: 0
+    weight: -0.42
+    borderType: 1
+    color: {r: 0.5566037, g: 0.7669268, b: 1, a: 0.1254902}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    edgeRadius: 0
+    solidEdgeRadius: 0
+    cutOutBox: 0
+    solid: 0
+    radius: 0.5
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    lineType: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    collider2D: {fileID: 0}
+  - gizmoType: 0
+    space: 7
+    space2: 7
+    positionType: 0
+    positionType2: 0
+    scaleSizeType: 0
+    initialized: 1
+    positionTransform: {fileID: 0}
+    positionOffset: {x: -10, y: 0}
+    positionTransform2: {fileID: 0}
+    positionOffset2: {x: 0, y: 0}
+    size: {x: 1, y: 1}
+    angle: 0
+    weight: 0
+    borderType: 1
+    color: {r: 0.5566037, g: 0.7669268, b: 1, a: 0.1254902}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    edgeRadius: 0
+    solidEdgeRadius: 0
+    cutOutBox: 0
+    solid: 1
+    radius: 0.5
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    lineType: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    collider2D: {fileID: 0}
+  - gizmoType: 0
+    space: 7
+    space2: 7
+    positionType: 0
+    positionType2: 0
+    scaleSizeType: 0
+    initialized: 1
+    positionTransform: {fileID: 0}
+    positionOffset: {x: 10, y: 0}
+    positionTransform2: {fileID: 0}
+    positionOffset2: {x: 0, y: 0}
+    size: {x: 1, y: 1}
+    angle: 0
+    weight: 0
+    borderType: 1
+    color: {r: 0.5566037, g: 0.7669268, b: 1, a: 0.1254902}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    edgeRadius: 0
+    solidEdgeRadius: 0
+    cutOutBox: 0
+    solid: 1
+    radius: 0.5
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    lineType: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    collider2D: {fileID: 0}
+  - gizmoType: 0
+    space: 7
+    space2: 7
+    positionType: 0
+    positionType2: 0
+    scaleSizeType: 0
+    initialized: 1
+    positionTransform: {fileID: 0}
+    positionOffset: {x: 0, y: 4.75}
+    positionTransform2: {fileID: 0}
+    positionOffset2: {x: 0, y: 0}
+    size: {x: 1, y: 1}
+    angle: 0
+    weight: 0
+    borderType: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    edgeRadius: 0
+    solidEdgeRadius: 0
+    cutOutBox: 0
+    solid: 1
+    radius: 0.5
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    lineType: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    collider2D: {fileID: 0}
+--- !u!4 &2094046473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094046471}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -515,3 +697,4 @@ SceneRoots:
   - {fileID: 1639903254}
   - {fileID: 519420032}
   - {fileID: 619394802}
+  - {fileID: 2094046473}

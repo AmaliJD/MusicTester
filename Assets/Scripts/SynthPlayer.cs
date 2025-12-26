@@ -1,12 +1,6 @@
-using GLDebug;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 [RequireComponent(typeof(AudioSource))]
 public class SynthPlayer : MonoBehaviour
@@ -16,36 +10,30 @@ public class SynthPlayer : MonoBehaviour
     public static float sampleRate = 0;
     public static float baseFrequency = 220;
     private double time;
-    int edo = 12;
 
-    List<KeyControl> keys = new();
-    Dictionary<int, Note> idNotes = new();
     List<Note> notes = new();
     List<Note> audioBufferedNotes = new();
+    Dictionary<int, Note> idNotes = new();
+    public List<int> NoteIDList => new List<int>(idNotes.Keys);
 
     List<Synth> synths = new();
     int synthIndex;
     ADSR adsr = new(.05f, .5f, .3f, .5f, 1f);
 
-    TouchHandler touchHandler = new();
-
     // test variables
     float maxValue = 0;
-    Note freeNote;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
-        //synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: 0.02f), 0, 4, 8));
+        synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: 0.02f), 0, 4, 8));
         synths.Add(new(Synth.Waveform.Saw, adsr));
-        //synths.Add(new(Synth.Waveform.White, new ADSR(.02f, .2f, .3f, .7f, 1)));
         synths.Add(new(Synth.Waveform.Saw, adsr.Clone(attack: .08f, release: .8f), -1, 5, 8));
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(decay: .2f, release: .75f), 0, 3, 700));
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(attack: .2f)));
         synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
         synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
-        freeNote = new(baseFrequency, 0, synths[synthIndex]);
 
         //keys = new()
         //{
@@ -158,62 +146,8 @@ public class SynthPlayer : MonoBehaviour
         return value;
     }
 
-    float GetFrequencyFromPosition(float yPos)
+    private void LateUpdate()
     {
-        return Mathf.Lerp(220, 440, Mathf.InverseLerp(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y, yPos));
-    }
-
-    private void Update()
-    {
-        time = AudioSettings.dspTime;
-        //Debug.Log($"Audio Value: {maxValue}");
-
-        TouchHandler.TouchList touchList = touchHandler.GetTouchList();
-
-        // change synth index
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            synthIndex = (synthIndex + 1) % synths.Count;
-            freeNote = new(freeNote.frequency, 0, synths[synthIndex]);
-        }
-
-        // keyboard
-        //for (int i = 0; i < keys.Count; i++)
-        //{
-        //    if (keys[i].wasPressedThisFrame)
-        //    {
-        //        AddNote(new Note(/*(0, 1.67f, 2)*/0, i, edo, 0, synths[synthIndex]), i);
-        //        Debug.Log($"{idNotes[i].frequency} Hz");
-        //    }
-        //    else if (keys[i].wasReleasedThisFrame)
-        //    {
-        //        ReleaseNote(idNotes[i]);
-        //    }
-        //}
-
-        for (int i = 0; i < touchList.Count; i++)
-        {
-            if (touchList.wasPressedThisFrame[i])
-            {
-                //AddNote(new Note(0, i, edo, 0, synths[synthIndex]), touchList.ids[i]);
-                AddNote(new Note(GetFrequencyFromPosition(touchList.positions[i].y), 0, synths[synthIndex]), touchList.ids[i]);
-            }
-            else
-            {
-                idNotes[touchList.ids[i]].frequency = GetFrequencyFromPosition(touchList.positions[i].y);
-            }
-        }
-
-        foreach (int id in new List<int>(idNotes.Keys))
-        {
-            if (!touchList.ids.Contains(id))
-            {
-                ReleaseNote(idNotes[id]);
-                idNotes.Remove(id);
-            }
-        }
-
-
         // enable/disable AudioSource
         if (notes.Count > 0 && !audioSource.isPlaying)
         {
@@ -225,7 +159,13 @@ public class SynthPlayer : MonoBehaviour
         }
     }
 
-    void AddNote(Note note, int? id = null)
+    public Synth GetSynth(int index) => synths[index % synths.Count];
+    public Synth GetSynth() => synths[synthIndex];
+    public void IncrementSynthIndex() => synthIndex = (synthIndex + 1) % synths.Count;
+
+    public void SetNoteFrequency(int noteID, float frequency) => idNotes[noteID].frequency = frequency;
+
+    public void AddNote(Note note, int? id = null)
     {
         if (notes.Contains(note))
             note.TurnOn();
@@ -247,13 +187,12 @@ public class SynthPlayer : MonoBehaviour
         idNotes.Add(id, note.On());
     }
 
-    void ReleaseNote(Note note)
+    void ReleaseNote(Note note) => note.TurnOff();
+    public void ReleaseNote(int id)
     {
-        note.TurnOff();
+        ReleaseNote(idNotes[id]);
+        idNotes.Remove(id);
     }
 
-    void RemoveNote(Note note)
-    {
-        notes.Remove(note);
-    }
+    void RemoveNote(Note note) => notes.Remove(note);
 }
