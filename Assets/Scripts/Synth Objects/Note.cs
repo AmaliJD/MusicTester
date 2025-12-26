@@ -190,6 +190,11 @@ public static class NoteExtensions
         return frequency * Mathf.Pow(2, octaves);
     }
 
+    public static float AddInterval(this float frequency, int edo, int index)
+    {
+        return frequency * Mathf.Pow(Mathf.Pow(2, 1 / (float)edo), (float)index);
+    }
+
     public static Note AddFrequencyMultipliers(this Note note, List<Vector2> timeAndMultList)
     {
         foreach (Vector2 tm in timeAndMultList)
