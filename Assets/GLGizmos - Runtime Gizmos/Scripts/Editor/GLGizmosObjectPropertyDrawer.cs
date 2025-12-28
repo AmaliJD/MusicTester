@@ -38,7 +38,7 @@ namespace GLDebug
                 sizeProperty.vector2Value = Vector2.one;
 
                 SerializedProperty borderTypeProperty = property.FindPropertyRelative("borderType");
-                borderTypeProperty.enumValueIndex = (int)GLGizmos.BorderType.Outside;
+                borderTypeProperty.enumValueIndex = (int)BorderType.Outside;
 
                 SerializedProperty colorProperty = property.FindPropertyRelative("color");
                 colorProperty.colorValue = Color.white;

@@ -28,42 +28,13 @@ public class SynthPlayer : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
         //synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: 0.02f), 0, 4, 8));
+        synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(sustain: 1.5f, velocity: 2f, release: .5f), 0, 3, 8));
         synths.Add(new(Synth.Waveform.Saw, adsr));
         synths.Add(new(Synth.Waveform.Saw, adsr.Clone(attack: .08f, release: .8f), -1, 5, 8));
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(decay: .2f, release: .75f), 0, 3, 700));
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(attack: .2f)));
         synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
         synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
-
-        //keys = new()
-        //{
-        //    Keyboard.current.escapeKey,
-        //    Keyboard.current.f1Key,
-        //    Keyboard.current.f2Key,
-        //    Keyboard.current.f3Key,
-        //    Keyboard.current.f4Key,
-        //    Keyboard.current.f5Key,
-        //    Keyboard.current.f6Key,
-        //    Keyboard.current.f7Key,
-        //    Keyboard.current.f8Key,
-        //    Keyboard.current.f9Key,
-        //    Keyboard.current.f10Key,
-        //    Keyboard.current.f11Key,
-        //    Keyboard.current.f12Key,
-        //    //Keyboard.current.digit1Key,
-        //    //Keyboard.current.digit2Key,
-        //    //Keyboard.current.digit3Key,
-        //    //Keyboard.current.digit4Key,
-        //    //Keyboard.current.digit5Key,
-        //    //Keyboard.current.digit6Key,
-        //    //Keyboard.current.digit7Key,
-        //    //Keyboard.current.digit8Key,
-        //    //Keyboard.current.digit9Key,
-        //    //Keyboard.current.digit0Key,
-        //    //Keyboard.current.minusKey,
-        //    //Keyboard.current.equalsKey,
-        //};
-        //edo = keys.Count - 1;
     }
 
     private void OnAudioFilterRead(float[] data, int channels)
@@ -192,6 +163,12 @@ public class SynthPlayer : MonoBehaviour
     {
         ReleaseNote(idNotes[id]);
         idNotes.Remove(id);
+    }
+
+    public void ReleaseAllNotes()
+    {
+        foreach (int id in new List<int>(idNotes.Keys))
+            ReleaseNote(id);
     }
 
     void RemoveNote(Note note) => notes.Remove(note);

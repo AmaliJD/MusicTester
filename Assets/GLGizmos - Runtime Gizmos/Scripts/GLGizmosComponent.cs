@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using GLGizmosExtensions;
-using System.Linq;
 
 namespace GLDebug
 {
@@ -115,7 +114,7 @@ namespace GLDebug
                             {
                                 position = gizmo.positionTransform.position;
                                 targetTransform = gizmo.positionTransform;
-                            }  
+                            }
                             else
                                 continue;
                             break;
@@ -159,7 +158,7 @@ namespace GLDebug
                     }
 
                     Color gizmoColor = color;
-                    drawActions.Add(() => GLGizmos.DrawAnyBox(position, size, gizmo.solid, angle, gizmo.edgeRadius, gizmo.solidEdgeRadius, gizmo.cutOutBox, gizmo.weight, gizmo.borderType, gizmoColor));
+                    drawActions.Add(() => GLGizmos.DrawBox(position, size, new BoxParams() { solid = gizmo.solid, rotation = angle, edgeRadius = gizmo.edgeRadius, solidEdgeRadius = gizmo.solidEdgeRadius, onlyRenderEdgeRadius = gizmo.cutOutBox, borderWidth = gizmo.weight, borderType = gizmo.borderType }, gizmoColor));
                 }
                 else if (gizmo.gizmoType == GizmoType.Circle)
                 {
@@ -218,7 +217,7 @@ namespace GLDebug
                     }
 
                     Color gizmoColor = color;
-                    drawActions.Add(() => GLGizmos.DrawAnyCircle(position, radius, gizmo.solid, gizmo.arcAngle, angle, gizmo.weight, gizmo.borderType, gizmo.arcCloseType, gizmo.numEdges, gizmoColor));
+                    drawActions.Add(() => GLGizmos.DrawCircle(position, radius, new CircleParams() { solid = gizmo.solid, arcAngle = gizmo.arcAngle, rotation = angle, borderWidth = gizmo.weight, borderType = gizmo.borderType, arcCloseType = gizmo.arcCloseType, numEdges = gizmo.numEdges }, gizmoColor));
                 }
                 else if (gizmo.gizmoType == GizmoType.Line)
                 {

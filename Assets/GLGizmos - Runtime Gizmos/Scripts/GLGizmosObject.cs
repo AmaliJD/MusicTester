@@ -50,7 +50,7 @@ namespace GLDebug
         public Vector2 size = Vector2.one;
         public float angle;
         public float weight;
-        public GLGizmos.BorderType borderType;
+        public BorderType borderType;
         public Color color = Color.white;
         public bool inheritColor;
         public int layer;
@@ -66,7 +66,7 @@ namespace GLDebug
         public float radius;
         [Range(-360, 360)]
         public float arcAngle;
-        public GLGizmos.ArcCloseType arcCloseType;
+        public ArcCloseType arcCloseType;
         public int numEdges = 0;
 
         public enum LineType

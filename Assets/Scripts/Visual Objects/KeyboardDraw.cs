@@ -1,8 +1,9 @@
 using GLDebug;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class KeyboardDraw
 {
@@ -13,9 +14,9 @@ public class KeyboardDraw
     public Vector2 KeySize { get; private set; }
 
     private int EDO = -1;
-
-    [Min(1)]
-    public int rows = 1;
+    public static TMP_FontAsset font;
+    public static float[] JI = new float[] { 1, 16f/15f, 9f/8f, 6f/5f, 5f/4f, 4f/3f, Mathf.Sqrt(2), 3f/2f, 8f/5f, 5f/3f, 9f/5f, 15f/8f, 2 };
+    public static string[] JInames = new string[] { "U", "m2", "M2", "m3", "M3", "P4", "Tri", "P5", "m6", "M6", "m7", "M7", "O" };
 
     public KeyboardDraw(int edo = -1)
     {
@@ -28,7 +29,7 @@ public class KeyboardDraw
         if (yBounds == Vector2.zero)
         {
             float y = Camera.main.orthographicSize;
-            yBounds = new Vector2(-y, y);
+            yBounds = new Vector2(-y, y * .6f);
         }
         
         (Positions, KeySize) = GetPositionsAndSize(edo);
@@ -68,8 +69,22 @@ public class KeyboardDraw
         foreach (Vector2 position in Positions)
         {
             bool pressed = keysPressed.Contains(keyIndex);
-            float keyColor = pressed ? .08f : .04f;
+            float keyColor = pressed ? .08f : .03f;
             float keyBorderColor = .18f;
+
+            float frequencyMult = Mathf.Pow(Mathf.Pow(2, 1 / (float)edo), (float)keyIndex);
+            float[] JIDiff = JI.Select(x => Main.GetCentDifference(x, frequencyMult)).ToArray();
+
+            float minJIDiff = 1200;
+            int minJIIndex = -1;
+
+            for (int i = 0;  i < JIDiff.Length; i++)
+            {
+                float prevMinJIDiff = minJIDiff;
+                minJIDiff = Mathf.Min(minJIDiff, Mathf.Abs(JIDiff[i]));
+                if (minJIDiff < prevMinJIDiff)
+                    minJIIndex = i;
+            }
 
             GLGizmos.SetLayer(-1);
             GLGizmos.SetColor(new Color(keyColor, keyColor, keyColor));
@@ -77,7 +92,15 @@ public class KeyboardDraw
 
             GLGizmos.SetLayer(0);
             GLGizmos.SetColor(new Color(keyBorderColor, keyBorderColor, keyBorderColor));
-            GLGizmos.DrawWeightedBox(position, KeySize, .02f, GLGizmos.BorderType.Inside);
+            GLGizmos.DrawWeightedBox(position, KeySize, .02f, BorderType.Inside);
+
+            if (Mathf.Abs(JIDiff[minJIIndex]) <= 33)
+            {
+                string topTxt = Mathf.Abs(JIDiff[minJIIndex]) > 0.01f ? (Mathf.Sign(JIDiff[minJIIndex]) == 1 ? "+" : "") + $"{Mathf.RoundToInt(JIDiff[minJIIndex])}" : "";
+                string bottomTxt = JInames[minJIIndex];
+                GLGizmos.SetColor(Color.white);
+                GLGizmos.DrawText($"{topTxt}\n{bottomTxt}", position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 4, new TextBoxParams() { alignment = TextAlignmentOptions.Bottom, positionPivot = PositionPivot.Bottom, fitTextToBox = true, textBoxSize = Vector2.one * XInterval * .95f });
+            }
 
             keyIndex++;
         }
