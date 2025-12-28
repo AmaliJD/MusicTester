@@ -131,6 +131,7 @@ public class Main : MonoBehaviour
 
         // keyboard input
         List<Vector2> keyPressPositions = new();
+        int I = 0;
         for (int i = 0; i < Mathf.Min(keyboardKeys.Count, edo + 1); i++)
         {
             int id = -i - 1;
@@ -138,13 +139,27 @@ public class Main : MonoBehaviour
             {
                 synthPlayer.AddNote(new Note(GetFrequencyFromKeyPosition(keyboardDraw.Positions[i]), 0, synthPlayer.GetSynth()), id);
             }
-            else if (keyboardKeys[i].wasReleasedThisFrame)
+            else if (keyboardKeys[i].wasReleasedThisFrame && synthPlayer.NoteIDList.Contains(id))
             {
                 synthPlayer.ReleaseNote(id);
             }
 
-            if (keyboardKeys[i].isPressed)
+            if (keyboardKeys[i].isPressed && i < keyboardDraw.Positions.Count)
                 keyPressPositions.Add(keyboardDraw.Positions[i]);
+
+            I = i;
+        }
+
+        if (synthPlayer.NoteIDList.Count > 0)
+        {
+            for (int i = I + 1; i < keyboardKeys.Count; i++)
+            {
+                int id = -i - 1;
+                if (keyboardKeys[i].wasReleasedThisFrame && synthPlayer.NoteIDList.Contains(id))
+                {
+                    synthPlayer.ReleaseNote(id);
+                }
+            }
         }
 
         keyPressPositions.AddRange(touchList.positions.ToList());
