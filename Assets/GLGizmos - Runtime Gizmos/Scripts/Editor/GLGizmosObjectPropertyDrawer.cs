@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 using GLGizmosExtensions;
-using System;
 
 namespace GLDebug
 {

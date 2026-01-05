@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Synth
@@ -16,15 +17,17 @@ public class Synth
     public float detune;
     public int octaveShift;
     public float noise;
+    public SortedList<double, float> frequencyMultipliers = new();
     AltRandom rand = new();
 
-    public Synth(Waveform shape, ADSR adsr = null, int octaveShift = 0, int unison = 1, float detune = 12)
+    public Synth(Waveform shape, ADSR adsr = null, int octaveShift = 0, int unison = 1, float detune = 12, float noise = 0)
     {
         this.waveform = shape;
         this.adsr = adsr ?? new();
         this.voiceCount = Mathf.Max(unison, 1);
         this.detune = Mathf.Max(detune, 0);
         this.octaveShift = octaveShift;
+        this.noise = noise;
     }
 
     public float GetWaveformValue(float phase)
@@ -40,8 +43,8 @@ public class Synth
         };
 
         // added noise
-        //if (noise > 0)
-        //    value = Mathf.Lerp(value, rand.Roll(), noise);
+        if (noise > 0)
+            value = Mathf.Lerp(value, rand.Roll(), noise);
 
         return value;
     }

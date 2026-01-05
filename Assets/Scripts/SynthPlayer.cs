@@ -10,6 +10,7 @@ public class SynthPlayer : MonoBehaviour
     public static float sampleRate = 0;
     public static float baseFrequency = 220;
     private double time;
+    private double timeIncrement = 1.0f;
 
     List<Note> notes = new();
     List<Note> audioBufferedNotes = new();
@@ -27,10 +28,11 @@ public class SynthPlayer : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
-        //synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: 0.02f), 0, 4, 8));
-        synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(sustain: 1.5f, velocity: 2f, release: .5f), 0, 3, 8));
+        timeIncrement = 1 / sampleRate;
+        synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(attack: .12f, sustain: 1.5f, velocity: 2f, release: .5f), 0, 3, 8));
         synths.Add(new(Synth.Waveform.Saw, adsr));
         synths.Add(new(Synth.Waveform.Saw, adsr.Clone(attack: .08f, release: .8f), -1, 5, 8));
+        synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: 0.02f)));
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(decay: .2f, release: .75f), 0, 3, 700));
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(attack: .2f)));
         synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
@@ -40,7 +42,10 @@ public class SynthPlayer : MonoBehaviour
     private void OnAudioFilterRead(float[] data, int channels)
     {
         time = AudioSettings.dspTime;
-        audioBufferedNotes = new List<Note>(notes);
+
+        audioBufferedNotes.Clear();
+        audioBufferedNotes.AddRange(notes);
+
         for (int i = 0; i < data.Length; i += channels)
         {
             float value = CombineNotes();
@@ -54,6 +59,8 @@ public class SynthPlayer : MonoBehaviour
             {
                 note.UpdatePhase();
             }
+
+            time += timeIncrement;
         }
     }
 
@@ -133,6 +140,8 @@ public class SynthPlayer : MonoBehaviour
     public Synth GetSynth(int index) => synths[index % synths.Count];
     public Synth GetSynth() => synths[synthIndex];
     public void IncrementSynthIndex() => synthIndex = (synthIndex + 1) % synths.Count;
+
+    public Note GetNote(int id) => idNotes.ContainsKey(id) ? idNotes[id] : null;
 
     public void SetNoteFrequency(int noteID, float frequency) => idNotes[noteID].frequency = frequency;
 

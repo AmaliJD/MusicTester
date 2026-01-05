@@ -13,13 +13,19 @@ public class KeyboardDraw
     public List<Vector2> Positions { get; private set; }
     public Vector2 KeySize { get; private set; }
 
-    private int EDO = -1;
-    public static TMP_FontAsset font;
-    public static float[] JI = new float[] { 1, 16f/15f, 9f/8f, 6f/5f, 5f/4f, 4f/3f, Mathf.Sqrt(2), 3f/2f, 8f/5f, 5f/3f, 9f/5f, 15f/8f, 2 };
-    public static string[] JInames = new string[] { "U", "m2", "M2", "m3", "M3", "P4", "Tri", "P5", "m6", "M6", "m7", "M7", "O" };
+    Main main;
 
-    public KeyboardDraw(int edo = -1)
+    private int EDO = -1;
+    private int EXTEND = 0;
+    public static TMP_FontAsset font;
+    public static float[] JI = new float[] { 1, 16f/15f, 9f/8f, 6f/5f, 5f/4f, 4f/3f, Mathf.Sqrt(2), 3f/2f, 8f/5f, 5f/3f, 7f/4f, 9f/5f, 15f/8f, 2 };
+    public static string[] JInames = new string[] { "U", "m2", "M2", "m3", "M3", "P4", "Tri", "P5", "m6", "M6", "H7", "m7", "M7", "O" };
+    public static float limitFrequencyRatio = 2f.AddCents(50);
+
+    public KeyboardDraw(Main m, int edo = -1)
     {
+        main = m;
+
         if (xBounds == Vector2.zero)
         {
             float x = Camera.main.orthographicSize * ((float)Screen.width / (float)Screen.height);
@@ -29,17 +35,22 @@ public class KeyboardDraw
         if (yBounds == Vector2.zero)
         {
             float y = Camera.main.orthographicSize;
-            yBounds = new Vector2(-y, y * .6f);
+            yBounds = new Vector2(-y, y * .45f);
         }
         
         (Positions, KeySize) = GetPositionsAndSize(edo);
         EDO = edo;
+        EXTEND = main.extend;
     }
 
     public (List<Vector2>, Vector2) GetPositionsAndSize(int edo)
     {
-        if (edo != EDO)
+        if (edo != EDO || main.extend != EXTEND)
         {
+            EDO = edo;
+            EXTEND = main.extend;
+            edo = edo + EXTEND;
+
             float width = xBounds.y - xBounds.x;
             XInterval = width / ((float)edo + 1);
 
@@ -53,8 +64,6 @@ public class KeyboardDraw
                 Vector2 position = new Vector2(xPosition, yPosition);
                 Positions.Add(position);
             }
-
-            EDO = edo;
         }
 
         return (Positions, KeySize);
@@ -69,11 +78,44 @@ public class KeyboardDraw
         foreach (Vector2 position in Positions)
         {
             bool pressed = keysPressed.Contains(keyIndex);
-            float keyColor = pressed ? .08f : .03f;
+            bool isPeriod = !((keyIndex + main.shift) % edo != 0);
+            float keyColor = pressed ? .08f : (isPeriod ? .04f : .0275f);
             float keyBorderColor = .18f;
 
-            float frequencyMult = Mathf.Pow(Mathf.Pow(2, 1 / (float)edo), (float)keyIndex);
-            float[] JIDiff = JI.Select(x => Main.GetCentDifference(x, frequencyMult)).ToArray();
+            GLGizmos.SetLayer(-1);
+            GLGizmos.SetColor(new Color(keyColor, keyColor, keyColor));
+            GLGizmos.DrawSolidBox(position, KeySize);
+
+            GLGizmos.SetLayer(0);
+            GLGizmos.SetColor(new Color(keyBorderColor, keyBorderColor, keyBorderColor));
+            GLGizmos.DrawWeightedBox(position, KeySize, .02f, BorderType.Inside);
+
+            float frequencyRatio = Mathf.Pow(Mathf.Pow(main.Period, 1 / (float)edo), (float)keyIndex + main.shift);
+
+            TextBoxParams tbp = new TextBoxParams() { alignment = TextAlignmentOptions.Bottom, positionPivot = PositionPivot.Bottom, fitTextToBox = true, textBoxSize = Vector2.one * XInterval * .9f, lineSpacing = 20 };
+            void DrawNullKey()
+            {
+                GLGizmos.SetColor(new Color(1, 1, 1, .2f));
+                GLGizmos.DrawText($"--", position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 3.25f, tbp);
+            }
+
+            if (frequencyRatio == 0)
+            {
+                DrawNullKey();
+                keyIndex++;
+                continue;
+            }
+
+            float octaveAdjAmt = Mathf.Abs(Mathf.Floor(Mathf.Log(frequencyRatio, 2)));
+            if (frequencyRatio > limitFrequencyRatio)
+                frequencyRatio /= Mathf.Pow(2, octaveAdjAmt);
+            else if (frequencyRatio < 1)
+                frequencyRatio *= Mathf.Pow(2, octaveAdjAmt);
+
+            if (octaveAdjAmt != 0 && frequencyRatio * 2 < limitFrequencyRatio)
+                frequencyRatio *= 2;
+
+            float[] JIDiff = JI.Select(x => main.GetCentDifference(x, frequencyRatio)).ToArray();
 
             float minJIDiff = 1200;
             int minJIIndex = -1;
@@ -86,20 +128,19 @@ public class KeyboardDraw
                     minJIIndex = i;
             }
 
-            GLGizmos.SetLayer(-1);
-            GLGizmos.SetColor(new Color(keyColor, keyColor, keyColor));
-            GLGizmos.DrawSolidBox(position, KeySize);
+            if (minJIIndex == -1)
+            {
+                DrawNullKey();
+                keyIndex++;
+                continue;
+            }
 
-            GLGizmos.SetLayer(0);
-            GLGizmos.SetColor(new Color(keyBorderColor, keyBorderColor, keyBorderColor));
-            GLGizmos.DrawWeightedBox(position, KeySize, .02f, BorderType.Inside);
-
-            if (Mathf.Abs(JIDiff[minJIIndex]) <= 33)
+            if (Mathf.Abs(JIDiff[minJIIndex]) <= 50)
             {
                 string topTxt = Mathf.Abs(JIDiff[minJIIndex]) > 0.01f ? (Mathf.Sign(JIDiff[minJIIndex]) == 1 ? "+" : "") + $"{Mathf.RoundToInt(JIDiff[minJIIndex])}" : "";
                 string bottomTxt = JInames[minJIIndex];
-                GLGizmos.SetColor(Color.white);
-                GLGizmos.DrawText($"{topTxt}\n{bottomTxt}", position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 4, new TextBoxParams() { alignment = TextAlignmentOptions.Bottom, positionPivot = PositionPivot.Bottom, fitTextToBox = true, textBoxSize = Vector2.one * XInterval * .95f });
+                GLGizmos.SetColor(Mathf.Abs(JIDiff[minJIIndex]) <= 33 ? Color.white : new Color(1, 1, 1, .2f));
+                GLGizmos.DrawText($"{topTxt}\n{bottomTxt}", position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 3.25f, tbp);
             }
 
             keyIndex++;
@@ -114,7 +155,7 @@ public class KeyboardDraw
         if (xPos < xBounds.x || xPos > xBounds.y || yPos < yBounds.x || yPos > yBounds.y)
             return -1;
 
-        float relativeX = Mathf.InverseLerp(xBounds.x, xBounds.y, xPos) * (EDO + 1);
+        float relativeX = Mathf.InverseLerp(xBounds.x, xBounds.y, xPos) * (EDO + 1 + EXTEND);
         int key = Mathf.FloorToInt(relativeX);
 
         return key;

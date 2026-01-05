@@ -114,7 +114,7 @@ namespace GLDebug
                             {
                                 position = gizmo.positionTransform.position;
                                 targetTransform = gizmo.positionTransform;
-                            }
+                            }  
                             else
                                 continue;
                             break;

@@ -23,6 +23,12 @@ namespace GLDebug
         public Vector2? scale;
         public Vector2 textBoxSize;
         public FontStyles fontStyle;
+
+        public float characterSpacing;
+        public float wordSpacing;
+        public float lineSpacing;
+        public float paragraphSpacing;
+
         public TextAlignmentOptions? alignment;
         public PositionPivot positionPivot;
         public bool fitTextToBox;
@@ -235,7 +241,7 @@ namespace GLDebug
             else if (boxParams.edgeRadius != 0 && boxParams.borderWidth == 0)
             {
                 AddAction(() => InternalDrawRectEdgeRadius(position, size, boxParams.edgeRadius, boxParams.rotation, false, boxParams.solidEdgeRadius, colorSetting: colorSetting));
-
+            
                 if (!boxParams.onlyRenderEdgeRadius)
                     AddAction(() => InternalDrawRect(position, size, boxParams.rotation, boxParams.solid, colorSetting));
             }
@@ -1231,7 +1237,7 @@ namespace GLDebug
             AddAction(() => InternalDrawWeightedCircle(position, innerRadius, outerRadius, arcAngle, offsetAngle, arcCloseType, numEdges, colorSetting));
         }
 
-        private static void InternalDrawWeightedCircle(Vector2 position, float innerRadius, float outerRadius, float arcAngle, float offsetAngle, ArcCloseType arcCloseType = ArcCloseType.None, int numEdges = 0, Color? colorSetting = null)
+        private static void InternalDrawWeightedCircle(Vector2 position, float innerRadius, float outerRadius, float arcAngle, float offsetAngle, ArcCloseType arcCloseType = ArcCloseType.None, int numEdges = 0, Color ? colorSetting = null)
         {
             if (innerRadius == outerRadius)
             {
@@ -1336,9 +1342,9 @@ namespace GLDebug
             // draw arc
             for (int i = 1; i <= numEdges; i++)
             {
-                Vector2 outer0 = position + Vector2.right.Rotate(arcAngle * ((float)(i - 1) / (float)numEdges) + offsetAngle) * outerRadius;
+                Vector2 outer0 = position + Vector2.right.Rotate(arcAngle * ((float)(i-1) / (float)numEdges) + offsetAngle) * outerRadius;
                 Vector2 outer1 = position + Vector2.right.Rotate(arcAngle * ((float)i / (float)numEdges) + offsetAngle) * outerRadius;
-                Vector2 inner0 = position + Vector2.right.Rotate(arcAngle * ((float)(i - 1) / (float)numEdges) + offsetAngle) * innerRadius;
+                Vector2 inner0 = position + Vector2.right.Rotate(arcAngle * ((float)(i-1) / (float)numEdges) + offsetAngle) * innerRadius;
                 Vector2 inner1 = position + Vector2.right.Rotate(arcAngle * ((float)i / (float)numEdges) + offsetAngle) * innerRadius;
 
                 List<Vector2> vertices = new();
@@ -1353,7 +1359,7 @@ namespace GLDebug
             if (arcAngleAbs >= 360 || arcCloseType == ArcCloseType.None)
                 return;
 
-
+            
             List<Vector2> closingVerticesWest = new();
             List<Vector2> closingVerticesEast = new();
 
@@ -1377,7 +1383,7 @@ namespace GLDebug
                     {
                         p1 = vertex1;
                         p2 = vertex2;
-                        edgeIndex = new(index1, index2);
+                        edgeIndex = new (index1, index2);
                         return true;
                     }
 
@@ -1388,7 +1394,7 @@ namespace GLDebug
                 return false;
             }
 
-            (List<Vector2>, List<Vector2>) GetWestEastInnerVectorLists(Vector2 outerCorner, Vector2 innerCorner, float innerRadiusLimit, bool ignoreDrawInnerCorner = false)
+            (List<Vector2>, List <Vector2>) GetWestEastInnerVectorLists(Vector2 outerCorner, Vector2 innerCorner, float innerRadiusLimit, bool ignoreDrawInnerCorner = false)
             {
                 List<Vector2> westVertices = new();
                 List<Vector2> eastVertices = new();
@@ -1598,7 +1604,7 @@ namespace GLDebug
                     Vector2 _outerStart = position + Vector2.right.Rotate(offsetAngle) * outerRadius;
                     Vector2 _outerEnd = position + Vector2.right.Rotate(arcAngle + offsetAngle) * outerRadius;
                     Vector2 _outerCorner = EdgeMinMaxPoint(position, -Vector2.right.Rotate(arcAngle / 2 + offsetAngle) * Min_Max_Bias, position + Vector2.right.Rotate(offsetAngle) * outerRadius, position + Vector2.right.Rotate(arcAngle + offsetAngle) * outerRadius, arcAngle);
-
+                    
                     // if flat
                     if (_outerCorner == _outerEnd || _outerCorner == _outerStart)
                     {
@@ -1639,14 +1645,14 @@ namespace GLDebug
                         Vector2 outerCorner = EdgeMinMaxPoint(position, -innerDirection * Min_Max_Bias, position + Vector2.right.Rotate(offsetAngle) * outerRadius, position + Vector2.right.Rotate(arcAngle + offsetAngle) * outerRadius, arcAngle);
                         Vector2 midCorner = EdgeMinMaxPoint(position, -innerDirection * Min_Max_Bias, position + Vector2.right.Rotate(offsetAngle) * innerRadius, position + Vector2.right.Rotate(arcAngle + offsetAngle) * innerRadius, arcAngle);
                         Vector2 innerCorner = _outerCorner + new Vector2(Mathf.Sign(innerDirection.x), Mathf.Sign(innerDirection.y)) * borderWidth;
-
+                        
                         if (Vector2.Distance(position, innerCorner) > innerRadius)
                         {
                             Vector2 xDir = new Vector2(Mathf.Sign(innerDirection.x), 0);
                             Vector2 yDir = new Vector2(0, Mathf.Sign(innerDirection.y));
                             Vector2 pointX = position - xDir * innerRadius;
                             Vector2 pointY = position - yDir * innerRadius;
-
+                            
                             if (GetNearestCircleEdge(innerCorner, innerRadius, out Vector2 p1, out Vector2 p2, out Vector2Int index))
                             {
                                 if (Extensions.FindSegmentIntersection(innerCorner, innerCorner + xDir * innerRadius, p1, p2, out Vector2 intersectionPoint1))
@@ -1658,9 +1664,9 @@ namespace GLDebug
                                     innerCorner = intersectionPoint2;
                                 }
                             }
-
+                            
                         }
-
+                        
                         //(closingVerticesWest, closingVerticesEast) = GetWestEastInnerVectorLists(midCorner, innerCorner);
 
                         List<Vector2> vertices = new();
@@ -1677,7 +1683,7 @@ namespace GLDebug
                         vertices.Add(midCorner);
                         InternalDrawFilledPath(vertices, colorSetting);
                     }
-
+                    
                     break;
 
             }
@@ -2143,50 +2149,57 @@ namespace GLDebug
             return pos;
         }
 
-
+        
         /// <summary>
-        /// Draws text based on TextMeshPro font asset
+        /// Draws text based on TextMeshPro font asset. If font is null, a default font will be used
         /// </summary>
-        public static void DrawText(string text, Vector2 position, TMP_FontAsset font, float fontSize, TextBoxParams textBoxParams, Color? colorSetting = null)
-            => AddAction(() => InternalDrawText(text, position, textBoxParams.rotation, textBoxParams.scale ?? Vector2.one, font, fontSize, textBoxParams.textBoxSize, textBoxParams.fontStyle, textBoxParams.alignment ?? TextAlignmentOptions.Center, textBoxParams.positionPivot, textBoxParams.fitTextToBox, colorSetting));
-        public static void InternalDrawText(string text, Vector2 position, float rotation, Vector2 scale, TMP_FontAsset font, float fontSize, Vector2 textBoxSize, FontStyles fontStyle, TextAlignmentOptions alignment, PositionPivot positionPivot, bool fitToBox, Color? colorSetting = null)
+        public static void DrawText(string text, Vector2 position, TMP_FontAsset font, float fontSize, TextBoxParams textBoxParams = new(), Color? colorSetting = null)
+            => AddAction(() => InternalDrawText(text, position, font, fontSize, textBoxParams, colorSetting));
+        public static void InternalDrawText(string text, Vector2 position, TMP_FontAsset font, float fontSize, TextBoxParams textBoxParams, Color? colorSetting = null)
         {
-            textBoxSize = textBoxSize.Abs();
+            textBoxParams.textBoxSize = textBoxParams.textBoxSize.Abs();
+            Vector2 scale = textBoxParams.scale ?? Vector2.one;
+            TextAlignmentOptions alignment = textBoxParams.alignment ?? TextAlignmentOptions.Center;
 
             tmp.enabled = true;
             tmp.text = text;
             tmp.font = font;
             tmp.fontSize = fontSize;
             tmp.fontSizeMax = fontSize;
-            tmp.fontStyle = fontStyle;
-            tmp.rectTransform.sizeDelta = textBoxSize;
-            tmp.textWrappingMode = textBoxSize == Vector2.zero ? TextWrappingModes.NoWrap : TextWrappingModes.Normal;
+            tmp.fontStyle = textBoxParams.fontStyle;
+            tmp.rectTransform.sizeDelta = textBoxParams.textBoxSize;
+            tmp.textWrappingMode = textBoxParams.textBoxSize == Vector2.zero ? TextWrappingModes.NoWrap : TextWrappingModes.Normal;
             tmp.alignment = alignment;
-            tmp.enableAutoSizing = fitToBox;
+            tmp.enableAutoSizing = textBoxParams.fitTextToBox;
             tmp.color = (Color)(colorSetting == null ? color : colorSetting);
+            
+            tmp.characterSpacing = textBoxParams.characterSpacing;
+            tmp.wordSpacing = textBoxParams.wordSpacing;
+            tmp.lineSpacing = textBoxParams.lineSpacing;
+            tmp.paragraphSpacing = textBoxParams.paragraphSpacing;
 
             tmp.ForceMeshUpdate();
 
             Mesh mesh = tmp.mesh;
             Material mat = tmp.fontSharedMaterial;
 
-            Vector2 RotatedTextBox(Vector2 textBox) => (Vector2.right * textBox.x).Rotate(rotation) + (Vector2.up * textBox.y).Rotate(rotation);
-            Vector2 pos = positionPivot switch
+            Vector2 RotatedTextBox(Vector2 textBox) => (Vector2.right * textBox.x).Rotate(textBoxParams.rotation) + (Vector2.up * textBox.y).Rotate(textBoxParams.rotation);
+            Vector2 pos = textBoxParams.positionPivot switch
             {
-                PositionPivot.TopLeft => position + RotatedTextBox((textBoxSize * scale).ScaleEach(.5f, -.5f)),
-                PositionPivot.TopRight => position + RotatedTextBox((textBoxSize * scale).ScaleEach(-.5f, -.5f)),
-                PositionPivot.BottomLeft => position + RotatedTextBox((textBoxSize * scale).ScaleEach(.5f, .5f)),
-                PositionPivot.BottomRight => position + RotatedTextBox((textBoxSize * scale).ScaleEach(-.5f, .5f)),
+                PositionPivot.TopLeft => position + RotatedTextBox((textBoxParams.textBoxSize * scale).ScaleEach(.5f, -.5f)),
+                PositionPivot.TopRight => position + RotatedTextBox((textBoxParams.textBoxSize * scale).ScaleEach(-.5f, -.5f)),
+                PositionPivot.BottomLeft => position + RotatedTextBox((textBoxParams.textBoxSize * scale).ScaleEach(.5f, .5f)),
+                PositionPivot.BottomRight => position + RotatedTextBox((textBoxParams.textBoxSize * scale).ScaleEach(-.5f, .5f)),
 
-                PositionPivot.Top => position + RotatedTextBox((textBoxSize * scale).ScaleEach(0, -.5f)),
-                PositionPivot.Bottom => position + RotatedTextBox((textBoxSize * scale).ScaleEach(0, .5f)),
-                PositionPivot.Left => position + RotatedTextBox((textBoxSize * scale).ScaleEach(.5f, 0)),
-                PositionPivot.Right => position + RotatedTextBox((textBoxSize * scale).ScaleEach(-.5f, 0)),
+                PositionPivot.Top => position + RotatedTextBox((textBoxParams.textBoxSize * scale).ScaleEach(0, -.5f)),
+                PositionPivot.Bottom => position + RotatedTextBox((textBoxParams.textBoxSize * scale).ScaleEach(0, .5f)),
+                PositionPivot.Left => position + RotatedTextBox((textBoxParams.textBoxSize * scale).ScaleEach(.5f, 0)),
+                PositionPivot.Right => position + RotatedTextBox((textBoxParams.textBoxSize * scale).ScaleEach(-.5f, 0)),
 
                 _ => position
             };
 
-            Quaternion rot = Quaternion.Euler(0, 0, rotation);
+            Quaternion rot = Quaternion.Euler(0, 0, textBoxParams.rotation);
             Vector2 scl = new Vector3(scale.x, scale.y, 1);
 
             mat.SetPass(0);
