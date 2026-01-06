@@ -32,11 +32,11 @@ public class SynthPlayer : MonoBehaviour
         synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(attack: .12f, sustain: 1.5f, velocity: 2f, release: .5f), 0, 3, 8));
         synths.Add(new(Synth.Waveform.Saw, adsr));
         synths.Add(new(Synth.Waveform.Saw, adsr.Clone(attack: .08f, release: .8f), -1, 5, 8));
-        synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: 0.02f)));
-        synths.Add(new(Synth.Waveform.Square, adsr.Clone(decay: .2f, release: .75f), 0, 3, 700));
         synths.Add(new(Synth.Waveform.Square, adsr.Clone(attack: .2f)));
-        synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
-        synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: .05f, decay: 1, release: 2f, sustain: 1, velocity: .2f)));
+        synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: 0.02f, velocity: 1.5f, sustain: 1f)));
+        //synths.Add(new(Synth.Waveform.Square, adsr.Clone(decay: .2f, release: .75f), 0, 3, 700));
+        //synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(release: 0)));
+        //synths.Add(new(Synth.Waveform.Sine, adsr.Clone(attack: .05f, decay: 1, release: 1.5f, sustain: .8f, velocity: .2f), 0, 2, .5f));
     }
 
     private void OnAudioFilterRead(float[] data, int channels)

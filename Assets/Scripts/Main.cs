@@ -26,6 +26,7 @@ public class Main : MonoBehaviour
     
     public int extend = 0;
     public int shift = 0;
+    //public float drift = 0;
 
     float maxFrequency = 1760f;
     float minFrequency = 27.5f;
@@ -53,10 +54,12 @@ public class Main : MonoBehaviour
     public Slider periodDSlider;
     public Slider extendSlider;
     public Slider shiftSlider;
+    public Slider driftSlider;
 
     Vector2 NTextPosition;
     Vector2 DTextPosition;
     Vector2 XTextPosition;
+    Vector2 ShiftTextPosition;
 
     private void Awake()
     {
@@ -113,8 +116,9 @@ public class Main : MonoBehaviour
         NTextPosition = Camera.main.ScreenToWorldPoint(periodNSlider.transform.GetChild(0).position);
         DTextPosition = Camera.main.ScreenToWorldPoint(periodDSlider.transform.GetChild(0).position);
         XTextPosition = Camera.main.ScreenToWorldPoint(extendSlider.transform.GetChild(0).position);
+        ShiftTextPosition = Camera.main.ScreenToWorldPoint(driftSlider.transform.GetChild(0).position);
 
-        AdjustShiftRange();
+        //AdjustShiftRange();
     }
 
     private void OnValidate()
@@ -129,7 +133,7 @@ public class Main : MonoBehaviour
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            synthPlayer.IncrementSynthIndex();
+            NextSynth();
         }
 
         if (Keyboard.current.deleteKey.wasPressedThisFrame)
@@ -172,13 +176,6 @@ public class Main : MonoBehaviour
                 {
                     float newFrequency = GetFrequencyFromKeyPosition(touchList.positions[i]);
                     synthPlayer.SetNoteFrequency(id, newFrequency);
-
-                    //float currFrequency = synthPlayer.GetNote(id).frequency;
-                    //if (currFrequency != newFrequency)
-                    //{
-                    //    synthPlayer.ReleaseNote(id);
-                    //    synthPlayer.AddNote(new Note(newFrequency, 0, synthPlayer.GetSynth()), id);
-                    //}
                 }
             }
         }
@@ -229,6 +226,14 @@ public class Main : MonoBehaviour
         keyboardDraw.Draw(edo, keyPressPositions);
 
         DrawGizmos();
+
+        //shift = Mathf.RoundToInt(octaveShift * edo * (2 / Period));
+        //shift = Mathf.RoundToInt(GetIntervalDifference(SynthPlayer.baseFrequency, SynthPlayer.baseFrequency.AddCents(1200 * drift), edo, Period));
+    }
+
+    public void NextSynth()
+    {
+        synthPlayer.IncrementSynthIndex();
     }
 
     //float GetFrequencyFromPosition(float xPos)
@@ -254,7 +259,7 @@ public class Main : MonoBehaviour
         extendSlider.maxValue = Mathf.Max(edo, 12);
         SetExtend();
 
-        AdjustShiftRange();
+        AdjustShift();
     }
 
     public void SetPeriodN()
@@ -263,21 +268,44 @@ public class Main : MonoBehaviour
         periodDSlider.maxValue = periodN;
         SetPeriodD();
 
-        AdjustShiftRange();
+        AdjustShift();
     }
     public void SetPeriodD()
     {
         periodD = (int)periodDSlider.value;
 
-        AdjustShiftRange();
+        AdjustShift();
     }
     public void SetExtend() => extend = (int)extendSlider.value;
     public void SetShift() => shift = (int)shiftSlider.value;
+    public void SetDrift() => AdjustShift();
     void AdjustShiftRange()
     {
         shiftSlider.maxValue = Mathf.Max(GetIntervalDifference(SynthPlayer.baseFrequency, maxFrequency, edo, Period) - (edo * 2), 0);
         shiftSlider.minValue = Mathf.Min(-GetIntervalDifference(minFrequency, SynthPlayer.baseFrequency, edo, Period), 0);
         SetShift();
+    }
+    void AdjustShift()
+    {
+        shift = Mathf.RoundToInt(GetIntervalDifference(SynthPlayer.baseFrequency, SynthPlayer.baseFrequency.AddCents(1200 * driftSlider.value), edo, Period));
+    }
+
+    public void ResetDrift()
+    {
+        driftSlider.value = 0;
+        AdjustShift();
+    }
+
+    public void ResetSliders()
+    {
+        extendSlider.value = 0;
+        edoSlider.value = 12;
+        SetEdo();
+
+        driftSlider.value = 0;
+        periodDSlider.value = 1;
+        periodNSlider.value = 2;
+        SetPeriodN();
     }
 
     public void DrawGizmos()
@@ -294,6 +322,7 @@ public class Main : MonoBehaviour
         GLGizmos.DrawText($"{periodN}", NTextPosition, font, 4f, new TextBoxParams() { fontStyle = FontStyles.Bold });
         GLGizmos.DrawText($"{periodD}", DTextPosition, font, 4f, new TextBoxParams() { fontStyle = FontStyles.Bold });
         GLGizmos.DrawText($"{extend}", XTextPosition, font, 4f, new TextBoxParams() { fontStyle = FontStyles.Bold });
+        GLGizmos.DrawText($"{shift}", ShiftTextPosition, font, 3f, new TextBoxParams() { alignment = TextAlignmentOptions.Right, positionPivot = PositionPivot.Right });
     }
 
     void OnEnable()
