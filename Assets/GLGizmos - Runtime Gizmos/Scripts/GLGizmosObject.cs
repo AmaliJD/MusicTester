@@ -1,4 +1,6 @@
 using System;
+using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace GLDebug
@@ -6,15 +8,9 @@ namespace GLDebug
     [System.Serializable]
     public class GLGizmosObject
     {
-        void OnEnable()
-        {
-            size = Vector2.one;
-            color = Color.white;
-        }
-
         public enum GizmoType
         {
-            Box, Circle, Line, Triangle, Collider
+            Box, Circle, Line, Triangle, Collider, Text
         }
         public GizmoType gizmoType;
 
@@ -86,5 +82,22 @@ namespace GLDebug
         public float skew;
 
         public Collider2D collider2D;
+
+        [Multiline(5)]
+        public string text;
+        public TMP_FontAsset font;
+        public float fontSize;
+        public bool autoSize;
+        public FontStyles fontStyle;
+        public bool showTextBox;
+        public Color textBoxColor;
+        public TextAlignmentOptions textAlignment;
+        public PositionPivot positionPivot;
+        public float characterSpacing;
+        public float wordSpacing;
+        public float lineSpacing;
+        public float paragraphSpacing;
+
+        public bool disable;
     }
 }

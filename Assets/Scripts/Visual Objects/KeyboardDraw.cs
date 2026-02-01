@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.Burst.CompilerServices;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class KeyboardDraw
@@ -77,8 +79,20 @@ public class KeyboardDraw
         int keyIndex = 0;
         foreach (Vector2 position in Positions)
         {
+            float frequencyRatio = main.partitionMode switch
+            {
+                Main.PartitionMode.Edo => Mathf.Pow(Mathf.Pow(main.Period, 1 / (float)edo), (float)keyIndex + main.shift),
+                Main.PartitionMode.Cent => SynthPlayer.baseFrequency.AddCents(main.cents * (keyIndex + main.shift)) / SynthPlayer.baseFrequency,
+                _ => 1
+            };
+
             bool pressed = keysPressed.Contains(keyIndex);
-            bool isPeriod = !((keyIndex + main.shift) % edo != 0);
+            bool isPeriod = main.partitionMode switch
+            {
+                Main.PartitionMode.Edo => (keyIndex + main.shift) % edo == 0,
+                Main.PartitionMode.Cent => GetGeometricClosenessToPower(frequencyRatio, 2) < .025f,
+                _ => false
+            };
             float keyColor = pressed ? .08f : (isPeriod ? .04f : .0275f);
             float keyBorderColor = .18f;
 
@@ -89,8 +103,6 @@ public class KeyboardDraw
             GLGizmos.SetLayer(0);
             GLGizmos.SetColor(new Color(keyBorderColor, keyBorderColor, keyBorderColor));
             GLGizmos.DrawWeightedBox(position, KeySize, .02f, BorderType.Inside);
-
-            float frequencyRatio = Mathf.Pow(Mathf.Pow(main.Period, 1 / (float)edo), (float)keyIndex + main.shift);
 
             TextBoxParams tbp = new TextBoxParams() { alignment = TextAlignmentOptions.Bottom, positionPivot = PositionPivot.Bottom, fitTextToBox = true, textBoxSize = Vector2.one * XInterval * .9f, lineSpacing = 20 };
             void DrawNullKey()
@@ -159,5 +171,20 @@ public class KeyboardDraw
         int key = Mathf.FloorToInt(relativeX);
 
         return key;
+    }
+
+    private float GetGeometricClosenessToPower(float number, float power)
+    {
+        if (number <= 0) return float.PositiveInfinity;
+
+        // The exponent value (e.g., for 6, log2 is ~2.58)
+        float logValue = Mathf.Log(number) / Mathf.Log(power);
+
+        // Distance to the nearest integer exponent
+        // Result of 0.0 means it is exactly a power of 2.
+        // Result of 0.5 means it is geometrically right in the middle (the geometric mean).
+        float distance = Mathf.Abs(logValue - Mathf.Round(logValue));
+
+        return distance;
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using GLGizmosExtensions;
+using TMPro;
 
 namespace GLDebug
 {
@@ -59,6 +60,15 @@ namespace GLDebug
 
                 SerializedProperty gapSizeProperty = property.FindPropertyRelative("gapSize");
                 gapSizeProperty.floatValue = .5f;
+
+                SerializedProperty fontSizeProperty = property.FindPropertyRelative("fontSize");
+                fontSizeProperty.floatValue = 5f;
+
+                SerializedProperty textBoxColorProperty = property.FindPropertyRelative("textBoxColor");
+                textBoxColorProperty.colorValue = new Color(0, 1, 0, .5f);
+
+                SerializedProperty textAlignmentProperty = property.FindPropertyRelative("textAlignment");
+                textAlignmentProperty.enumValueFlag = (int)TextAlignmentOptions.Center;
             }
 
             if (property.isExpanded)
@@ -341,6 +351,74 @@ namespace GLDebug
                     SerializedProperty solidProperty = property.FindPropertyRelative("solid");
                     EditorGUILayout.PropertyField(solidProperty, new GUIContent("Solid"));
                 }
+                else if (gizmoType == GizmoType.Text)
+                {
+                    EditorGUILayout.LabelField("Transform", EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(positionTypeProperty, new GUIContent("Position Type"));
+                    PositionType positionType = (PositionType)positionTypeProperty.enumValueIndex;
+
+                    SerializedProperty positionOffsetProperty = property.FindPropertyRelative("positionOffset");
+                    switch (positionType)
+                    {
+                        case PositionType.Transform:
+                            SerializedProperty positionTransformProperty = property.FindPropertyRelative("positionTransform");
+                            EditorGUILayout.PropertyField(positionTransformProperty, new GUIContent("Target"));
+                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
+                            break;
+                        case PositionType.Raw:
+                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Position"));
+                            break;
+                        case PositionType.This:
+                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
+                            break;
+                    }
+
+                    EditorGUILayout.Space();
+                    SerializedProperty sizeProperty = property.FindPropertyRelative("size");
+
+                    if (space.FlagEnumContains(LocalSpace.Scale))
+                    {
+                        SerializedProperty sizeTypeProperty = property.FindPropertyRelative("scaleSizeType");
+                        EditorGUILayout.PropertyField(sizeTypeProperty, new GUIContent("Size Type"));
+                        ScaleSizeType sizeType = (ScaleSizeType)sizeTypeProperty.enumValueIndex;
+
+                        if (sizeType == ScaleSizeType.Add)
+                            EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size (add)"));
+                        else
+                            EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size (multiply)"));
+                    }
+                    else
+                        EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size"));
+
+                    EditorGUILayout.Space();
+                    SerializedProperty angleProperty = property.FindPropertyRelative("angle");
+                    EditorGUILayout.PropertyField(angleProperty, new GUIContent("Rotation"));
+
+                    EditorGUILayout.Space();
+                    EditorGUILayout.LabelField("Text Properties", EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("text"), new GUIContent("Text"));
+                    EditorGUILayout.Space();
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("font"), new GUIContent("Font"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("fontSize"), new GUIContent("Font Size"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("autoSize"), new GUIContent("Auto Size"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("fontStyle"), new GUIContent("Font Style"));
+
+                    EditorGUILayout.Space();
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("characterSpacing"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("wordSpacing"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("lineSpacing"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("paragraphSpacing"));
+
+                    EditorGUILayout.Space();
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("textAlignment"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("positionPivot"), new GUIContent("Pivot"));
+
+                    EditorGUILayout.Space();
+                    SerializedProperty showTextBoxProperty = property.FindPropertyRelative("showTextBox");
+                    EditorGUILayout.PropertyField(showTextBoxProperty);
+                    if (showTextBoxProperty.boolValue)
+                        EditorGUILayout.PropertyField(property.FindPropertyRelative("textBoxColor"));
+                }
 
                 // color
                 EditorGUILayout.Space();
@@ -365,6 +443,9 @@ namespace GLDebug
                     EditorGUILayout.PropertyField(layerProperty, new GUIContent("Layer"));
                 }
                 EditorGUILayout.PropertyField(inheritLayerProperty, new GUIContent("Inherit Layer"));
+
+                //disable
+                EditorGUILayout.PropertyField(property.FindPropertyRelative("disable"), new GUIContent("disable"));
             }
         }
     }

@@ -89,6 +89,7 @@ namespace GLDebug
             RenderPipelineManager.endCameraRendering -= RenderPipelineManager_endCameraRendering;
             RenderPipelineManager.beginCameraRendering += RenderPipelineManager_beginCameraRendering;
             DestroyGLMaterial();
+            ClearDrawActions();
         }
 
         private void RenderPipelineManager_endCameraRendering(ScriptableRenderContext context, Camera camera)
@@ -103,6 +104,9 @@ namespace GLDebug
 
         private void OnPreRender()
         {
+            if (GLmat == null)
+                CreateGLMaterial();
+
             GL.wireframe = false;
         }
 
@@ -722,6 +726,26 @@ namespace GLDebug
                 InternalDrawFilledPath(points, colorSetting);
         }
 
+        private static void InternalDrawPartialRectOutline(Vector2 position, Vector2 size, float angle, bool top, bool bottom, bool left, bool right, Color? colorSetting = null)
+        {
+            Vector2 topRight = new Vector2(size.x / 2, size.y / 2).Rotate(angle) + position;
+            Vector2 topLeft = new Vector2(-size.x / 2, size.y / 2).Rotate(angle) + position;
+            Vector2 bottomLeft = new Vector2(-size.x / 2, -size.y / 2).Rotate(angle) + position;
+            Vector2 bottomRight = new Vector2(size.x / 2, -size.y / 2).Rotate(angle) + position;
+
+            if (top)
+                InternalDrawLine(topLeft, topRight, colorSetting);
+
+            if (bottom)
+                InternalDrawLine(bottomLeft, bottomRight, colorSetting);
+
+            if (left)
+                InternalDrawLine(topLeft, bottomLeft, colorSetting);
+
+            if (right)
+                InternalDrawLine(topRight, bottomRight, colorSetting);
+        }
+
 
         /// <summary>
         /// Draws a box with an edge thickness of 'borderWidth'
@@ -885,6 +909,73 @@ namespace GLDebug
             size = size.Abs();
 
             return (size, borderWidth, borderType, fillBox);
+        }
+
+
+        /// <summary>
+        /// Draws a solid plus shape at 'position' with 'size' rotated by 'rotation' and with line width of 'lineWidth'
+        /// </summary>
+        public static void DrawSolidPlus(Vector2 position, Vector2 size, float lineWidth, float rotation, bool useLineWidthAsMultiplier = false, Color? colorSetting = null)
+        {
+            lineWidth = Mathf.Abs(lineWidth);
+            size = size.Abs();
+
+            float lineX = useLineWidthAsMultiplier ? size.x * lineWidth : lineWidth;
+            float lineY = useLineWidthAsMultiplier ? size.y * lineWidth : lineWidth;
+
+            if (lineWidth == 0)
+            {
+                AddAction(() => InternalDrawLine(position + (Vector2.up * size / 2).Rotate(rotation), position - (Vector2.up * size / 2).Rotate(rotation), colorSetting));
+                AddAction(() => InternalDrawLine(position + (Vector2.right * size / 2).Rotate(rotation), position - (Vector2.right * size / 2).Rotate(rotation), colorSetting));
+            }
+            else
+            {
+                if (rotation % 90 == 0)
+                {
+                    AddAction(() => InternalDrawBox(position, new Vector2(Mathf.Min(lineX, size.x), Mathf.Min(lineY, size.y)), true, colorSetting));
+
+                    AddAction(() => InternalDrawBox(position + Vector2.up * ((lineY / 2) + (size.y / 4 - lineY / 4)), new Vector2(Mathf.Min(lineX, size.x), size.y / 2 - lineY / 2), true, colorSetting));
+                    AddAction(() => InternalDrawBox(position - Vector2.up * ((lineY / 2) + (size.y / 4 - lineY / 4)), new Vector2(Mathf.Min(lineX, size.x), size.y / 2 - lineY / 2), true, colorSetting));
+                    AddAction(() => InternalDrawBox(position + Vector2.right * ((lineX / 2) + (size.x / 4 - lineX / 4)), new Vector2(size.x / 2 - lineX / 2, Mathf.Min(lineY, size.y)), true, colorSetting));
+                    AddAction(() => InternalDrawBox(position - Vector2.right * ((lineX / 2) + (size.x / 4 - lineX / 4)), new Vector2(size.x / 2 - lineX / 2, Mathf.Min(lineY, size.y)), true, colorSetting));
+                }
+                else
+                {
+                    AddAction(() => InternalDrawRect(position, new Vector2(Mathf.Min(lineX, size.x), Mathf.Min(lineY, size.y)), rotation, true, colorSetting));
+
+                    AddAction(() => InternalDrawRect(position + (Vector2.up * ((lineY / 2) + (size.y / 4 - lineY / 4))).Rotate(rotation), new Vector2(Mathf.Min(lineX, size.x), size.y / 2 - lineY / 2), rotation, true, colorSetting));
+                    AddAction(() => InternalDrawRect(position - (Vector2.up * ((lineY / 2) + (size.y / 4 - lineY / 4))).Rotate(rotation), new Vector2(Mathf.Min(lineX, size.x), size.y / 2 - lineY / 2), rotation, true, colorSetting));
+                    AddAction(() => InternalDrawRect(position + (Vector2.right * ((lineX / 2) + (size.x / 4 - lineX / 4))).Rotate(rotation), new Vector2(size.x / 2 - lineX / 2, Mathf.Min(lineY, size.y)), rotation, true, colorSetting));
+                    AddAction(() => InternalDrawRect(position - (Vector2.right * ((lineX / 2) + (size.x / 4 - lineX / 4))).Rotate(rotation), new Vector2(size.x / 2 - lineX / 2, Mathf.Min(lineY, size.y)), rotation, true, colorSetting));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draws an open plus shape at 'position' with 'size' rotated by 'rotation' and with line width of 'lineWidth'
+        /// </summary>
+        public static void DrawOpenPlus(Vector2 position, Vector2 size, float lineWidth, float rotation, bool useLineWidthAsMultiplier = false, Color? colorSetting = null)
+        {
+            lineWidth = Mathf.Abs(lineWidth);
+            size = size.Abs();
+
+            float lineX = useLineWidthAsMultiplier ? size.x * lineWidth : lineWidth;
+            float lineY = useLineWidthAsMultiplier ? size.y * lineWidth : lineWidth;
+
+            if (lineWidth == 0)
+            {
+                AddAction(() => InternalDrawLine(position + (Vector2.up * size / 2).Rotate(rotation), position - (Vector2.up * size / 2).Rotate(rotation), colorSetting));
+                AddAction(() => InternalDrawLine(position + (Vector2.right * size / 2).Rotate(rotation), position - (Vector2.right * size / 2).Rotate(rotation), colorSetting));
+            }
+            else
+            {
+                bool overSizeX = lineX > size.x;
+                bool overSizeY = lineY > size.y;
+                AddAction(() => InternalDrawPartialRectOutline(position + (Vector2.up * ((lineY / 2) + (size.y / 4 - lineY / 4))).Rotate(rotation), new Vector2(Mathf.Min(lineX, size.x), size.y / 2 - lineY / 2), rotation, !overSizeY, overSizeY, true, true, colorSetting));
+                AddAction(() => InternalDrawPartialRectOutline(position - (Vector2.up * ((lineY / 2) + (size.y / 4 - lineY / 4))).Rotate(rotation), new Vector2(Mathf.Min(lineX, size.x), size.y / 2 - lineY / 2), rotation, overSizeY, !overSizeY, true, true, colorSetting));
+                AddAction(() => InternalDrawPartialRectOutline(position + (Vector2.right * ((lineX / 2) + (size.x / 4 - lineX / 4))).Rotate(rotation), new Vector2(size.x / 2 - lineX / 2, Mathf.Min(lineY, size.y)), rotation, true, true, overSizeX, !overSizeX, colorSetting));
+                AddAction(() => InternalDrawPartialRectOutline(position - (Vector2.right * ((lineX / 2) + (size.x / 4 - lineX / 4))).Rotate(rotation), new Vector2(size.x / 2 - lineX / 2, Mathf.Min(lineY, size.y)), rotation, true, true, !overSizeX, overSizeX, colorSetting));
+            }
         }
         #endregion
 
@@ -2157,6 +2248,7 @@ namespace GLDebug
             => AddAction(() => InternalDrawText(text, position, font, fontSize, textBoxParams, colorSetting));
         public static void InternalDrawText(string text, Vector2 position, TMP_FontAsset font, float fontSize, TextBoxParams textBoxParams, Color? colorSetting = null)
         {
+            GL.wireframe = false;
             textBoxParams.textBoxSize = textBoxParams.textBoxSize.Abs();
             Vector2 scale = textBoxParams.scale ?? Vector2.one;
             TextAlignmentOptions alignment = textBoxParams.alignment ?? TextAlignmentOptions.Center;

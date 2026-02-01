@@ -11,7 +11,7 @@ namespace GLDebug
     public class GLGizmosComponent : MonoBehaviour
     {
         private List<Action> drawActions = new();
-        public GLGizmosObject[] gizmos;
+        public List<GLGizmosObject> gizmos;
         private struct TransformCache
         {
             int id;
@@ -59,7 +59,7 @@ namespace GLDebug
             }
 
             List<TransformCache> tempRefTransformCache = new();
-            if (gizmos != null && gizmos.Length > 0)
+            if (gizmos != null && gizmos.Count > 0)
             {
                 foreach (GLGizmosObject gizmo in gizmos)
                 {
@@ -74,6 +74,7 @@ namespace GLDebug
             if (tempRefTransformCache.Count != refTransformCache.Count)
             {
                 SetActions();
+                refTransformCache = tempRefTransformCache;
                 return;
             }
 
@@ -84,6 +85,7 @@ namespace GLDebug
                 {
                     transformCache = new TransformCache(transform);
                     SetActions();
+                    refTransformCache = tempRefTransformCache;
                     return;
                 }
                 i++;
@@ -101,6 +103,9 @@ namespace GLDebug
 
             foreach (GLGizmosObject gizmo in gizmos)
             {
+                if (gizmo.disable)
+                    continue;
+
                 if (gizmo.gizmoType == GizmoType.Box)
                 {
                     Transform targetTransform = transform;
@@ -389,6 +394,82 @@ namespace GLDebug
 
                     Color gizmoColor = color;
                     drawActions.Add(() => GLGizmos.DrawCollider2D(gizmo.collider2D, gizmo.solid, gizmoColor));
+                }
+                else if (gizmo.gizmoType == GizmoType.Text)
+                {
+                    Transform targetTransform = transform;
+
+                    // position
+                    Vector2 position;
+                    switch (gizmo.positionType)
+                    {
+                        case PositionType.Transform:
+                            if (gizmo.positionTransform != null)
+                            {
+                                position = gizmo.positionTransform.position;
+                                targetTransform = gizmo.positionTransform;
+                            }
+                            else
+                                continue;
+                            break;
+                        case PositionType.Raw:
+                            position = Vector2.zero;
+                            break;
+                        default:
+                            position = targetTransform.position;
+                            break;
+                    }
+
+                    Vector2 rightMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.right : Vector2.right;
+                    Vector2 upMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.up : Vector2.up;
+                    Vector2 scaleMult = gizmo.space.FlagEnumContains(LocalSpace.Scale) ? targetTransform.localScale : Vector2.one;
+                    position += rightMult * gizmo.positionOffset.x * scaleMult.x + upMult * gizmo.positionOffset.y * scaleMult.y;
+
+                    // size
+                    Vector2 size = gizmo.size;
+                    if (gizmo.space.FlagEnumContains(LocalSpace.Scale))
+                    {
+                        if (gizmo.scaleSizeType == ScaleSizeType.Add)
+                            size += (Vector2)targetTransform.localScale;
+                        else
+                            size *= targetTransform.localScale;
+                    }
+
+                    float angle = gizmo.angle;
+                    if (gizmo.space.FlagEnumContains(LocalSpace.Rotation))
+                    {
+                        angle += targetTransform.rotation.eulerAngles.z;
+                    }
+
+                    if (!gizmo.inheritColor)
+                    {
+                        color = gizmo.color;
+                    }
+                    if (gizmo.layer != layer && !gizmo.inheritLayer)
+                    {
+                        layer = gizmo.layer;
+                        drawActions.Add(() => GLGizmos.SetLayer(gizmo.layer));
+                    }
+
+                    Color gizmoColor = color;
+                    drawActions.Add(() => GLGizmos.DrawText(gizmo.text, position, gizmo.font, gizmo.fontSize, new TextBoxParams()
+                    {
+                        fontStyle = gizmo.fontStyle,
+                        fitTextToBox = gizmo.autoSize,
+                        rotation = angle,
+                        textBoxSize = size,
+                        alignment = gizmo.textAlignment,
+                        positionPivot = gizmo.positionPivot,
+
+                        characterSpacing = gizmo.characterSpacing,
+                        wordSpacing = gizmo.wordSpacing,
+                        lineSpacing = gizmo.lineSpacing,
+                        paragraphSpacing = gizmo.paragraphSpacing
+                    },
+                    gizmoColor));
+
+                    if (gizmo.showTextBox)
+                        drawActions.Add(() => GLGizmos.DrawOpenRect(GLGizmos.GetBoxPositionByPivot(position, size, angle, gizmo.positionPivot), size, angle, gizmo.textBoxColor));
                 }
             }
             drawActions.Add(() => GLGizmos.SetLayer(0));

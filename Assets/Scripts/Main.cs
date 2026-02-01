@@ -11,6 +11,12 @@ using static TouchHandler;
 
 public class Main : MonoBehaviour
 {
+    public enum PartitionMode
+    {
+        Edo, Cent, Custom
+    }
+    public PartitionMode partitionMode;
+
     TouchHandler touchHandler;
     KeyboardDraw keyboardDraw;
     SynthPlayer synthPlayer;
@@ -26,7 +32,6 @@ public class Main : MonoBehaviour
     
     public int extend = 0;
     public int shift = 0;
-    //public float drift = 0;
 
     float maxFrequency = 1760f;
     float minFrequency = 27.5f;
@@ -44,9 +49,14 @@ public class Main : MonoBehaviour
     {
         get
         {
-            return GetCentDifference(SynthPlayer.baseFrequency, SynthPlayer.baseFrequency.AddInterval(edo, 1, Period));
+            if (partitionMode == PartitionMode.Edo)
+                cents = GetCentDifference(SynthPlayer.baseFrequency, SynthPlayer.baseFrequency.AddInterval(edo, 1, Period));
+
+            return cents;
         }
     }
+
+    public float cents;
 
     public TMP_FontAsset font;
     public Slider edoSlider;
@@ -243,7 +253,17 @@ public class Main : MonoBehaviour
 
     float GetFrequencyFromKeyPosition(Vector2 position)
     {
-        return SynthPlayer.baseFrequency.AddInterval(edo, keyboardDraw.GetKey(position) + shift, Period);
+        switch (partitionMode)
+        {
+            case PartitionMode.Edo:
+                return SynthPlayer.baseFrequency.AddInterval(edo, keyboardDraw.GetKey(position) + shift, Period);
+            case PartitionMode.Cent:
+                return SynthPlayer.baseFrequency.AddCents(cents * (keyboardDraw.GetKey(position) + shift));
+            case PartitionMode.Custom:
+                break;
+        }
+
+        return SynthPlayer.baseFrequency;
     }
 
     bool TouchingKey(Vector2 position) => keyboardDraw.GetKey(position) != -1;
