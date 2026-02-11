@@ -43,7 +43,7 @@ public class VisualNote
         Color color = new Color(.2f, 1f, .2f, 1f);
         Color colorBorder = new Color(.1f, .6f, .1f, 1f);
 
-        GLGizmos.DrawSolidBox(center, size, color);
-        GLGizmos.DrawWeightedBox(center, size, .075f, BorderType.Inside, colorBorder);
+        GLGizmos.DrawSolidBox(center, size).SetColor(color);
+        GLGizmos.DrawWeightedBox(center, size, .075f, BorderType.Inside).SetColor(colorBorder);
     }
 }

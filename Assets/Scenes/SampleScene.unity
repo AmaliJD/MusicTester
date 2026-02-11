@@ -3038,11 +3038,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4211171b093144eaf70d574fa179ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partitionMode: 0
   edo: 12
   periodN: 2
   periodD: 1
   extend: 0
   shift: 0
+  cents: 0
   font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
   edoSlider: {fileID: 1977218359}
   periodNSlider: {fileID: 1675127865}

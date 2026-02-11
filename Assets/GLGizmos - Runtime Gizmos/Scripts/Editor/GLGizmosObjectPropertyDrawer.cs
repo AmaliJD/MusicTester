@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using GLGizmosExtensions;
 using TMPro;
 
 namespace GLDebug
@@ -26,49 +25,15 @@ namespace GLDebug
             bool initialized = initializedProperty.boolValue;
             initializedProperty.boolValue = true;
 
-            if (!initialized && firstElement)
+            SerializedProperty ObjectPositionProperty1 = property.FindPropertyRelative("ObjectPosition1");
+            SerializedProperty ObjectPositionProperty2 = property.FindPropertyRelative("ObjectPosition2");
+
+            if (!initialized)
             {
-                SerializedProperty spaceProperty = property.FindPropertyRelative("space");
-                spaceProperty.enumValueFlag = 7;
-
-                SerializedProperty space2Property = property.FindPropertyRelative("space2");
-                space2Property.enumValueFlag = 7;
-
-                SerializedProperty sizeProperty = property.FindPropertyRelative("size");
-                sizeProperty.vector2Value = Vector2.one;
-
-                SerializedProperty borderTypeProperty = property.FindPropertyRelative("borderType");
-                borderTypeProperty.enumValueIndex = (int)BorderType.Outside;
-
-                SerializedProperty colorProperty = property.FindPropertyRelative("color");
-                colorProperty.colorValue = Color.white;
-
-                SerializedProperty inheritLayerProperty = property.FindPropertyRelative("inheritLayer");
-                inheritLayerProperty.boolValue = true;
-
-                SerializedProperty radiusProperty = property.FindPropertyRelative("radius");
-                radiusProperty.floatValue = 0.5f;
-
-                SerializedProperty arcAngleProperty = property.FindPropertyRelative("arcAngle");
-                arcAngleProperty.floatValue = 360;
-
-                SerializedProperty bezierCurveProperty = property.FindPropertyRelative("bezierCurve");
-                bezierCurveProperty.floatValue = .75f;
-
-                SerializedProperty dashLengthProperty = property.FindPropertyRelative("dashLength");
-                dashLengthProperty.floatValue = 1;
-
-                SerializedProperty gapSizeProperty = property.FindPropertyRelative("gapSize");
-                gapSizeProperty.floatValue = .5f;
-
-                SerializedProperty fontSizeProperty = property.FindPropertyRelative("fontSize");
-                fontSizeProperty.floatValue = 5f;
-
-                SerializedProperty textBoxColorProperty = property.FindPropertyRelative("textBoxColor");
-                textBoxColorProperty.colorValue = new Color(0, 1, 0, .5f);
-
-                SerializedProperty textAlignmentProperty = property.FindPropertyRelative("textAlignment");
-                textAlignmentProperty.enumValueFlag = (int)TextAlignmentOptions.Center;
+                if (firstElement)
+                    InitializeFirstElement(property, ObjectPositionProperty1, ObjectPositionProperty2);
+                else
+                    InitializeNewElement(property);
             }
 
             if (property.isExpanded)
@@ -77,191 +42,80 @@ namespace GLDebug
                 EditorGUILayout.PropertyField(gizmoTypeProperty, new GUIContent("Gizmo Type"));
                 GizmoType gizmoType = (GizmoType)gizmoTypeProperty.enumValueIndex;
 
-                SerializedProperty spaceProperty = property.FindPropertyRelative("space");
-                SerializedProperty space2Property = property.FindPropertyRelative("space2");
-                SerializedProperty positionTypeProperty = property.FindPropertyRelative("positionType");
-                SerializedProperty positionType2Property = property.FindPropertyRelative("positionType2");
+                SerializedProperty spaceProperty1 = ObjectPositionProperty1.FindPropertyRelative("space");
+                SerializedProperty spaceProperty2 = ObjectPositionProperty2.FindPropertyRelative("space");
+                SerializedProperty positionTypeProperty1 = ObjectPositionProperty1.FindPropertyRelative("type");
+                SerializedProperty positionTypeProperty2 = ObjectPositionProperty2.FindPropertyRelative("type");
 
+                SerializedProperty colliderToFromProperty = property.FindPropertyRelative("useToFromPositions");
+
+                // LOCAL SPACE
                 EditorGUILayout.Space();
-                EditorGUILayout.PropertyField(spaceProperty, new GUIContent("Local Space"));
-                LocalSpace space = (LocalSpace)spaceProperty.enumValueFlag;
+                bool useObjectPosition1 = gizmoType != GizmoType.Collider;
+                bool useObjectPosition2 = gizmoType == GizmoType.Line || (gizmoType == GizmoType.Capsule && colliderToFromProperty.boolValue);
 
-                LocalSpace space2;
-                if (gizmoType == GizmoType.Line)
+                if (gizmoType == GizmoType.Capsule)
                 {
-                    EditorGUILayout.PropertyField(space2Property, new GUIContent("Local Space 2"));
-                    space2 = (LocalSpace)space2Property.enumValueFlag;
+                    EditorGUILayout.PropertyField(colliderToFromProperty, new GUIContent("Use Position Anchors"));
+                    EditorGUILayout.Space();
                 }
 
+                if (useObjectPosition1)
+                    EditorGUILayout.PropertyField(spaceProperty1, new GUIContent("Local Space"));
+                if (useObjectPosition2)
+                    EditorGUILayout.PropertyField(spaceProperty2, new GUIContent("Local Space 2"));
+
+                // TRANSFORM
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Transform", EditorStyles.boldLabel);
+                if (useObjectPosition1)
+                    DrawTransformSection(property, ObjectPositionProperty1, useObjectPosition2 ? 1 : 0);
+                if (useObjectPosition2)
+                    DrawTransformSection(property, ObjectPositionProperty2, 2);
+
+
+                LocalSpace space1 = (LocalSpace)spaceProperty1.enumValueFlag;
+                LocalSpace space2 = (LocalSpace)spaceProperty2.enumValueFlag;
+                // OBJECT
                 EditorGUILayout.Space();
                 if (gizmoType == GizmoType.Box)
                 {
-                    EditorGUILayout.LabelField("Transform", EditorStyles.boldLabel);
-                    EditorGUILayout.PropertyField(positionTypeProperty, new GUIContent("Position Type"));
-                    PositionType positionType = (PositionType)positionTypeProperty.enumValueIndex;
-
-                    SerializedProperty positionOffsetProperty = property.FindPropertyRelative("positionOffset");
-                    switch (positionType)
-                    {
-                        case PositionType.Transform:
-                            SerializedProperty positionTransformProperty = property.FindPropertyRelative("positionTransform");
-                            EditorGUILayout.PropertyField(positionTransformProperty, new GUIContent("Target"));
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
-                            break;
-                        case PositionType.Raw:
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Position"));
-                            break;
-                        case PositionType.This:
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
-                            break;
-                    }
+                    DrawScaleSection(property, ObjectPositionProperty1, "size", "Size", "Size");
 
                     EditorGUILayout.Space();
-                    SerializedProperty sizeProperty = property.FindPropertyRelative("size");
-
-                    if (space.FlagEnumContains(LocalSpace.Scale))
-                    {
-                        SerializedProperty sizeTypeProperty = property.FindPropertyRelative("scaleSizeType");
-                        EditorGUILayout.PropertyField(sizeTypeProperty, new GUIContent("Size Type"));
-                        ScaleSizeType sizeType = (ScaleSizeType)sizeTypeProperty.enumValueIndex;
-
-                        if (sizeType == ScaleSizeType.Add)
-                            EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size (add)"));
-                        else
-                            EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size (multiply)"));
-                    }
-                    else
-                        EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size"));
-
-                    EditorGUILayout.Space();
-                    SerializedProperty angleProperty = property.FindPropertyRelative("angle");
-                    EditorGUILayout.PropertyField(angleProperty, new GUIContent("Rotation"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("rotation"), new GUIContent("Rotation"));
 
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Box Properties", EditorStyles.boldLabel);
-                    SerializedProperty solidProperty = property.FindPropertyRelative("solid");
-                    EditorGUILayout.PropertyField(solidProperty, new GUIContent("Solid"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("solid"), new GUIContent("Solid"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("hideBox"), new GUIContent("Hide Inner Box"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("roundCorners01"), new GUIContent("Round Corners"));
 
                     EditorGUILayout.Space();
-                    EditorGUILayout.LabelField("Border", EditorStyles.boldLabel);
-                    SerializedProperty weightProperty = property.FindPropertyRelative("weight");
-                    EditorGUILayout.PropertyField(weightProperty, new GUIContent("Border Width"));
-                    SerializedProperty borderTypeProperty = property.FindPropertyRelative("borderType");
-                    EditorGUILayout.PropertyField(borderTypeProperty, new GUIContent("Border Type"));
-
-                    SerializedProperty edgeRadiusProperty = property.FindPropertyRelative("edgeRadius");
-                    EditorGUILayout.PropertyField(edgeRadiusProperty, new GUIContent("Edge Radius"));
-                    SerializedProperty solidEdgeRadiusProperty = property.FindPropertyRelative("solidEdgeRadius");
-                    EditorGUILayout.PropertyField(solidEdgeRadiusProperty, new GUIContent("Solid Edge Radius"));
-                    SerializedProperty cutOutBoxProperty = property.FindPropertyRelative("cutOutBox");
-                    EditorGUILayout.PropertyField(cutOutBoxProperty, new GUIContent("Render Only  Edge Radius"));
+                    DrawBorderSection(property);
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("solidBorder"), new GUIContent("Solid Border"));
                 }
                 else if (gizmoType == GizmoType.Circle)
                 {
-                    EditorGUILayout.LabelField("Transform", EditorStyles.boldLabel);
-                    EditorGUILayout.PropertyField(positionTypeProperty, new GUIContent("Position Type"));
-                    PositionType positionType = (PositionType)positionTypeProperty.enumValueIndex;
-
-                    SerializedProperty positionOffsetProperty = property.FindPropertyRelative("positionOffset");
-                    switch (positionType)
-                    {
-                        case PositionType.Transform:
-                            SerializedProperty positionTransformProperty = property.FindPropertyRelative("positionTransform");
-                            EditorGUILayout.PropertyField(positionTransformProperty, new GUIContent("Target"));
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
-                            break;
-                        case PositionType.Raw:
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Position"));
-                            break;
-                        case PositionType.This:
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
-                            break;
-                    }
+                    DrawScaleSection(property, ObjectPositionProperty1, "radius", "Radius", "Radius");
 
                     EditorGUILayout.Space();
-                    SerializedProperty radiusProperty = property.FindPropertyRelative("radius");
-
-                    if (space.FlagEnumContains(LocalSpace.Scale))
-                    {
-                        SerializedProperty sizeTypeProperty = property.FindPropertyRelative("scaleSizeType");
-                        EditorGUILayout.PropertyField(sizeTypeProperty, new GUIContent("Size Type"));
-                        ScaleSizeType sizeType = (ScaleSizeType)sizeTypeProperty.enumValueIndex;
-
-                        if (sizeType == ScaleSizeType.Add)
-                            EditorGUILayout.PropertyField(radiusProperty, new GUIContent("Radius (add)"));
-                        else
-                            EditorGUILayout.PropertyField(radiusProperty, new GUIContent("Radius (multiply)"));
-                    }
-                    else
-                        EditorGUILayout.PropertyField(radiusProperty, new GUIContent("Radius"));
-
-                    EditorGUILayout.Space();
-                    SerializedProperty angleProperty = property.FindPropertyRelative("angle");
-                    EditorGUILayout.PropertyField(angleProperty, new GUIContent("Rotation"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("rotation"), new GUIContent("Rotation"));
 
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Arc Properties", EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("arcAngle"), new GUIContent("Arc Angle"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("arcCloseType"), new GUIContent("Arc Close"));
 
-                    SerializedProperty arcAngleProperty = property.FindPropertyRelative("arcAngle");
-                    EditorGUILayout.PropertyField(arcAngleProperty, new GUIContent("Arc Angle"));
-                    SerializedProperty arcCloseProperty = property.FindPropertyRelative("arcCloseType");
-                    EditorGUILayout.PropertyField(arcCloseProperty, new GUIContent("Arc Close"));
-
-                    SerializedProperty numEdgesProperty = property.FindPropertyRelative("numEdges");
-                    EditorGUILayout.PropertyField(numEdgesProperty, new GUIContent("numEdges"));
-                    SerializedProperty solidProperty = property.FindPropertyRelative("solid");
-                    EditorGUILayout.PropertyField(solidProperty, new GUIContent("Solid"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("numEdges"), new GUIContent("numEdges"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("dashed"), new GUIContent("Dashed"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("solid"), new GUIContent("Solid"));
 
                     EditorGUILayout.Space();
-                    EditorGUILayout.LabelField("Border", EditorStyles.boldLabel);
-                    SerializedProperty weightProperty = property.FindPropertyRelative("weight");
-                    EditorGUILayout.PropertyField(weightProperty, new GUIContent("Border Width"));
-                    SerializedProperty borderTypeProperty = property.FindPropertyRelative("borderType");
-                    EditorGUILayout.PropertyField(borderTypeProperty, new GUIContent("Border Type"));
+                    DrawBorderSection(property);
                 }
                 else if (gizmoType == GizmoType.Line)
                 {
-                    EditorGUILayout.LabelField("Transform", EditorStyles.boldLabel);
-
-                    EditorGUILayout.PropertyField(positionTypeProperty, new GUIContent("Position Type"));
-                    PositionType positionType = (PositionType)positionTypeProperty.enumValueIndex;
-
-                    SerializedProperty positionOffsetProperty = property.FindPropertyRelative("positionOffset");
-                    switch (positionType)
-                    {
-                        case PositionType.Transform:
-                            SerializedProperty positionTransformProperty = property.FindPropertyRelative("positionTransform");
-                            EditorGUILayout.PropertyField(positionTransformProperty, new GUIContent("Target"));
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
-                            break;
-                        case PositionType.Raw:
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Position"));
-                            break;
-                        case PositionType.This:
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
-                            break;
-                    }
-
-                    EditorGUILayout.PropertyField(positionType2Property, new GUIContent("Position 2 Type"));
-                    PositionType positionType2 = (PositionType)positionType2Property.enumValueIndex;
-
-                    SerializedProperty positionOffset2Property = property.FindPropertyRelative("positionOffset2");
-                    switch (positionType2)
-                    {
-                        case PositionType.Transform:
-                            SerializedProperty positionTransform2Property = property.FindPropertyRelative("positionTransform2");
-                            EditorGUILayout.PropertyField(positionTransform2Property, new GUIContent("Target 2"));
-                            EditorGUILayout.PropertyField(positionOffset2Property, new GUIContent("Offset 2"));
-                            break;
-                        case PositionType.Raw:
-                            EditorGUILayout.PropertyField(positionOffset2Property, new GUIContent("Position 2"));
-                            break;
-                        case PositionType.This:
-                            EditorGUILayout.PropertyField(positionOffset2Property, new GUIContent("Offset 2"));
-                            break;
-                    }
-
-                    EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Line Properties", EditorStyles.boldLabel);
 
                     SerializedProperty lineTypeProperty = property.FindPropertyRelative("lineType");
@@ -271,75 +125,70 @@ namespace GLDebug
                     switch (lineType)
                     {
                         case LineType.Solid:
-                            SerializedProperty weightProperty = property.FindPropertyRelative("weight");
-                            EditorGUILayout.PropertyField(weightProperty, new GUIContent("Line Weight"));
+                            EditorGUILayout.PropertyField(property.FindPropertyRelative("weight"), new GUIContent("Line Weight"));
+                            EditorGUILayout.PropertyField(property.FindPropertyRelative("roundedTips"), new GUIContent("Rounded Tips"));
                             break;
                         case LineType.Bezier:
-                            SerializedProperty bezierCurveProperty = property.FindPropertyRelative("bezierCurve");
-                            EditorGUILayout.PropertyField(bezierCurveProperty, new GUIContent("Curve Strength"));
-                            SerializedProperty numEdgesProperty = property.FindPropertyRelative("numEdges");
-                            EditorGUILayout.PropertyField(numEdgesProperty, new GUIContent("numEdges"));
+                            EditorGUILayout.PropertyField(property.FindPropertyRelative("bezierCurve"), new GUIContent("Curve Strength"));
+                            EditorGUILayout.PropertyField(property.FindPropertyRelative("numEdges"), new GUIContent("numEdges"));
                             break;
                         case LineType.Dashed:
-                            SerializedProperty dashLengthProperty = property.FindPropertyRelative("dashLength");
-                            EditorGUILayout.PropertyField(dashLengthProperty, new GUIContent("Dash Length"));
-                            SerializedProperty gapSizeProperty = property.FindPropertyRelative("gapSize");
-                            EditorGUILayout.PropertyField(gapSizeProperty, new GUIContent("Gap Size"));
+                            EditorGUILayout.PropertyField(property.FindPropertyRelative("weight"), new GUIContent("Line Weight"));
+                            EditorGUILayout.PropertyField(property.FindPropertyRelative("dashLength"), new GUIContent("Dash Length"));
+                            EditorGUILayout.PropertyField(property.FindPropertyRelative("gapSize"), new GUIContent("Gap Size"));
                             break;
+                        case LineType.Dotted:
+                            EditorGUILayout.PropertyField(property.FindPropertyRelative("weight"), new GUIContent("Line Weight"));
+                            EditorGUILayout.PropertyField(property.FindPropertyRelative("gapSize"), new GUIContent("Gap Size"));
+                            break;
+                    }
+                }
+                else if (gizmoType == GizmoType.Capsule)
+                {
+                    if (colliderToFromProperty.boolValue)
+                    {
+                        EditorGUILayout.Space();
+                        EditorGUILayout.LabelField("Capsule Properties", EditorStyles.boldLabel);
+                        EditorGUILayout.PropertyField(property.FindPropertyRelative("radius"), new GUIContent("Radius"));
+                        EditorGUILayout.PropertyField(property.FindPropertyRelative("solid"), new GUIContent("Solid"));
+
+                        EditorGUILayout.Space();
+                        DrawBorderSection(property);
+                    }
+                    else
+                    {
+                        EditorGUILayout.Space();
+                        DrawScaleSection(property, ObjectPositionProperty1, "size", "Size", "Size");
+
+                        EditorGUILayout.Space();
+                        EditorGUILayout.PropertyField(property.FindPropertyRelative("rotation"), new GUIContent("Rotation"));
+
+                        EditorGUILayout.Space();
+                        EditorGUILayout.LabelField("Capsule Properties", EditorStyles.boldLabel);
+                        EditorGUILayout.PropertyField(property.FindPropertyRelative("capsuleDirection"), new GUIContent("Direction"));
+                        EditorGUILayout.PropertyField(property.FindPropertyRelative("solid"), new GUIContent("Solid"));
+
+                        EditorGUILayout.Space();
+                        DrawBorderSection(property);
                     }
                 }
                 else if (gizmoType == GizmoType.Triangle)
                 {
-                    EditorGUILayout.LabelField("Transform", EditorStyles.boldLabel);
-                    EditorGUILayout.PropertyField(positionTypeProperty, new GUIContent("Position Type"));
-                    PositionType positionType = (PositionType)positionTypeProperty.enumValueIndex;
-
-                    SerializedProperty positionOffsetProperty = property.FindPropertyRelative("positionOffset");
-                    switch (positionType)
-                    {
-                        case PositionType.Transform:
-                            SerializedProperty positionTransformProperty = property.FindPropertyRelative("positionTransform");
-                            EditorGUILayout.PropertyField(positionTransformProperty, new GUIContent("Target"));
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
-                            break;
-                        case PositionType.Raw:
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Position"));
-                            break;
-                        case PositionType.This:
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
-                            break;
-                    }
-
-                    SerializedProperty centerOffsetProperty = property.FindPropertyRelative("centerOffset");
-                    EditorGUILayout.PropertyField(centerOffsetProperty, new GUIContent("Center Offset"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("centerOffset"), new GUIContent("Center Offset"));
 
                     EditorGUILayout.Space();
-                    SerializedProperty sizeProperty = property.FindPropertyRelative("size");
-
-                    if (space.FlagEnumContains(LocalSpace.Scale))
-                    {
-                        SerializedProperty sizeTypeProperty = property.FindPropertyRelative("scaleSizeType");
-                        EditorGUILayout.PropertyField(sizeTypeProperty, new GUIContent("Size Type"));
-                        ScaleSizeType sizeType = (ScaleSizeType)sizeTypeProperty.enumValueIndex;
-
-                        if (sizeType == ScaleSizeType.Add)
-                            EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size (add)"));
-                        else
-                            EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size (multiply)"));
-                    }
-                    else
-                        EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Width & Height"));
+                    DrawScaleSection(property, ObjectPositionProperty1, "size", "Size", "Width & Height");
 
                     EditorGUILayout.Space();
-                    SerializedProperty angleProperty = property.FindPropertyRelative("angle");
-                    EditorGUILayout.PropertyField(angleProperty, new GUIContent("Rotation"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("rotation"), new GUIContent("Rotation"));
 
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Triangle Properties", EditorStyles.boldLabel);
-                    SerializedProperty skewProperty = property.FindPropertyRelative("skew");
-                    EditorGUILayout.PropertyField(skewProperty, new GUIContent("Skew"));
-                    SerializedProperty solidProperty = property.FindPropertyRelative("solid");
-                    EditorGUILayout.PropertyField(solidProperty, new GUIContent("Solid"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("skew"), new GUIContent("Skew"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("solid"), new GUIContent("Solid"));
+
+                    EditorGUILayout.Space();
+                    DrawBorderSection(property);
                 }
                 else if (gizmoType == GizmoType.Collider)
                 {
@@ -353,46 +202,11 @@ namespace GLDebug
                 }
                 else if (gizmoType == GizmoType.Text)
                 {
-                    EditorGUILayout.LabelField("Transform", EditorStyles.boldLabel);
-                    EditorGUILayout.PropertyField(positionTypeProperty, new GUIContent("Position Type"));
-                    PositionType positionType = (PositionType)positionTypeProperty.enumValueIndex;
-
-                    SerializedProperty positionOffsetProperty = property.FindPropertyRelative("positionOffset");
-                    switch (positionType)
-                    {
-                        case PositionType.Transform:
-                            SerializedProperty positionTransformProperty = property.FindPropertyRelative("positionTransform");
-                            EditorGUILayout.PropertyField(positionTransformProperty, new GUIContent("Target"));
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
-                            break;
-                        case PositionType.Raw:
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Position"));
-                            break;
-                        case PositionType.This:
-                            EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent("Offset"));
-                            break;
-                    }
+                    EditorGUILayout.Space();
+                    DrawScaleSection(property, ObjectPositionProperty1, "size", "Size", "Size");
 
                     EditorGUILayout.Space();
-                    SerializedProperty sizeProperty = property.FindPropertyRelative("size");
-
-                    if (space.FlagEnumContains(LocalSpace.Scale))
-                    {
-                        SerializedProperty sizeTypeProperty = property.FindPropertyRelative("scaleSizeType");
-                        EditorGUILayout.PropertyField(sizeTypeProperty, new GUIContent("Size Type"));
-                        ScaleSizeType sizeType = (ScaleSizeType)sizeTypeProperty.enumValueIndex;
-
-                        if (sizeType == ScaleSizeType.Add)
-                            EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size (add)"));
-                        else
-                            EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size (multiply)"));
-                    }
-                    else
-                        EditorGUILayout.PropertyField(sizeProperty, new GUIContent("Size"));
-
-                    EditorGUILayout.Space();
-                    SerializedProperty angleProperty = property.FindPropertyRelative("angle");
-                    EditorGUILayout.PropertyField(angleProperty, new GUIContent("Rotation"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("rotation"), new GUIContent("Rotation"));
 
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Text Properties", EditorStyles.boldLabel);
@@ -420,33 +234,121 @@ namespace GLDebug
                         EditorGUILayout.PropertyField(property.FindPropertyRelative("textBoxColor"));
                 }
 
-                // color
                 EditorGUILayout.Space();
-                EditorGUILayout.LabelField("Draw Settings", EditorStyles.boldLabel);
-                SerializedProperty inheritColorProperty = property.FindPropertyRelative("inheritColor");
-                bool inheritColor = (bool)inheritColorProperty.boolValue;
-                if (!inheritColor)
-                {
-                    SerializedProperty colorProperty = property.FindPropertyRelative("color");
-                    EditorGUILayout.PropertyField(colorProperty, new GUIContent("Color"));
-                }
-                EditorGUILayout.PropertyField(inheritColorProperty, new GUIContent("Inherit Color"));
-
-                // layer
-                EditorGUILayout.Space();
-                SerializedProperty inheritLayerProperty = property.FindPropertyRelative("inheritLayer");
-
-                bool inheritLayer = (bool)inheritLayerProperty.boolValue;
-                if (!inheritLayer)
-                {
-                    SerializedProperty layerProperty = property.FindPropertyRelative("layer");
-                    EditorGUILayout.PropertyField(layerProperty, new GUIContent("Layer"));
-                }
-                EditorGUILayout.PropertyField(inheritLayerProperty, new GUIContent("Inherit Layer"));
-
-                //disable
-                EditorGUILayout.PropertyField(property.FindPropertyRelative("disable"), new GUIContent("disable"));
+                DrawSettingsSection(property);
             }
+        }
+
+        void InitializeFirstElement(SerializedProperty property, SerializedProperty ObjectPositionProperty1, SerializedProperty ObjectPositionProperty2)
+        {
+            ObjectPositionProperty1.FindPropertyRelative("space").enumValueFlag = 7;
+            ObjectPositionProperty2.FindPropertyRelative("space").enumValueFlag = 7;
+
+            property.FindPropertyRelative("size").vector2Value = Vector2.one;
+            property.FindPropertyRelative("radius").floatValue = 0.5f;
+            property.FindPropertyRelative("borderType").enumValueIndex = (int)BorderType.Outside;
+            property.FindPropertyRelative("solidBorder").boolValue = true;
+            property.FindPropertyRelative("color").colorValue = Color.white;
+            property.FindPropertyRelative("inheritLayer").boolValue = true;
+
+            property.FindPropertyRelative("arcAngle").floatValue = 360;
+            property.FindPropertyRelative("bezierCurve").floatValue = .75f;
+
+            property.FindPropertyRelative("dashLength").floatValue = 1;
+            property.FindPropertyRelative("gapSize").floatValue = .5f;
+
+            property.FindPropertyRelative("text").stringValue = "Text";
+            property.FindPropertyRelative("fontSize").floatValue = 5f;
+            property.FindPropertyRelative("textBoxColor").colorValue = new Color(.5f, 1, 0, .25f);
+            property.FindPropertyRelative("textAlignment").enumValueFlag = (int)TextAlignmentOptions.Center;
+        }
+
+        void InitializeNewElement(SerializedProperty property)
+        {
+            property.FindPropertyRelative("inheritColor").boolValue = true;
+            property.FindPropertyRelative("inheritLayer").boolValue = true;
+
+            if ((GizmoType)property.FindPropertyRelative("gizmoType").enumValueIndex != GizmoType.Text)
+            {
+                property.FindPropertyRelative("text").stringValue = "Text";
+            }
+        }
+
+        void DrawTransformSection(SerializedProperty property, SerializedProperty ObjectPositionProperty, int number)
+        {
+            string num = number > 0 ? $" {number.ToString()}" : "";
+
+            SerializedProperty positionTypeProperty = ObjectPositionProperty.FindPropertyRelative("type");
+            EditorGUILayout.PropertyField(positionTypeProperty, new GUIContent($"Position{num} Type"));
+
+            SerializedProperty positionOffsetProperty = ObjectPositionProperty.FindPropertyRelative("offset");
+            switch ((PositionType)positionTypeProperty.enumValueIndex)
+            {
+                case PositionType.Transform:
+                    SerializedProperty positionTransformProperty = property.FindPropertyRelative("transform");
+                    EditorGUILayout.PropertyField(positionTransformProperty, new GUIContent($"Target"));
+                    EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent($"Offset{num}"));
+                    break;
+                case PositionType.Raw:
+                    EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent($"Position{num}"));
+                    break;
+                case PositionType.This:
+                    EditorGUILayout.PropertyField(positionOffsetProperty, new GUIContent($"Offset{num}"));
+                    break;
+            }
+        }
+
+        void DrawScaleSection(SerializedProperty property, SerializedProperty ObjectPositionProperty, string PropertyName, string FieldName, string DefaultName)
+        {
+            SerializedProperty sizeProperty = property.FindPropertyRelative(PropertyName);
+
+            if (((LocalSpace)ObjectPositionProperty.FindPropertyRelative("space").enumValueFlag).HasFlag(LocalSpace.Scale))
+            {
+                SerializedProperty sizeTypeProperty = property.FindPropertyRelative("scaleSizeType");
+                EditorGUILayout.PropertyField(sizeTypeProperty, new GUIContent("Size Type"));
+                ScaleSizeType sizeType = (ScaleSizeType)sizeTypeProperty.enumValueIndex;
+
+                if (sizeType == ScaleSizeType.Add)
+                    EditorGUILayout.PropertyField(sizeProperty, new GUIContent($"{FieldName} (add)"));
+                else
+                    EditorGUILayout.PropertyField(sizeProperty, new GUIContent($"{FieldName} (multiply)"));
+            }
+            else
+                EditorGUILayout.PropertyField(sizeProperty, new GUIContent(DefaultName));
+        }
+
+        void DrawBorderSection(SerializedProperty property)
+        {
+            EditorGUILayout.LabelField("Border", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(property.FindPropertyRelative("weight"), new GUIContent("Border Width"));
+            EditorGUILayout.PropertyField(property.FindPropertyRelative("borderType"), new GUIContent("Border Type"));
+        }
+
+        void DrawSettingsSection(SerializedProperty property)
+        {
+            EditorGUILayout.LabelField("Draw Settings", EditorStyles.boldLabel);
+            SerializedProperty inheritColorProperty = property.FindPropertyRelative("inheritColor");
+            bool inheritColor = inheritColorProperty.boolValue;
+            if (!inheritColor)
+            {
+                EditorGUILayout.PropertyField(property.FindPropertyRelative("color"), new GUIContent("Color"));
+            }
+            EditorGUILayout.PropertyField(inheritColorProperty, new GUIContent("Inherit Color"));
+
+            // layer
+            EditorGUILayout.Space();
+            SerializedProperty inheritLayerProperty = property.FindPropertyRelative("inheritLayer");
+
+            bool inheritLayer = inheritLayerProperty.boolValue;
+            if (!inheritLayer)
+            {
+                EditorGUILayout.PropertyField(property.FindPropertyRelative("layer"), new GUIContent("Layer"));
+            }
+            EditorGUILayout.PropertyField(inheritLayerProperty, new GUIContent("Inherit Layer"));
+
+            //disable
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(property.FindPropertyRelative("disable"), new GUIContent("disable"));
         }
     }
 }

@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using GLGizmosExtensions;
 
 namespace GLDebug
 {
@@ -10,25 +8,8 @@ namespace GLDebug
     [ExecuteInEditMode]
     public class GLGizmosComponent : MonoBehaviour
     {
-        private List<Action> drawActions = new();
+        int gizmoListCount = 0;
         public List<GLGizmosObject> gizmos;
-        private struct TransformCache
-        {
-            int id;
-            Vector2 position;
-            Quaternion rotation;
-            Vector2 scale;
-
-            public TransformCache(Transform transform)
-            {
-                id = transform.GetHashCode();
-                position = transform.position;
-                rotation = transform.rotation;
-                scale = transform.localScale;
-            }
-        }
-        private TransformCache transformCache;
-        private List<TransformCache> refTransformCache = new();
 
         private void OnEnable()
         {
@@ -47,334 +28,322 @@ namespace GLDebug
 
         private void OnValidate()
         {
-            SetActions();
-        }
-
-        public void OnTransformChange()
-        {
-            if (!transformCache.Equals(new TransformCache(transform)))
-            {
-                transformCache = new TransformCache(transform);
-                SetActions();
-            }
-
-            List<TransformCache> tempRefTransformCache = new();
-            if (gizmos != null && gizmos.Count > 0)
-            {
-                foreach (GLGizmosObject gizmo in gizmos)
-                {
-                    if (gizmo.positionTransform != null)
-                        tempRefTransformCache.Add(new TransformCache(gizmo.positionTransform));
-
-                    if (gizmo.positionTransform2 != null)
-                        tempRefTransformCache.Add(new TransformCache(gizmo.positionTransform2));
-                }
-            }
-
-            if (tempRefTransformCache.Count != refTransformCache.Count)
-            {
-                SetActions();
-                refTransformCache = tempRefTransformCache;
+            if (gizmos == null)
                 return;
+
+            if (gizmoListCount < gizmos.Count && gizmoListCount > 1)
+            {
+                gizmos[gizmoListCount].Uninitialize();
             }
 
-            int i = 0;
-            foreach (TransformCache cache in tempRefTransformCache)
-            {
-                if (!tempRefTransformCache[i].Equals(refTransformCache[i]))
-                {
-                    transformCache = new TransformCache(transform);
-                    SetActions();
-                    refTransformCache = tempRefTransformCache;
-                    return;
-                }
-                i++;
-            }
+            gizmoListCount = gizmos.Count;
         }
 
-        private void SetActions()
+        public void ReadGizmos()
         {
             if (gizmos == null)
                 return;
 
-            drawActions.Clear();
-            Color color = Color.white;
-            int layer = 0;
+            GLGizmos.ResetSettings();
 
             foreach (GLGizmosObject gizmo in gizmos)
             {
                 if (gizmo.disable)
                     continue;
 
+                if (!gizmo.inheritColor)
+                    GLGizmos.SetColor(gizmo.color);
+                if (!gizmo.inheritLayer)
+                    GLGizmos.SetLayer(gizmo.layer);
+
                 if (gizmo.gizmoType == GizmoType.Box)
                 {
-                    Transform targetTransform = transform;
+                    (Vector2? getPosition, Transform target) = GetPositionAndTargetTransform(gizmo.ObjectPosition1);
+                    if (getPosition == null)
+                        continue;
 
-                    // position
-                    Vector2 position;
-                    switch (gizmo.positionType)
-                    {
-                        case PositionType.Transform:
-                            if (gizmo.positionTransform != null)
-                            {
-                                position = gizmo.positionTransform.position;
-                                targetTransform = gizmo.positionTransform;
-                            }  
-                            else
-                                continue;
-                            break;
-                        case PositionType.Raw:
-                            position = Vector2.zero;
-                            break;
-                        default:
-                            position = targetTransform.position;
-                            break;
-                    }
+                    Vector2 position = getPosition.Value;
+                    (Vector2 rightMult, Vector2 upMult, Vector2 scaleMult) = GetMults(gizmo.ObjectPosition1, target);
+                    position += rightMult * gizmo.ObjectPosition1.offset.x * scaleMult.x + upMult * gizmo.ObjectPosition1.offset.y * scaleMult.y;
 
-                    Vector2 rightMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.right : Vector2.right;
-                    Vector2 upMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.up : Vector2.up;
-                    Vector2 scaleMult = gizmo.space.FlagEnumContains(LocalSpace.Scale) ? targetTransform.localScale : Vector2.one;
-                    position += rightMult * gizmo.positionOffset.x * scaleMult.x + upMult * gizmo.positionOffset.y * scaleMult.y;
-
-                    // size
                     Vector2 size = gizmo.size;
-                    if (gizmo.space.FlagEnumContains(LocalSpace.Scale))
+                    if (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Scale))
                     {
                         if (gizmo.scaleSizeType == ScaleSizeType.Add)
-                            size += (Vector2)targetTransform.localScale;
+                        {
+                            size += (Vector2)target.localScale;
+                        }
                         else
-                            size *= targetTransform.localScale;
+                        {
+                            size *= target.localScale;
+                        }
                     }
 
-                    float angle = gizmo.angle;
-                    if (gizmo.space.FlagEnumContains(LocalSpace.Rotation))
+                    float angle = gizmo.rotation;
+                    if (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Rotation))
                     {
-                        angle += targetTransform.rotation.eulerAngles.z;
+                        angle += target.rotation.eulerAngles.z;
                     }
 
-                    if (!gizmo.inheritColor)
+                    BoxParams boxParams = new BoxParams()
                     {
-                        color = gizmo.color;
-                    }
-                    if (gizmo.layer != layer && !gizmo.inheritLayer)
-                    {
-                        layer = gizmo.layer;
-                        drawActions.Add(() => GLGizmos.SetLayer(gizmo.layer));
-                    }
+                        solid = gizmo.solid,
+                        rotation = angle,
 
-                    Color gizmoColor = color;
-                    drawActions.Add(() => GLGizmos.DrawBox(position, size, new BoxParams() { solid = gizmo.solid, rotation = angle, edgeRadius = gizmo.edgeRadius, solidEdgeRadius = gizmo.solidEdgeRadius, onlyRenderEdgeRadius = gizmo.cutOutBox, borderWidth = gizmo.weight, borderType = gizmo.borderType }, gizmoColor));
+                        borderWidth = gizmo.weight,
+                        borderType = gizmo.borderType,
+                        solidBorder = gizmo.solidBorder,
+
+                        roundCorners01 = gizmo.roundCorners01,
+                        hideBox = gizmo.hideBox
+                    };
+
+                    GLGizmos.DrawCustomBox(position, size, boxParams);
                 }
                 else if (gizmo.gizmoType == GizmoType.Circle)
                 {
-                    Transform targetTransform = transform;
+                    (Vector2? getPosition, Transform target) = GetPositionAndTargetTransform(gizmo.ObjectPosition1);
+                    if (getPosition == null)
+                        continue;
 
-                    // position
-                    Vector2 position;
-                    switch (gizmo.positionType)
-                    {
-                        case PositionType.Transform:
-                            if (gizmo.positionTransform != null)
-                            {
-                                position = gizmo.positionTransform.position;
-                                targetTransform = gizmo.positionTransform;
-                            }
-                            else
-                                continue;
-                            break;
-                        case PositionType.Raw:
-                            position = Vector2.zero;
-                            break;
-                        default:
-                            position = targetTransform.position;
-                            break;
-                    }
+                    Vector2 position = getPosition.Value;
+                    (Vector2 rightMult, Vector2 upMult, Vector2 scaleMult) = GetMults(gizmo.ObjectPosition1, target);
+                    position += rightMult * gizmo.ObjectPosition1.offset.x * scaleMult.x + upMult * gizmo.ObjectPosition1.offset.y * scaleMult.y;
 
-                    Vector2 rightMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.right : Vector2.right;
-                    Vector2 upMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.up : Vector2.up;
-                    Vector2 scaleMult = gizmo.space.FlagEnumContains(LocalSpace.Scale) ? targetTransform.localScale : Vector2.one;
-                    position += rightMult * gizmo.positionOffset.x * scaleMult.x + upMult * gizmo.positionOffset.y * scaleMult.y;
-
-                    // radius
                     float radius = gizmo.radius;
-                    if (gizmo.space.FlagEnumContains(LocalSpace.Scale))
+                    if (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Scale))
                     {
                         if (gizmo.scaleSizeType == ScaleSizeType.Add)
-                            radius += Mathf.Max(Mathf.Abs(targetTransform.localScale.x), Mathf.Abs(targetTransform.localScale.y));
+                        {
+                            radius += Mathf.Max(Mathf.Abs(target.localScale.x), Mathf.Abs(target.localScale.y));
+                        }
                         else
-                            radius *= Mathf.Max(Mathf.Abs(targetTransform.localScale.x), Mathf.Abs(targetTransform.localScale.y));
+                        {
+                            radius *= Mathf.Max(Mathf.Abs(target.localScale.x), Mathf.Abs(target.localScale.y));
+                        }
                     }
 
-                    float angle = gizmo.angle;
-                    if (gizmo.space.FlagEnumContains(LocalSpace.Rotation))
+                    float angle = gizmo.rotation;
+                    if (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Rotation))
                     {
-                        angle += targetTransform.rotation.eulerAngles.z;
+                        angle += target.rotation.eulerAngles.z;
                     }
 
-                    if (!gizmo.inheritColor)
+                    CircleParams circleParams = new CircleParams()
                     {
-                        color = gizmo.color;
-                    }
-                    if (gizmo.layer != layer && !gizmo.inheritLayer)
-                    {
-                        layer = gizmo.layer;
-                        drawActions.Add(() => GLGizmos.SetLayer(gizmo.layer));
-                    }
+                        solid = gizmo.solid,
+                        dashed = gizmo.dashed,
+                        
+                        arcAngle = gizmo.arcAngle,
+                        rotation = angle,
 
-                    Color gizmoColor = color;
-                    drawActions.Add(() => GLGizmos.DrawCircle(position, radius, new CircleParams() { solid = gizmo.solid, arcAngle = gizmo.arcAngle, rotation = angle, borderWidth = gizmo.weight, borderType = gizmo.borderType, arcCloseType = gizmo.arcCloseType, numEdges = gizmo.numEdges }, gizmoColor));
+                        borderWidth = gizmo.weight,
+                        borderType = gizmo.borderType,
+
+                        arcCloseType = gizmo.arcCloseType,
+                        numEdges = gizmo.numEdges,
+                        roundCenter = gizmo.roundCenter
+                    };
+
+                    GLGizmos.DrawCustomCircle(position, radius, circleParams);
                 }
                 else if (gizmo.gizmoType == GizmoType.Line)
                 {
-                    Transform targetTransform = transform;
-                    Transform targetTransform2 = transform;
+                    (Vector2? getPosition1, Transform target1) = GetPositionAndTargetTransform(gizmo.ObjectPosition1);
+                    (Vector2? getPosition2, Transform target2) = GetPositionAndTargetTransform(gizmo.ObjectPosition2);
+                    if (getPosition1 == null || getPosition2 == null)
+                        continue;
 
-                    // position
-                    Vector2 position;
-                    switch (gizmo.positionType)
-                    {
-                        case PositionType.Transform:
-                            if (gizmo.positionTransform != null)
-                            {
-                                position = gizmo.positionTransform.position;
-                                targetTransform = gizmo.positionTransform;
-                            }
-                            else
-                                continue;
-                            break;
-                        case PositionType.Raw:
-                            position = Vector2.zero;
-                            break;
-                        default:
-                            position = targetTransform.position;
-                            break;
-                    }
+                    Vector2 position1 = getPosition1.Value;
+                    Vector2 position2 = getPosition2.Value;
 
-                    Vector2 rightMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.right : Vector2.right;
-                    Vector2 upMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.up : Vector2.up;
-                    Vector2 scaleMult = gizmo.space.FlagEnumContains(LocalSpace.Scale) ? targetTransform.localScale : Vector2.one;
-                    position += rightMult * gizmo.positionOffset.x * scaleMult.x + upMult * gizmo.positionOffset.y * scaleMult.y;
+                    (Vector2 rightMult1, Vector2 upMult1, Vector2 scaleMult1) = GetMults(gizmo.ObjectPosition1, target1);
+                    position1 += rightMult1 * gizmo.ObjectPosition1.offset.x * scaleMult1.x + upMult1 * gizmo.ObjectPosition1.offset.y * scaleMult1.y;
 
-                    // position
-                    Vector2 position2;
-                    switch (gizmo.positionType2)
-                    {
-                        case PositionType.Transform:
-                            if (gizmo.positionTransform2 != null)
-                            {
-                                position2 = gizmo.positionTransform2.position;
-                                targetTransform2 = gizmo.positionTransform2;
-                            }
-                            else
-                                continue;
-                            break;
-                        case PositionType.Raw:
-                            position2 = Vector2.zero;
-                            break;
-                        default:
-                            position2 = targetTransform2.position;
-                            break;
-                    }
+                    (Vector2 rightMult2, Vector2 upMult2, Vector2 scaleMult2) = GetMults(gizmo.ObjectPosition2, target2);
+                    position2 += rightMult2 * gizmo.ObjectPosition2.offset.x * scaleMult2.x + upMult2 * gizmo.ObjectPosition2.offset.y * scaleMult2.y;
 
-                    Vector2 rightMult2 = gizmo.space2.FlagEnumContains(LocalSpace.Position) ? targetTransform2.right : Vector2.right;
-                    Vector2 upMult2 = gizmo.space2.FlagEnumContains(LocalSpace.Position) ? targetTransform2.up : Vector2.up;
-                    Vector2 scaleMult2 = gizmo.space2.FlagEnumContains(LocalSpace.Scale) ? targetTransform2.localScale : Vector2.one;
-                    position2 += rightMult2 * gizmo.positionOffset2.x * scaleMult2.x + upMult2 * gizmo.positionOffset2.y * scaleMult2.y;
-
-                    if (!gizmo.inheritColor)
-                    {
-                        color = gizmo.color;
-                    }
-                    if (gizmo.layer != layer && !gizmo.inheritLayer)
-                    {
-                        layer = gizmo.layer;
-                        drawActions.Add(() => GLGizmos.SetLayer(gizmo.layer));
-                    }
-
-                    Color gizmoColor = color;
                     switch (gizmo.lineType)
                     {
                         case LineType.Solid:
-                            if (gizmo.weight == 0)
-                                drawActions.Add(() => GLGizmos.DrawLine(position, position2, gizmoColor));
-                            else
-                                drawActions.Add(() => GLGizmos.DrawCapsulePath(new List<Vector2>() { position, position2 }, Mathf.Abs(gizmo.weight), gizmoColor));
+                            GLGizmos.DrawWeightedLine(position1, position2, gizmo.weight, gizmo.roundedTips);
                             break;
                         case LineType.Bezier:
-                            drawActions.Add(() => GLGizmos.DrawBezier(position, position2, gizmo.bezierCurve, gizmo.numEdges, gizmoColor));
+                            GLGizmos.DrawBezier(position1, position2, gizmo.bezierCurve, gizmo.numEdges);
                             break;
                         case LineType.Dashed:
-                            drawActions.Add(() => GLGizmos.DrawDashedLine(position, position2, gizmo.dashLength, gizmo.gapSize, gizmoColor));
+                            GLGizmos.DrawWeightedDashedLine(position1, position2, gizmo.dashLength, gizmo.gapSize, gizmo.weight);
                             break;
+                        case LineType.Dotted:
+                            GLGizmos.DrawDottedLine(position1, position2, gizmo.weight / 2, gizmo.gapSize);
+                            break;
+                    }
+                }
+                else if (gizmo.gizmoType == GizmoType.Capsule)
+                {
+                    if (gizmo.useToFromPositions)
+                    {
+                        (Vector2? getPosition1, Transform target1) = GetPositionAndTargetTransform(gizmo.ObjectPosition1);
+                        (Vector2? getPosition2, Transform target2) = GetPositionAndTargetTransform(gizmo.ObjectPosition2);
+                        if (getPosition1 == null || getPosition2 == null)
+                            continue;
+
+                        Vector2 position1 = getPosition1.Value;
+                        Vector2 position2 = getPosition2.Value;
+
+                        (Vector2 rightMult1, Vector2 upMult1, Vector2 scaleMult1) = GetMults(gizmo.ObjectPosition1, target1);
+                        position1 += rightMult1 * gizmo.ObjectPosition1.offset.x * scaleMult1.x + upMult1 * gizmo.ObjectPosition1.offset.y * scaleMult1.y;
+
+                        (Vector2 rightMult2, Vector2 upMult2, Vector2 scaleMult2) = GetMults(gizmo.ObjectPosition2, target2);
+                        position2 += rightMult2 * gizmo.ObjectPosition2.offset.x * scaleMult2.x + upMult2 * gizmo.ObjectPosition2.offset.y * scaleMult2.y;
+
+                        if (gizmo.weight == 0 && gizmo.solid)
+                        {
+                            GLGizmos.DrawSolidCapsule(position1, position2, gizmo.radius);
+                            continue;
+                        }
+
+                        if (gizmo.solid)
+                        {
+                            float newRadius = gizmo.radius;
+                            if (gizmo.weight != 0)
+                            {
+                                (float newBorderWidth, BorderType newBorderType) = GLGizmos.AdjustForNegativeBorderWidth(gizmo.weight, gizmo.borderType);
+
+                                switch (newBorderType)
+                                {
+                                    case BorderType.Outside:
+                                        newRadius += newBorderWidth * 2;
+                                        break;
+                                    case BorderType.Centered:
+                                        newRadius += newBorderWidth;
+                                        break;
+                                }
+                            }
+
+                            GLGizmos.DrawSolidCapsule(position1, position2, newRadius);
+                        }
+                        else
+                        {
+                            GLGizmos.DrawWeightedCapsule(position1, position2, gizmo.radius, gizmo.weight, gizmo.borderType);
+                        }
+                    }
+                    else
+                    {
+                        (Vector2? getPosition, Transform target) = GetPositionAndTargetTransform(gizmo.ObjectPosition1);
+                        if (getPosition == null)
+                            continue;
+
+                        Vector2 position = getPosition.Value;
+                        (Vector2 rightMult, Vector2 upMult, Vector2 scaleMult) = GetMults(gizmo.ObjectPosition1, target);
+                        position += rightMult * gizmo.ObjectPosition1.offset.x * scaleMult.x + upMult * gizmo.ObjectPosition1.offset.y * scaleMult.y;
+
+                        Vector2 size = gizmo.size;
+                        if (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Scale))
+                        {
+                            if (gizmo.scaleSizeType == ScaleSizeType.Add)
+                            {
+                                size += (Vector2)target.localScale;
+                            }
+                            else
+                            {
+                                size *= target.localScale;
+                            }
+                        }
+
+                        float angle = gizmo.rotation;
+                        if (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Rotation))
+                        {
+                            angle += target.rotation.eulerAngles.z;
+                        }
+
+                        if (gizmo.solid)
+                        {
+                            Vector2 newSize = size;
+                            if (gizmo.weight != 0)
+                            {
+                                (float newBorderWidth, BorderType newBorderType) = GLGizmos.AdjustForNegativeBorderWidth(gizmo.weight, gizmo.borderType);
+
+                                switch (newBorderType)
+                                {
+                                    case BorderType.Outside:
+                                        newSize += Vector2.one * newBorderWidth * 2;
+                                        break;
+                                    case BorderType.Centered:
+                                        newSize += Vector2.one * newBorderWidth;
+                                        break;
+                                }
+                            }
+
+                            GLGizmos.DrawSolidCapsule(position, newSize, gizmo.capsuleDirection, angle);
+                        }
+                        else
+                        {
+                            GLGizmos.DrawWeightedCapsule(position, size, gizmo.capsuleDirection, angle, gizmo.weight, gizmo.borderType);
+                        }
                     }
                 }
                 else if (gizmo.gizmoType == GizmoType.Triangle)
                 {
-                    Transform targetTransform = transform;
+                    (Vector2? getPosition, Transform target) = GetPositionAndTargetTransform(gizmo.ObjectPosition1);
+                    if (getPosition == null)
+                        continue;
 
-                    // position
-                    Vector2 position;
-                    switch (gizmo.positionType)
-                    {
-                        case PositionType.Transform:
-                            if (gizmo.positionTransform != null)
-                            {
-                                position = gizmo.positionTransform.position;
-                                targetTransform = gizmo.positionTransform;
-                            }
-                            else
-                                continue;
-                            break;
-                        case PositionType.Raw:
-                            position = Vector2.zero;
-                            break;
-                        default:
-                            position = targetTransform.position;
-                            break;
-                    }
-
-                    Vector2 rightMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.right : Vector2.right;
-                    Vector2 upMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.up : Vector2.up;
-                    Vector2 scaleMult = gizmo.space.FlagEnumContains(LocalSpace.Scale) ? targetTransform.localScale : Vector2.one;
-                    position += rightMult * gizmo.positionOffset.x * scaleMult.x + upMult * gizmo.positionOffset.y * scaleMult.y;
+                    Vector2 position = getPosition.Value;
+                    (Vector2 rightMult, Vector2 upMult, Vector2 scaleMult) = GetMults(gizmo.ObjectPosition1, target);
+                    position += rightMult * gizmo.ObjectPosition1.offset.x * scaleMult.x + upMult * gizmo.ObjectPosition1.offset.y * scaleMult.y;
 
                     Vector2 centerOffset = rightMult * gizmo.centerOffset.x * scaleMult.x + upMult * gizmo.centerOffset.y * scaleMult.y;
-                    float skew = gizmo.skew * (gizmo.space.FlagEnumContains(LocalSpace.Scale) ? targetTransform.localScale.x : 1);
+                    float skew = gizmo.skew * (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Scale) ? target.localScale.x : 1);
 
-                    // size
                     Vector2 size = gizmo.size;
-                    if (gizmo.space.FlagEnumContains(LocalSpace.Scale))
+                    if (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Scale))
                     {
                         if (gizmo.scaleSizeType == ScaleSizeType.Add)
-                            size += (Vector2)targetTransform.localScale;
+                        {
+                            size += (Vector2)target.localScale;
+                        }
                         else
-                            size *= targetTransform.localScale;
+                        {
+                            size *= target.localScale;
+                        }
                     }
 
-                    float angle = gizmo.angle;
-                    if (gizmo.space.FlagEnumContains(LocalSpace.Rotation))
+                    float angle = gizmo.rotation;
+                    if (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Rotation))
                     {
-                        angle += targetTransform.rotation.eulerAngles.z;
+                        angle += target.rotation.eulerAngles.z;
                     }
 
-                    if (!gizmo.inheritColor)
-                    {
-                        color = gizmo.color;
-                    }
-                    if (gizmo.layer != layer && !gizmo.inheritLayer)
-                    {
-                        layer = gizmo.layer;
-                        drawActions.Add(() => GLGizmos.SetLayer(gizmo.layer));
-                    }
-
-                    Color gizmoColor = color;
                     if (gizmo.solid)
                     {
-                        drawActions.Add(() => GLGizmos.DrawSolidTriangle(position, centerOffset, size.y, size.x, skew, angle, gizmoColor));
+                        if (gizmo.weight == 0)
+                        {
+                            GLGizmos.DrawSolidTriangle(position, centerOffset, size.y, size.x, skew, angle);
+                        }
+                        else
+                        {
+                            (float newBorderWidth, BorderType newBorderType) = GLGizmos.AdjustForNegativeBorderWidth(gizmo.weight, gizmo.borderType);
+
+                            switch (newBorderType)
+                            {
+                                case BorderType.Outside:
+                                    GLGizmos.DrawWeightedTriangle(position, centerOffset, size.y, size.x, skew, angle, newBorderWidth, newBorderType);
+                                    GLGizmos.DrawSolidTriangle(position, centerOffset, size.y, size.x, skew, angle);
+                                    break;
+                                case BorderType.Inside:
+                                    GLGizmos.DrawSolidTriangle(position, centerOffset, size.y, size.x, skew, angle);
+                                    break;
+                                case BorderType.Centered:
+                                    GLGizmos.DrawWeightedTriangle(position, centerOffset, size.y, size.x, skew, angle, newBorderWidth / 2, BorderType.Outside);
+                                    GLGizmos.DrawSolidTriangle(position, centerOffset, size.y, size.x, skew, angle);
+                                    break;
+                            }
+                        }
                     }
                     else
                     {
-                        drawActions.Add(() => GLGizmos.DrawOpenTriangle(position, centerOffset, size.y, size.x, skew, angle, gizmoColor));
+                        GLGizmos.DrawWeightedTriangle(position, centerOffset, size.y, size.x, skew, angle, gizmo.weight, gizmo.borderType);
                     }
                 }
                 else if (gizmo.gizmoType == GizmoType.Collider)
@@ -382,77 +351,38 @@ namespace GLDebug
                     if (gizmo.collider2D == null)
                         return;
 
-                    if (!gizmo.inheritColor)
-                    {
-                        color = gizmo.color;
-                    }
-                    if (gizmo.layer != layer && !gizmo.inheritLayer)
-                    {
-                        layer = gizmo.layer;
-                        drawActions.Add(() => GLGizmos.SetLayer(gizmo.layer));
-                    }
-
-                    Color gizmoColor = color;
-                    drawActions.Add(() => GLGizmos.DrawCollider2D(gizmo.collider2D, gizmo.solid, gizmoColor));
+                    GLGizmos.DrawCollider2D(gizmo.collider2D, gizmo.solid);
                 }
                 else if (gizmo.gizmoType == GizmoType.Text)
                 {
-                    Transform targetTransform = transform;
+                    (Vector2? getPosition, Transform target) = GetPositionAndTargetTransform(gizmo.ObjectPosition1);
+                    if (getPosition == null)
+                        continue;
 
-                    // position
-                    Vector2 position;
-                    switch (gizmo.positionType)
-                    {
-                        case PositionType.Transform:
-                            if (gizmo.positionTransform != null)
-                            {
-                                position = gizmo.positionTransform.position;
-                                targetTransform = gizmo.positionTransform;
-                            }
-                            else
-                                continue;
-                            break;
-                        case PositionType.Raw:
-                            position = Vector2.zero;
-                            break;
-                        default:
-                            position = targetTransform.position;
-                            break;
-                    }
+                    Vector2 position = getPosition.Value;
+                    (Vector2 rightMult, Vector2 upMult, Vector2 scaleMult) = GetMults(gizmo.ObjectPosition1, target);
+                    position += rightMult * gizmo.ObjectPosition1.offset.x * scaleMult.x + upMult * gizmo.ObjectPosition1.offset.y * scaleMult.y;
 
-                    Vector2 rightMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.right : Vector2.right;
-                    Vector2 upMult = gizmo.space.FlagEnumContains(LocalSpace.Position) ? targetTransform.up : Vector2.up;
-                    Vector2 scaleMult = gizmo.space.FlagEnumContains(LocalSpace.Scale) ? targetTransform.localScale : Vector2.one;
-                    position += rightMult * gizmo.positionOffset.x * scaleMult.x + upMult * gizmo.positionOffset.y * scaleMult.y;
-
-                    // size
                     Vector2 size = gizmo.size;
-                    if (gizmo.space.FlagEnumContains(LocalSpace.Scale))
+                    if (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Scale))
                     {
                         if (gizmo.scaleSizeType == ScaleSizeType.Add)
-                            size += (Vector2)targetTransform.localScale;
+                        {
+                            size += (Vector2)target.localScale;
+                        }
                         else
-                            size *= targetTransform.localScale;
+                        {
+                            size *= target.localScale;
+                        }
                     }
 
-                    float angle = gizmo.angle;
-                    if (gizmo.space.FlagEnumContains(LocalSpace.Rotation))
+                    float angle = gizmo.rotation;
+                    if (gizmo.ObjectPosition1.space.HasFlag(LocalSpace.Rotation))
                     {
-                        angle += targetTransform.rotation.eulerAngles.z;
+                        angle += target.rotation.eulerAngles.z;
                     }
 
-                    if (!gizmo.inheritColor)
-                    {
-                        color = gizmo.color;
-                    }
-                    if (gizmo.layer != layer && !gizmo.inheritLayer)
-                    {
-                        layer = gizmo.layer;
-                        drawActions.Add(() => GLGizmos.SetLayer(gizmo.layer));
-                    }
-
-                    Color gizmoColor = color;
-                    drawActions.Add(() => GLGizmos.DrawText(gizmo.text, position, gizmo.font, gizmo.fontSize, new TextBoxParams()
+                    TextBoxParams textBoxParams = new TextBoxParams()
                     {
                         fontStyle = gizmo.fontStyle,
                         fitTextToBox = gizmo.autoSize,
@@ -465,16 +395,53 @@ namespace GLDebug
                         wordSpacing = gizmo.wordSpacing,
                         lineSpacing = gizmo.lineSpacing,
                         paragraphSpacing = gizmo.paragraphSpacing
-                    },
-                    gizmoColor));
+                    };
+
+                    GLGizmos.DrawText(gizmo.text, position, gizmo.font, gizmo.fontSize, textBoxParams);
 
                     if (gizmo.showTextBox)
-                        drawActions.Add(() => GLGizmos.DrawOpenRect(GLGizmos.GetBoxPositionByPivot(position, size, angle, gizmo.positionPivot), size, angle, gizmo.textBoxColor));
+                        GLGizmos.DrawOpenBox(GLGizmos.GetBoxPositionByPivot(position, size, angle, gizmo.positionPivot), size, angle).SetColor(gizmo.textBoxColor);
                 }
             }
-            drawActions.Add(() => GLGizmos.SetLayer(0));
         }
 
-        public List<Action> GetDrawActions() => drawActions;
+        (Vector2?, Transform) GetPositionAndTargetTransform(GLGObjectPosition Position)
+        {
+            Vector2? position = null;
+            Transform target = transform;
+
+            switch (Position.type)
+            {
+                case PositionType.Transform:
+                    if (Position.transform != null)
+                    {
+                        position = Position.transform.position;
+                        target = Position.transform;
+                    }
+                    else
+                    {
+                        return (null, null);
+                    }
+                        break;
+                case PositionType.Raw:
+                    position = Vector2.zero;
+                    break;
+                default:
+                case PositionType.This:
+                    position = transform.position;
+                    break;
+            }
+
+            return (position, target);
+        }
+
+        (Vector2, Vector2, Vector2) GetMults(GLGObjectPosition Position, Transform target)
+        {
+            Vector2 rightMult = Position.space.HasFlag(LocalSpace.Position) ? target.right : Vector2.right;
+            Vector2 upMult = Position.space.HasFlag(LocalSpace.Position) ? target.up : Vector2.up;
+            Vector2 scaleMult = Position.space.HasFlag(LocalSpace.Scale) ? target.localScale : Vector2.one;
+
+            return (rightMult, upMult, scaleMult);
+        }
     }
 }

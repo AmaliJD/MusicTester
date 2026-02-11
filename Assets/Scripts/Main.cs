@@ -158,12 +158,16 @@ public class Main : MonoBehaviour
 
         if (Keyboard.current.numpadPlusKey.wasPressedThisFrame)
         {
-            edoSlider.value++;
+            //edoSlider.value++;
+            shift++;
+            AdjustDrift();
         }
 
         if (Keyboard.current.numpadMinusKey.wasPressedThisFrame)
         {
-            edoSlider.value--;
+            //edoSlider.value--;
+            shift--;
+            AdjustDrift();
         }
 
         edoSlider.value += Mouse.current.scroll.value.y;
@@ -308,6 +312,12 @@ public class Main : MonoBehaviour
     void AdjustShift()
     {
         shift = Mathf.RoundToInt(GetIntervalDifference(SynthPlayer.baseFrequency, SynthPlayer.baseFrequency.AddCents(1200 * driftSlider.value), edo, Period));
+    }
+
+    void AdjustDrift()
+    {
+        float drift = GetCentDifference(SynthPlayer.baseFrequency, SynthPlayer.baseFrequency.AddInterval(edo, shift, Period)) / 1200;
+        driftSlider.value = drift;
     }
 
     public void ResetDrift()
