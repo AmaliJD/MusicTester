@@ -2,10 +2,10 @@ using GLDebug;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TMPro;
-using Unity.Burst.CompilerServices;
-using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class KeyboardDraw
 {
@@ -16,6 +16,12 @@ public class KeyboardDraw
     public Vector2 KeySize { get; private set; }
 
     Main main;
+
+    string plusSign = "+";
+    string newline = "\n";
+    const int maxAllowedJIDiff = 50;
+    string[] positiveDiffCache = new string[maxAllowedJIDiff + 1];
+    string[] negativeDiffCache = new string[maxAllowedJIDiff + 1];
 
     private int EDO = -1;
     private int EXTEND = 0;
@@ -43,6 +49,12 @@ public class KeyboardDraw
         (Positions, KeySize) = GetPositionsAndSize(edo);
         EDO = edo;
         EXTEND = main.extend;
+
+        for (int i = 0; i < positiveDiffCache.Length; i++)
+        {
+            positiveDiffCache[i] = plusSign + i;
+            negativeDiffCache[i] = (i * -1).ToString();
+        }
     }
 
     public (List<Vector2>, Vector2) GetPositionsAndSize(int edo)
@@ -74,7 +86,18 @@ public class KeyboardDraw
     public void Draw(int edo, List<Vector2> positions)
     {
         (Positions, KeySize) = GetPositionsAndSize(edo);
-        List<int> keysPressed = positions.Select(x => GetKey(x)).ToList();
+
+        Span<int> keysPressed = stackalloc int[positions.Count];
+        for (int i = 0; i < positions.Count; i++)
+        {
+            keysPressed[i] = GetKey(positions[i]);
+        }
+        //List<int> keysPressed = positions.Select(x => GetKey(x)).ToList();
+
+        float bgKeyColor = .0275f;
+        Vector2 bgCenter = new Vector2((xBounds.y + xBounds.x) / 2, (yBounds.y + yBounds.x) / 2);
+        Vector2 bgSize = new Vector2(xBounds.y - xBounds.x, yBounds.y - yBounds.x);
+        GLGizmos.DrawSolidBox(bgCenter, bgSize).SetLayer(-2).SetColor(new Color(bgKeyColor, bgKeyColor, bgKeyColor));
 
         int keyIndex = 0;
         foreach (Vector2 position in Positions)
@@ -86,7 +109,16 @@ public class KeyboardDraw
                 _ => 1
             };
 
-            bool pressed = keysPressed.Contains(keyIndex);
+            bool pressed = false;
+            foreach (int i in keysPressed)
+            {
+                if (i == keyIndex)
+                {
+                    pressed = true;
+                    break;
+                }
+            }
+            //bool pressed = keysPressed.Contains(keyIndex);
             bool isPeriod = main.partitionMode switch
             {
                 Main.PartitionMode.Edo => (keyIndex + main.shift) % edo == 0,
@@ -96,19 +128,23 @@ public class KeyboardDraw
             float keyColor = pressed ? .08f : (isPeriod ? .04f : .0275f);
             float keyBorderColor = .18f;
 
-            GLGizmos.SetLayer(-1);
-            GLGizmos.SetColor(new Color(keyColor, keyColor, keyColor));
-            GLGizmos.DrawSolidBox(position, KeySize);
+            if (keyColor != bgKeyColor)
+            {
+                GLGizmos.SetLayer(-1);
+                GLGizmos.SetColor(new Color(keyColor, keyColor, keyColor));
+                GLGizmos.DrawSolidBox(position, KeySize);
+            }
 
             GLGizmos.SetLayer(0);
             GLGizmos.SetColor(new Color(keyBorderColor, keyBorderColor, keyBorderColor));
             GLGizmos.DrawWeightedBox(position, KeySize, .02f, BorderType.Inside);
 
             TextBoxParams tbp = new TextBoxParams() { alignment = TextAlignmentOptions.Bottom, positionPivot = PositionPivot.Bottom, fitTextToBox = true, textBoxSize = Vector2.one * XInterval * .9f, lineSpacing = 20 };
+            GLGizmos.SetLayer(1);
             void DrawNullKey()
             {
                 GLGizmos.SetColor(new Color(1, 1, 1, .2f));
-                GLGizmos.DrawText($"--", position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 3.25f, tbp);
+                GLGizmos.DrawText("--", position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 3.25f, tbp);
             }
 
             if (frequencyRatio == 0)
@@ -127,7 +163,12 @@ public class KeyboardDraw
             if (octaveAdjAmt != 0 && frequencyRatio * 2 < limitFrequencyRatio)
                 frequencyRatio *= 2;
 
-            float[] JIDiff = JI.Select(x => main.GetCentDifference(x, frequencyRatio)).ToArray();
+            Span<float> JIDiff = stackalloc float[JI.Length];
+            for (int i = 0; i < JIDiff.Length; i++)
+            {
+                JIDiff[i] = main.GetCentDifference(JI[i], frequencyRatio);
+            }
+            //float[] JIDiff = JI.Select(x => main.GetCentDifference(x, frequencyRatio)).ToArray();
 
             float minJIDiff = 1200;
             int minJIIndex = -1;
@@ -147,12 +188,21 @@ public class KeyboardDraw
                 continue;
             }
 
-            if (Mathf.Abs(JIDiff[minJIIndex]) <= 50)
+            if (Mathf.Abs(JIDiff[minJIIndex]) <= maxAllowedJIDiff)
             {
-                string topTxt = Mathf.Abs(JIDiff[minJIIndex]) > 0.01f ? (Mathf.Sign(JIDiff[minJIIndex]) == 1 ? "+" : "") + $"{Mathf.RoundToInt(JIDiff[minJIIndex])}" : "";
-                string bottomTxt = JInames[minJIIndex];
+                bool nonZeroDiff = Mathf.Abs(JIDiff[minJIIndex]) > 0.01f;
+                bool positiveDiff = Mathf.Sign(JIDiff[minJIIndex]) == 1;
+
+                int roundedDiff = Mathf.RoundToInt(JIDiff[minJIIndex]);
+                //string sign = (nonZeroDiff && Mathf.Sign(JIDiff[minJIIndex]) == 1) ? plusSign: string.Empty;
+                //string noteName = JInames[minJIIndex];
+                string keyString = (positiveDiff ? positiveDiffCache[roundedDiff] : negativeDiffCache[Mathf.Abs(roundedDiff)]) + newline + JInames[minJIIndex];
+
+                //string topTxt = nonZeroDiff ? string.Format("{0}{1}", (positiveDiff ? "+" : ""), Mathf.RoundToInt(JIDiff[minJIIndex])) : "";
+                //string bottomTxt = JInames[minJIIndex];
                 GLGizmos.SetColor(Mathf.Abs(JIDiff[minJIIndex]) <= 33 ? Color.white : new Color(1, 1, 1, .2f));
-                GLGizmos.DrawText($"{topTxt}\n{bottomTxt}", position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 3.25f, tbp);
+                //GLGizmos.DrawText(topTxt + "\n" + bottomTxt, position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 3.25f, tbp);
+                GLGizmos.DrawText(keyString, position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 3.25f, tbp);
             }
 
             keyIndex++;

@@ -11388,7 +11388,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 47826
+  m_LastSelectedObjectID: 47784
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -11502,7 +11502,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: ba93fffffefaffff08bb0000
+      m_ExpandedIDs: fefaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

@@ -420,7 +420,7 @@ namespace GLDebug
             Vector2 scale = definition.textBoxParams.scale ?? Vector2.one;
             TextAlignmentOptions alignment = definition.textBoxParams.alignment ?? TextAlignmentOptions.Center;
 
-            tmp.enabled = true;
+            //tmp.enabled = true;
             tmp.SetText(definition.text);
             tmp.font = definition.font;
             tmp.fontSize = definition.fontSize;
@@ -438,9 +438,6 @@ namespace GLDebug
             tmp.paragraphSpacing = definition.textBoxParams.paragraphSpacing;
 
             tmp.ForceMeshUpdate();
-
-            Mesh mesh = tmp.mesh;
-            Material mat = tmp.fontSharedMaterial;
 
             Vector2 RotatedTextBox(Vector2 textBox) => (Vector2.right * textBox.x).Rotate(definition.textBoxParams.rotation) + (Vector2.up * textBox.y).Rotate(definition.textBoxParams.rotation);
             Vector3 pos = definition.textBoxParams.positionPivot switch
@@ -461,6 +458,8 @@ namespace GLDebug
             Quaternion rot = Quaternion.Euler(0, 0, definition.textBoxParams.rotation);
             Vector2 scl = new Vector3(scale.x, scale.y, 1);
 
+            Mesh mesh = tmp.mesh;
+            Material mat = tmp.fontSharedMaterial;
             mat.SetPass(0);
             Graphics.DrawMeshNow(
                 mesh,
@@ -468,8 +467,6 @@ namespace GLDebug
             );
 
             GLmat.SetPass(0);
-            tmp.text = "";
-            tmp.enabled = false;
         }
 
         private static void _NewShape(Vector3 origin, int definitionCount)
@@ -3417,7 +3414,7 @@ namespace GLDebug
                 tmp = tmpGO.AddComponent<TextMeshPro>();
                 tmp.alignment = TextAlignmentOptions.Center;
                 tmp.fontSizeMin = 0;
-                tmp.enabled = false;
+                tmp.renderer.enabled = false;
             }
         }
 
