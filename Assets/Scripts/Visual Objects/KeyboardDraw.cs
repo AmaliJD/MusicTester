@@ -196,7 +196,7 @@ public class KeyboardDraw
                 int roundedDiff = Mathf.RoundToInt(JIDiff[minJIIndex]);
                 //string sign = (nonZeroDiff && Mathf.Sign(JIDiff[minJIIndex]) == 1) ? plusSign: string.Empty;
                 //string noteName = JInames[minJIIndex];
-                string keyString = (positiveDiff ? positiveDiffCache[roundedDiff] : negativeDiffCache[Mathf.Abs(roundedDiff)]) + newline + JInames[minJIIndex];
+                string keyString = (!nonZeroDiff ? string.Empty : (positiveDiff ? positiveDiffCache[roundedDiff] : negativeDiffCache[Mathf.Abs(roundedDiff)])) + newline + JInames[minJIIndex];
 
                 //string topTxt = nonZeroDiff ? string.Format("{0}{1}", (positiveDiff ? "+" : ""), Mathf.RoundToInt(JIDiff[minJIIndex])) : "";
                 //string bottomTxt = JInames[minJIIndex];
