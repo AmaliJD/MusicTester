@@ -17,6 +17,7 @@ namespace GLDebug
         Top, TopLeft, TopRight,
         Bottom, BottomLeft, BottomRight,
     }
+    //public enum Polygon { Circle, Triangle, Square, Hexagon }
 
     [Serializable]
     public struct TextBoxParams
@@ -149,6 +150,17 @@ namespace GLDebug
                 }
                 return this;
             }
+            public ShapeModifier SetLookRotation(Transform t)
+            {
+                if (!valid) { return this; }
+                for (int i = 0; i < count; i++)
+                {
+                    ShapeSettings settings = shapeSettingsList[index + i];
+                    settings.SetLookRotation(t);
+                    shapeSettingsList[index + i] = settings;
+                }
+                return this;
+            }
             //public ShapeModifier SetLookRotationToCamera()
             //{
             //    if (!valid) { return this; }
@@ -171,8 +183,8 @@ namespace GLDebug
             public bool faceCamera { get; private set; }
 
             public int index { get; private set; }
-            public int definitionListIndex { get; private set; }
-            public int numberOfDefinitions { get; private set; }
+            public int definitionListIndex;
+            public int numberOfDefinitions;
             public bool isText { get; private set; }
 
             public ShapeSettings(int index, int layer, Color color, Vector3 origin, Vector3 up, Vector3 forward, int definitionListIndex, int numberOfDefinitions, bool isText = false)
@@ -198,6 +210,12 @@ namespace GLDebug
                 this.forward = forward;
                 faceCamera = false;
             }
+            public void SetLookRotation(Transform t)
+            {
+                this.up = t.up;
+                this.forward = t.forward;
+                faceCamera = false;
+            }
             public void SetLookRotationToCamera() => faceCamera = true;
 
             public int CompareTo(ShapeSettings x)
@@ -214,7 +232,7 @@ namespace GLDebug
         {
             public int shapeType { get; private set; }
             public bool wireframe { get; private set; }
-            public int vertexListIndex { get; private set; }
+            public int vertexListIndex;
             public int numberOfVertices { get; private set; }
             public Color? overrideColor { get; private set; }
 
@@ -265,12 +283,36 @@ namespace GLDebug
 
         private const float Min_Max_Bias = 1;
 
+        // horrible experiement gone wrong, do not use batching!
+        private static bool batchDrawCalls = false;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetStatics()
+        {
+            shapeSettingsList.Clear();
+            shapeDefinitionList.Clear();
+            verticesList.Clear();
+            textList.Clear();
+            GLGizmoComponents.Clear();
+
+            color = Color.white;
+            drawLayer = 0;
+            coordinateUp = Vector3.up;
+            coordinateForward = Vector3.forward;
+            coordinateOrigin = Vector3.zero;
+
+            GLmat = null;
+            tmp = null;
+            batchDrawCalls = false;
+        }
+
         private void OnEnable()
         {
             RenderPipelineManager.endCameraRendering += RenderPipelineManager_endCameraRendering;
             RenderPipelineManager.beginCameraRendering += RenderPipelineManager_beginCameraRendering;
             CreateGLMaterial();
             ResetSettings();
+            ClearLists();
         }
 
         private void OnDisable()
@@ -279,6 +321,7 @@ namespace GLDebug
             RenderPipelineManager.beginCameraRendering += RenderPipelineManager_beginCameraRendering;
             DestroyGLMaterial();
             ClearLists();
+            batchDrawCalls = false;
         }
 
         private void RenderPipelineManager_endCameraRendering(ScriptableRenderContext context, Camera camera)
@@ -301,41 +344,50 @@ namespace GLDebug
 
         private void OnPostRender()
         {
-            GLmat.SetPass(0);
-
-            Matrix4x4 matrix = Matrix4x4.TRS(Vector2.zero, Quaternion.LookRotation(coordinateForward, coordinateUp), Vector2.one);
-            GL.MultMatrix(matrix);
-            GL.PushMatrix();
-
             foreach (var gizmoComponent in GLGizmoComponents)
             {
                 gizmoComponent.ReadGizmos();
             }
 
-            // shape settings
-            shapeSettingsList.HybridSort();
-            foreach (ShapeSettings settings in shapeSettingsList)
+            if (shapeSettingsList.Count != 0)
             {
-                //if (settings.faceCamera)
-                //    settings.SetLookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
+                shapeSettingsList.HybridSort();
 
-                int startIndex = settings.definitionListIndex;
-                if (!settings.isText)
+                // horrible experiement gone wrong, do not use batching!
+                if (batchDrawCalls)
                 {
-                    for (int i = 0; i < settings.numberOfDefinitions; i++)
+                    ReorderLists();
+                    BatchDrawCalls();
+                }
+
+                GLmat.SetPass(0);
+
+                Matrix4x4 matrix = Matrix4x4.TRS(Vector2.zero, Quaternion.LookRotation(coordinateForward, coordinateUp), Vector3.one);
+                GL.MultMatrix(matrix);
+                GL.PushMatrix();
+
+                foreach (ShapeSettings settings in shapeSettingsList)
+                {
+                    int startIndex = settings.definitionListIndex;
+                    if (!settings.isText)
                     {
-                        DrawGL(settings, shapeDefinitionList[startIndex + i]);
+                        for (int i = 0; i < settings.numberOfDefinitions; i++)
+                        {
+                            DrawGL(settings, shapeDefinitionList[startIndex + i]);
+                        }
+                    }
+                    else
+                    {
+                        DrawGLText(settings, textList[settings.definitionListIndex]);
                     }
                 }
-                else
-                {
-                    DrawGLText(settings, textList[settings.definitionListIndex]);
-                }
+
+                //Debug.Log($"Definitions: {shapeDefinitionList.Count + textList.Count}, Vertices: {verticesList.Count}");
+
+                GL.PopMatrix();
+
+                GL.wireframe = false;
             }
-
-            GL.PopMatrix();
-
-            GL.wireframe = false;
 
             ClearLists();
             ResetSettings();
@@ -394,6 +446,163 @@ namespace GLDebug
             coordinateForward = forward;
             coordinateUp = up;
         }
+
+        /// <summary>
+        /// Sets the global look rotation parameter of GLGizmos
+        /// </summary>
+        public static void SetLookRotation(Transform t)
+        {
+            coordinateForward = t.forward;
+            coordinateUp = t.up;
+        }
+
+        private static bool SamePlane(Vector3 forward1, Vector3 forward2, Vector3 up1, Vector3 up2, Vector3 pos1, Vector3 pos2)
+        {
+            return forward1 == forward2 && up1 == up2 && Vector3.Dot(pos1, forward1) == Vector3.Dot(pos2, forward1);
+        }
+
+        private static void BatchDrawCalls()
+        {
+            bool MergeSettings(int i)
+            {
+                ShapeSettings settings1 = shapeSettingsList[i];
+                ShapeSettings settings2 = shapeSettingsList[i + 1];
+
+                if (settings1.layer != settings2.layer ||
+                    settings1.color != settings2.color ||
+                    settings1.isText || settings2.isText ||
+                    !SamePlane(settings1.forward, settings2.forward, settings1.up, settings2.up, settings1.origin, settings2.origin))
+                {
+                    return false;
+                }
+
+                ShapeSettings newSettings = new ShapeSettings(
+                    index: settings1.index,
+                    layer: settings1.layer,
+                    color: settings1.color,
+                    origin: settings1.origin,
+                    up: settings1.up,
+                    forward: settings1.forward,
+                    definitionListIndex: settings1.definitionListIndex,
+                    numberOfDefinitions: settings1.numberOfDefinitions + settings2.numberOfDefinitions
+                );
+
+                shapeSettingsList[i] = newSettings;
+                shapeSettingsList.RemoveAt(i + 1);
+
+                // update vertices
+                int startDefinitionIndex = settings2.definitionListIndex;
+                for (int j = 0; j < settings2.numberOfDefinitions; j++)
+                {
+                    int startVertexIndex = shapeDefinitionList[startDefinitionIndex + j].vertexListIndex;
+                    for (int k = 0; k < shapeDefinitionList[startDefinitionIndex + j].numberOfVertices; k++)
+                    {
+                        verticesList[startVertexIndex + k] += (settings2.origin - settings1.origin).Rotate(Vector3.SignedAngle(settings1.up, Vector3.up, settings1.forward), settings1.forward);
+                    }
+                }
+
+                return true;
+            }
+
+            void MergeDefinitions(int i)
+            {
+                int numMerged = 0;
+                ShapeSettings settings = shapeSettingsList[i];
+
+                for (int j = 0; j < settings.numberOfDefinitions - 1; j++)
+                {
+                    int definitionIndex = settings.definitionListIndex + j;
+                    ShapeDefinition definition1 = shapeDefinitionList[definitionIndex];
+                    ShapeDefinition definition2 = shapeDefinitionList[definitionIndex + 1];
+
+                    if (definition1.shapeType != definition2.shapeType ||
+                        definition1.wireframe != definition2.wireframe ||
+                        definition1.overrideColor != definition2.overrideColor ||
+                        definition1.shapeType == GL.LINE_STRIP || definition2.shapeType == GL.LINE_STRIP)
+                        continue;
+
+                    ShapeDefinition newDefinition = new ShapeDefinition(
+                        shapeType: definition1.shapeType,
+                        wireframe: definition1.wireframe,
+                        vertexListIndex: definition1.vertexListIndex,
+                        numberOfVertices: definition1.numberOfVertices + definition2.numberOfVertices,
+                        color: definition1.overrideColor
+                    );
+
+                    shapeDefinitionList[definitionIndex] = newDefinition;
+                    shapeDefinitionList.RemoveAt(definitionIndex + 1);
+                    settings.numberOfDefinitions--;
+                    shapeSettingsList[i] = settings;
+                    j--;
+                    numMerged++;
+                }
+
+                if (numMerged > 0)
+                {
+                    for (int j = i + 1; j < shapeSettingsList.Count; j++)
+                    {
+                        ShapeSettings tempShape = shapeSettingsList[j];
+
+                        if (tempShape.isText)
+                            continue;
+
+                        tempShape.definitionListIndex -= numMerged;
+                        shapeSettingsList[j] = tempShape;
+                    }
+                }
+            }
+
+            for (int i = 0; i < shapeSettingsList.Count - 1; i++)
+            {
+                if (MergeSettings(i))
+                {
+                    i--;
+                }
+            }
+
+            for (int i = 0; i < shapeSettingsList.Count; i++)
+            {
+                if (!shapeSettingsList[i].isText)
+                    MergeDefinitions(i);
+            }
+        }
+
+        private static void ReorderLists()
+        {
+            int definitionCount = shapeDefinitionList.Count;
+            int vertexCount = verticesList.Count;
+
+            int definitionIndex = 0;
+            int vertexIndex = 0;
+            for(int i = 0; i < shapeSettingsList.Count; i++)
+            {
+                ShapeSettings settings = shapeSettingsList[i];
+
+                if (settings.isText)
+                    continue;
+
+                for (int j = 0; j < settings.numberOfDefinitions; j++)
+                {
+                    ShapeDefinition definition = shapeDefinitionList[settings.definitionListIndex + j];
+                    
+                    for (int k = 0; k < definition.numberOfVertices; k++)
+                    {
+                        verticesList.Add(verticesList[definition.vertexListIndex + k]);
+                    }
+
+                    definition.vertexListIndex = vertexIndex;
+                    shapeDefinitionList.Add(definition);
+                    vertexIndex += definition.numberOfVertices;
+                }
+
+                settings.definitionListIndex = definitionIndex;
+                shapeSettingsList[i] = settings;
+                definitionIndex += settings.numberOfDefinitions;
+            }
+
+            shapeDefinitionList.RemoveRange(0, definitionCount);
+            verticesList.RemoveRange(0, vertexCount);
+        }
         #endregion
 
         #region ### Draw Overhead
@@ -402,7 +611,7 @@ namespace GLDebug
             GL.wireframe = definition.wireframe;
             int startIndex = definition.vertexListIndex;
 
-            Matrix4x4 matrix = Matrix4x4.TRS(settings.origin, Quaternion.LookRotation(settings.forward, settings.up), Vector2.one);
+            Matrix4x4 matrix = Matrix4x4.TRS(settings.origin, Quaternion.LookRotation(settings.forward, settings.up), Vector3.one);
             GL.MultMatrix(matrix);
 
             GL.Begin(definition.shapeType);
@@ -490,7 +699,7 @@ namespace GLDebug
         private static void _NewShapeText(Vector3 origin, int definitionCount)
         {
             int settingsListIndex = shapeSettingsList.Count;
-            int textLisIndex = textList.Count;
+            int textListIndex = textList.Count;
             ShapeSettings settings = new ShapeSettings(
                 index: settingsListIndex,
                 layer: drawLayer,
@@ -498,7 +707,7 @@ namespace GLDebug
                 origin: origin,
                 up: coordinateUp,
                 forward: coordinateForward,
-                definitionListIndex: textLisIndex,
+                definitionListIndex: textListIndex,
                 numberOfDefinitions: 1,
                 isText: true
             );
@@ -520,6 +729,8 @@ namespace GLDebug
 
         #region ### Basic Shape Definitions
         private static void _OpenBox(Vector3 offset, Vector2 size, float rotation, Color? overrideColor = null)
+            => _OpenBox(offset, Quaternion.identity, size, rotation, overrideColor);
+        private static void _OpenBox(Vector3 offset, Quaternion lookRotation, Vector2 size, float rotation, Color ? overrideColor = null)
         {
             // definition
             int vertexListIndex = verticesList.Count;
@@ -544,7 +755,7 @@ namespace GLDebug
             bool flipY = true;
             for (int i = 0; i < 5; i++)
             {
-                verticesList.Add(offset + (Vector3)new Vector2(signX * halfSizeX, signY * halfSizeY).Rotate(rotation));
+                verticesList.Add(offset + lookRotation * ((Vector3)new Vector2(signX * halfSizeX, signY * halfSizeY).Rotate(rotation)));
 
                 if (flipY)
                     signY *= -1;
@@ -555,6 +766,8 @@ namespace GLDebug
             }
         }
         public static void _SolidBox(Vector3 offset, Vector2 size, float rotation, Color? overrideColor = null)
+            => _SolidBox(offset, Quaternion.identity, size, rotation, overrideColor);
+        public static void _SolidBox(Vector3 offset, Quaternion lookRotation, Vector2 size, float rotation, Color ? overrideColor = null)
         {
             // definition
             int vertexListIndex = verticesList.Count;
@@ -579,7 +792,7 @@ namespace GLDebug
             bool flipY = true;
             for (int i = 0; i < 4; i++)
             {
-                verticesList.Add(offset + (Vector3)new Vector2(signX * halfSizeX, signY * halfSizeY).Rotate(rotation));
+                verticesList.Add(offset + lookRotation * ((Vector3)new Vector2(signX * halfSizeX, signY * halfSizeY).Rotate(rotation)));
 
                 if (flipY)
                     signY *= -1;
@@ -590,6 +803,8 @@ namespace GLDebug
             }
         }
         private static void _PartialOpenBox(Vector3 offset, Vector2 size, float rotation, bool top, bool bottom, bool left, bool right, Color? overrideColor = null)
+            => _PartialOpenBox(offset, Quaternion.identity, size, rotation, top, bottom, left, right, overrideColor);
+        private static void _PartialOpenBox(Vector3 offset, Quaternion lookRotation, Vector2 size, float rotation, bool top, bool bottom, bool left, bool right, Color ? overrideColor = null)
         {
             int count = 0;
             if (top) count += 2;
@@ -611,10 +826,10 @@ namespace GLDebug
             shapeDefinitionList.Add(definition);
 
             // vertices
-            Vector3 topRight = (Vector3)new Vector2(size.x / 2, size.y / 2).Rotate(rotation) + offset;
-            Vector3 topLeft = (Vector3)new Vector2(-size.x / 2, size.y / 2).Rotate(rotation) + offset;
-            Vector3 bottomLeft = (Vector3)new Vector2(-size.x / 2, -size.y / 2).Rotate(rotation) + offset;
-            Vector3 bottomRight = (Vector3)new Vector2(size.x / 2, -size.y / 2).Rotate(rotation) + offset;
+            Vector3 topRight = lookRotation * ((Vector3)new Vector2(size.x / 2, size.y / 2).Rotate(rotation)) + offset;
+            Vector3 topLeft = lookRotation * ((Vector3)new Vector2(-size.x / 2, size.y / 2).Rotate(rotation)) + offset;
+            Vector3 bottomLeft = lookRotation * ((Vector3)new Vector2(-size.x / 2, -size.y / 2).Rotate(rotation)) + offset;
+            Vector3 bottomRight = lookRotation * ((Vector3)new Vector2(size.x / 2, -size.y / 2).Rotate(rotation)) + offset;
 
             if (top)
             {
@@ -640,7 +855,9 @@ namespace GLDebug
                 verticesList.Add(topRight);
             }
         }
-        private static void _OpenQuad(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Color? overrideColor = null)
+        private static void _OpenQuad(Vector2 v1, Vector2 v2, Vector2 v3, Vector2 v4, Color? overrideColor = null)
+            => _OpenQuad(v1, v2, v3, v4, Quaternion.identity, overrideColor);
+        private static void _OpenQuad(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Quaternion lookRoation, Color? overrideColor = null)
         {
             int vertexListIndex = verticesList.Count;
             ShapeDefinition definition = new ShapeDefinition
@@ -655,13 +872,15 @@ namespace GLDebug
             shapeDefinitionList.Add(definition);
 
             // vertices
-            verticesList.Add(v1);
-            verticesList.Add(v2);
-            verticesList.Add(v3);
-            verticesList.Add(v4);
-            verticesList.Add(v1);
+            verticesList.Add(lookRoation * v1);
+            verticesList.Add(lookRoation * v2);
+            verticesList.Add(lookRoation * v3);
+            verticesList.Add(lookRoation * v4);
+            verticesList.Add(lookRoation * v1);
         }
         private static void _SolidQuad(Vector2 v1, Vector2 v2, Vector2 v3, Vector2 v4, Color? overrideColor = null)
+            => _SolidQuad(v1, v2, v3, v4, Quaternion.identity, overrideColor);
+        private static void _SolidQuad(Vector2 v1, Vector2 v2, Vector2 v3, Vector2 v4, Quaternion lookRoation, Color? overrideColor = null)
         {
             int vertexListIndex = verticesList.Count;
             ShapeDefinition definition = new ShapeDefinition
@@ -676,12 +895,41 @@ namespace GLDebug
             shapeDefinitionList.Add(definition);
 
             // vertices
-            verticesList.Add(v1);
-            verticesList.Add(v2);
-            verticesList.Add(v3);
-            verticesList.Add(v4);
+            verticesList.Add(lookRoation * v1);
+            verticesList.Add(lookRoation * v2);
+            verticesList.Add(lookRoation * v3);
+            verticesList.Add(lookRoation * v4);
+        }
+        private static void _SolidQuads(NativeList<Vector3> vertices)
+            => _SolidQuads(vertices, Vector3.zero, Quaternion.identity);
+        private static void _SolidQuads(NativeList<Vector3> vertices, Vector3 offset)
+            => _SolidQuads(vertices, offset, Quaternion.identity);
+        private static void _SolidQuads(NativeList<Vector3> vertices, Vector3 offset, Quaternion lookRotation)
+        {
+            int numberOfVertices = vertices.Length - (vertices.Length % 4);
+
+            int vertexListIndex = verticesList.Count;
+            ShapeDefinition definition = new ShapeDefinition
+            (
+                shapeType: GL.QUADS,
+                wireframe: false,
+                vertexListIndex: vertexListIndex,
+                numberOfVertices: numberOfVertices
+            );
+
+            shapeDefinitionList.Add(definition);
+
+            // vertices
+            for (int i = 0; i < numberOfVertices; i++)
+            {
+                verticesList.Add((lookRotation * vertices[i]) + offset);
+            }
+
+            vertices.Dispose();
         }
         private static void _OpenCircle(Vector3 offset, float radius, float arcAngle, float offsetAngle, int numEdges, bool dashed = false, Color? overrideColor = null)
+            => _OpenCircle(offset, Quaternion.identity, radius, arcAngle, offsetAngle, numEdges, dashed = false, overrideColor);
+        private static void _OpenCircle(Vector3 offset, Quaternion lookRotation, float radius, float arcAngle, float offsetAngle, int numEdges, bool dashed = false, Color? overrideColor = null)
         {
             radius = Mathf.Abs(radius);
 
@@ -711,7 +959,7 @@ namespace GLDebug
             // vertices
             for (int i = 0; i <= numEdges; i++)
             {
-                verticesList.Add(offset + (Vector3)Vector2.right.Rotate(arcAngle * ((float)i / (float)numEdges) + offsetAngle) * radius);
+                verticesList.Add(offset + lookRotation * ((Vector3)Vector2.right.Rotate(arcAngle * ((float)i / (float)numEdges) + offsetAngle) * radius));
             }
         }
         private static void _SolidCircle(Vector3 offset, float radius, float arcAngle, float offsetAngle, int numEdges, Color? overrideColor = null)
@@ -895,6 +1143,30 @@ namespace GLDebug
             verticesList.Add(v2);
             verticesList.Add(v3);
         }
+        private static void _Triangles(NativeList<Vector3> vertices, bool solid, Color? overrideColor = null)
+        {
+            // definition
+            int numberOfVertices = vertices.Length - (vertices.Length % 3);
+            int vertexListIndex = verticesList.Count;
+            ShapeDefinition definition = new ShapeDefinition
+            (
+                shapeType: GL.TRIANGLES,
+                wireframe: !solid,
+                vertexListIndex: vertexListIndex,
+                numberOfVertices: numberOfVertices,
+                color: overrideColor
+            );
+
+            shapeDefinitionList.Add(definition);
+
+            // vertices
+            for (int i = 0; i < numberOfVertices; i++)
+            {
+                verticesList.Add(vertices[i]);
+            }
+
+            vertices.Dispose();
+        }
 
         private static void _Text(string text, TMP_FontAsset font, float fontSize, TextBoxParams textBoxParams)
         {
@@ -965,7 +1237,8 @@ namespace GLDebug
             bool insideFill;
             (size, borderWidth, borderType, insideFill, outsideFill) = AdjustWeightedBoxParams(size, borderWidth, borderType);
 
-            int count = (insideFill ? 1 : 0) + (outsideFill ? 4 : 0);
+            //int count = (insideFill ? 1 : 0) + (outsideFill ? 4 : 0);
+            int count = (insideFill ? 1 : 0) + (outsideFill ? 1 : 0);
             _NewShape(position, count);
 
             if (insideFill)
@@ -985,10 +1258,13 @@ namespace GLDebug
                 Vector2 outerBL = (new Vector2(-halfSize.x, -halfSize.y) + new Vector2(-borderWidth, -borderWidth)).Rotate(rotation);
                 Vector2 outerBR = (new Vector2(halfSize.x, -halfSize.y) + new Vector2(borderWidth, -borderWidth)).Rotate(rotation);
 
-                _SolidQuad(innerTL, outerTL, outerTR, innerTR);
-                _SolidQuad(innerTR, outerTR, outerBR, innerBR);
-                _SolidQuad(innerBR, outerBR, outerBL, innerBL);
-                _SolidQuad(innerBL, outerBL, outerTL, innerTL);
+                _SolidQuads(new NativeList<Vector3>(Allocator.Temp)
+                {
+                    innerTL, outerTL, outerTR, innerTR,
+                    innerTR, outerTR, outerBR, innerBR,
+                    innerBR, outerBR, outerBL, innerBL,
+                    innerBL, outerBL, outerTL, innerTL
+                });
             }
 
             return 1;
@@ -1181,7 +1457,7 @@ namespace GLDebug
         private static int BuildSolidBoxEdgeRadius(Vector3 position, Vector2 size, float edgeRadius, float rotation, bool drawBox)
         {
             drawBox = drawBox && size.x != 0 && size.y != 0;
-            int count = drawBox ? 9 : 8;
+            int count = drawBox ? 6 : 5;
             _NewShape(position, count);
 
             int numCornerVertices = 8;
@@ -1203,10 +1479,13 @@ namespace GLDebug
             Vector2 vectorRightDown = bottomRight + Vector2.right.Rotate(rotation) * edgeRadius;
             Vector2 vectorRightUp = topRight + Vector2.right.Rotate(rotation) * edgeRadius;
 
-            _SolidQuad(topLeft, topRight, vectorTopRight, vectorTopLeft);
-            _SolidQuad(topLeft, bottomLeft, vectorLeftDown, vectorLeftUp);
-            _SolidQuad(bottomLeft, bottomRight, vectorBottomRight, vectorBottomLeft);
-            _SolidQuad(topRight, bottomRight, vectorRightDown, vectorRightUp);
+            _SolidQuads(new NativeList<Vector3>(Allocator.Temp)
+            {
+                topLeft, topRight, vectorTopRight, vectorTopLeft,
+                topLeft, bottomLeft, vectorLeftDown, vectorLeftUp,
+                bottomLeft, bottomRight, vectorBottomRight, vectorBottomLeft,
+                topRight, bottomRight, vectorRightDown, vectorRightUp
+            });
             _SolidCircle(topRight, edgeRadius, 90, 0 + rotation, numCornerVertices);
             _SolidCircle(topLeft, edgeRadius, 90, 90 + rotation, numCornerVertices);
             _SolidCircle(bottomLeft, edgeRadius, 90, 180 + rotation, numCornerVertices);
@@ -1837,9 +2116,10 @@ namespace GLDebug
                 }
             }
 
-            _NewShape(position, numEdges);
+            _NewShape(position, 1);
             numShapes++;
             // draw arc
+            NativeList<Vector3> vertices = new(Allocator.Temp);
             for (int i = 1; i <= numEdges; i++)
             {
                 Vector2 outer0 = Vector2.right.Rotate(arcAngle * ((float)(i - 1) / (float)numEdges) + offsetAngle) * outerRadius;
@@ -1847,8 +2127,16 @@ namespace GLDebug
                 Vector2 inner0 = Vector2.right.Rotate(arcAngle * ((float)(i - 1) / (float)numEdges) + offsetAngle) * innerRadius;
                 Vector2 inner1 = Vector2.right.Rotate(arcAngle * ((float)i / (float)numEdges) + offsetAngle) * innerRadius;
 
-                _SolidQuad(outer0, outer1, inner1, inner0);
+                vertices.Add(outer0);
+                vertices.Add(outer1);
+                vertices.Add(inner1);
+                if (inner0 != inner1)
+                    vertices.Add(inner0);
             }
+            if (innerRadius != 0)
+                _SolidQuads(vertices);
+            else
+                _Triangles(vertices, true);
 
             // if arc and needs connector - continue
             if (arcAngleAbs >= 360 || arcCloseType == ArcCloseType.None)
@@ -2612,7 +2900,7 @@ namespace GLDebug
         /// Optional 'canter' defines position triangles are fanned out from (Default is the average position of the vertices)
         /// </summary>
         public static ShapeModifier DrawSolidPolygon(Span<Vector3> vertices, Vector2? center = null) => _NewShapeModifierCount(BuildSolidPolygon(vertices, center));
-        
+
         private static int BuildLineStrip(List<Vector2> vertices, bool closed)
         {
             if (vertices == null)
@@ -2966,24 +3254,30 @@ namespace GLDebug
             }
             else
             {
-                _NewShape(origin, 3);
+                _NewShape(origin, 1);
                 switch (borderType)
                 {
                     case BorderType.Inside:
                         Vector2 V1 = v1 - (borderWidth * scaleV1 * directionItoV1);
                         Vector2 V2 = v2 - (borderWidth * scaleV2 * directionItoV2);
                         Vector2 V3 = v3 - (borderWidth * scaleV3 * directionItoV3);
-                        _SolidQuad(v1, v2, V2, V1);
-                        _SolidQuad(v2, v3, V3, V2);
-                        _SolidQuad(v3, v1, V1, V3);
+                        _SolidQuads(new(Allocator.Temp)
+                        {
+                            v1, v2, V2, V1,
+                            v2, v3, V3, V2,
+                            v3, v1, V1, V3
+                        });
                         break;
                     case BorderType.Outside:
                         V1 = v1 + (borderWidth * scaleV1 * directionItoV1);
                         V2 = v2 + (borderWidth * scaleV2 * directionItoV2);
                         V3 = v3 + (borderWidth * scaleV3 * directionItoV3);
-                        _SolidQuad(v1, v2, V2, V1);
-                        _SolidQuad(v2, v3, V3, V2);
-                        _SolidQuad(v3, v1, V1, V3);
+                        _SolidQuads(new(Allocator.Temp)
+                        {
+                            v1, v2, V2, V1,
+                            v2, v3, V3, V2,
+                            v3, v1, V1, V3
+                        });
                         break;
                     case BorderType.Centered:
                         float halfWidth = borderWidth / 2;
@@ -2993,9 +3287,12 @@ namespace GLDebug
                         Vector2 V1B = v1 - (halfWidth * scaleV1 * directionItoV1);
                         Vector2 V2B = v2 - (halfWidth * scaleV2 * directionItoV2);
                         Vector2 V3B = v3 - (halfWidth * scaleV3 * directionItoV3);
-                        _SolidQuad(V1A, V2A, V2B, V1B);
-                        _SolidQuad(V2A, V3A, V3B, V2B);
-                        _SolidQuad(V3A, V1A, V1B, V3B);
+                        _SolidQuads(new(Allocator.Temp)
+                        {
+                            V1A, V2A, V2B, V1B,
+                            V2A, V3A, V3B, V2B,
+                            V3A, V1A, V1B, V3B
+                        });
                         break;
                     default:
                         return 0;
@@ -3067,15 +3364,15 @@ namespace GLDebug
             if (!solid)
             {
                 bool vertical = direction == CapsuleDirection2D.Vertical;
+                _PartialOpenBox(Vector3.zero, (size - (radius * 2 * orientationSize)).ZeroNegatives(), angle, !vertical, !vertical, vertical, vertical);
                 _OpenCircle(curveOffsetDirection * difference, radius, 180, offsetAngle, 0, false);
                 _OpenCircle(-curveOffsetDirection * difference, radius, 180, 180 + offsetAngle, 0, false);
-                _PartialOpenBox(Vector3.zero, (size - (radius * 2 * orientationSize)).ZeroNegatives(), angle, !vertical, !vertical, vertical, vertical);
             }
             else
             {
+                _SolidBox(Vector3.zero, (size - (radius * 2 * orientationSize)).ZeroNegatives(), angle);
                 _SolidCircle(curveOffsetDirection * difference, radius, 180, offsetAngle, 0);
                 _SolidCircle(-curveOffsetDirection * difference, radius, 180, 180 + offsetAngle, 0);
-                _SolidBox(Vector3.zero, (size - (radius * 2 * orientationSize)).ZeroNegatives(), angle);
             }
 
             return 1;
@@ -3143,7 +3440,7 @@ namespace GLDebug
             Vector2 curveOffsetDirection = (direction == CapsuleDirection2D.Vertical ? Vector2.up : Vector2.left).Rotate(angle);
             Vector2 orientationSize = direction == CapsuleDirection2D.Vertical ? Vector2.up : Vector2.right;
 
-            
+
             (borderWidth, borderType) = AdjustForNegativeBorderWidth(borderWidth, borderType);
             bool solid =
                 (borderType == BorderType.Outside && borderWidth <= -radius) ||
@@ -3297,7 +3594,7 @@ namespace GLDebug
             else if (collider is CapsuleCollider2D)
             {
                 CapsuleCollider2D capsuleCollider2D = (CapsuleCollider2D)collider;
-                Vector3 position = (Vector2)capsuleCollider2D.transform.position + ((Vector2)capsuleCollider2D.transform.right * capsuleCollider2D.offset.x) + ((Vector2)capsuleCollider2D.transform.up * capsuleCollider2D.offset.y);
+                Vector3 position = capsuleCollider2D.transform.position + (capsuleCollider2D.transform.right * capsuleCollider2D.offset.x) + (capsuleCollider2D.transform.up * capsuleCollider2D.offset.y);
                 Vector2 size = capsuleCollider2D.size.ScaleEach(capsuleCollider2D.transform.lossyScale.Abs());
                 float parentScale = capsuleCollider2D.transform.parent != null ? capsuleCollider2D.transform.parent.lossyScale.Abs().Max() : 1;
                 if (solid)
@@ -3333,7 +3630,7 @@ namespace GLDebug
                 if (solid)
                     return DrawSolidPolygon(colliderPaths).SetOrigin(edgeCollider2D.transform.position).SetLookRotation(collider.transform.forward, collider.transform.up);
                 else
-                    return DrawOpenPolygon(colliderPaths).SetOrigin(edgeCollider2D.transform.position).SetLookRotation(collider.transform.forward, collider.transform.up);
+                    return DrawPath(colliderPaths).SetOrigin(edgeCollider2D.transform.position).SetLookRotation(collider.transform.forward, collider.transform.up);
             }
             else
             {
@@ -3383,6 +3680,303 @@ namespace GLDebug
 
             _NewShapeText(position, 1);
             _Text(text, font, fontSize, textBoxParams);
+            return 1;
+        }
+        #endregion
+
+        #region ### 3D Wire Shapes
+        /// <summary>
+        /// Draws a wireframe box at 'center' with 'size'
+        /// </summary>
+        public static ShapeModifier DrawWireCube(Vector3 center, Vector3 size)
+            => _NewShapeModifierCount(BuildWireCube(center, size));
+        private static int BuildWireCube(Vector3 center, Vector3 size)
+        {
+            float half_x = size.x / 2;
+            float half_y = size.y / 2;
+            float half_z = size.z / 2;
+
+            _NewShape(center, 3);
+            _OpenBox(-Vector3.forward * half_z, new Vector2(size.x, size.y), 0);
+            _OpenBox(Vector3.forward * half_z, new Vector2(size.x, size.y), 0);
+
+            Vector3 frontTL = new Vector3(-half_x, half_y, -half_z);
+            Vector3 frontTR = new Vector3(half_x, half_y, -half_z);
+            Vector3 frontBL = new Vector3(-half_x, -half_y, -half_z);
+            Vector3 frontBR = new Vector3(half_x, -half_y, -half_z);
+            Vector3 backTL = new Vector3(-half_x, half_y, half_z);
+            Vector3 backTR = new Vector3(half_x, half_y, half_z);
+            Vector3 backBL = new Vector3(-half_x, -half_y, half_z);
+            Vector3 backBR = new Vector3(half_x, -half_y, half_z);
+            Span<Vector3> connectorLines = stackalloc Vector3[8]
+            {
+                frontTL, backTL,
+                frontTR, backTR,
+                frontBL, backBL,
+                frontBR, backBR
+            };
+            _Lines(connectorLines);
+
+            return 1;
+        }
+
+        /// <summary>
+        /// Draws a wireframe box at 'center' with 'size' and an inner edge thickness of 'borderWidth'
+        /// </summary>
+        public static ShapeModifier DrawWeightedWireCube(Vector3 center, Vector3 size, float borderWidth)
+            => _NewShapeModifierCount(BuildWeightedWireCube(center, size, Mathf.Abs(borderWidth), BorderType.Inside));
+        private static int BuildWeightedWireCube(Vector3 center, Vector3 size, float borderWidth, BorderType borderType)
+        {
+            float half_x = size.x / 2;
+            float half_y = size.y / 2;
+            float half_z = size.z / 2;
+
+            int numBuilds = 0;
+            // Front
+            numBuilds += BuildWeightedBoxLookRotation(center, -Vector3.forward * half_z, Quaternion.identity, new Vector2(size.x, size.y), borderWidth, borderType);
+            // Back
+            numBuilds += BuildWeightedBoxLookRotation(center, Vector3.forward * half_z, Quaternion.identity, new Vector2(size.x, size.y), borderWidth, borderType);
+            // Top
+            numBuilds += BuildWeightedBoxLookRotation(center, Vector3.up * half_y, Quaternion.LookRotation(Vector3.up), new Vector2(size.x, size.z), borderWidth, borderType);
+            // Bottom
+            numBuilds += BuildWeightedBoxLookRotation(center, -Vector3.up * half_y, Quaternion.LookRotation(Vector3.up), new Vector2(size.x, size.z), borderWidth, borderType);
+            // Right
+            numBuilds += BuildWeightedBoxLookRotation(center, Vector3.right * half_x, Quaternion.LookRotation(Vector3.right), new Vector2(size.z, size.y), borderWidth, borderType);
+            // Left
+            numBuilds += BuildWeightedBoxLookRotation(center, -Vector3.right * half_x, Quaternion.LookRotation(Vector3.right), new Vector2(size.z, size.y), borderWidth, borderType);
+
+            return numBuilds;
+        }
+        private static int BuildWeightedBoxLookRotation(Vector3 center, Vector3 offset, Quaternion lookRotation, Vector2 size, float borderWidth, BorderType borderType, float rotation = 0)
+        {
+            if (borderWidth == 0)
+            {
+                _NewShape(center, 1);
+                _OpenBox(offset, lookRotation, size, rotation);
+                return 1;
+            }
+
+            bool outsideFill;
+            bool insideFill;
+            (size, borderWidth, borderType, insideFill, outsideFill) = AdjustWeightedBoxParams(size, borderWidth, borderType);
+
+            int count = (insideFill ? 1 : 0) + (outsideFill ? 1 : 0);
+            _NewShape(center, count);
+
+            if (insideFill)
+                _SolidBox(offset, lookRotation, size, rotation);
+
+            if (outsideFill)
+            {
+                Vector2 halfSize = size / 2;
+
+                Vector3 innerTL = (Vector3)new Vector2(-halfSize.x, halfSize.y).Rotate(rotation);
+                Vector3 innerTR = (Vector3)new Vector2(halfSize.x, halfSize.y).Rotate(rotation);
+                Vector3 innerBL = (Vector3)new Vector2(-halfSize.x, -halfSize.y).Rotate(rotation);
+                Vector3 innerBR = (Vector3)new Vector2(halfSize.x, -halfSize.y).Rotate(rotation);
+
+                Vector3 outerTL = (Vector3)(new Vector2(-halfSize.x, halfSize.y) + new Vector2(-borderWidth, borderWidth)).Rotate(rotation);
+                Vector3 outerTR = (Vector3)(new Vector2(halfSize.x, halfSize.y) + new Vector2(borderWidth, borderWidth)).Rotate(rotation);
+                Vector3 outerBL = (Vector3)(new Vector2(-halfSize.x, -halfSize.y) + new Vector2(-borderWidth, -borderWidth)).Rotate(rotation);
+                Vector3 outerBR = (Vector3)(new Vector2(halfSize.x, -halfSize.y) + new Vector2(borderWidth, -borderWidth)).Rotate(rotation);
+
+                _SolidQuads(new NativeList<Vector3>(Allocator.Temp)
+                {
+                    innerTL, outerTL, outerTR, innerTR,
+                    innerTR, outerTR, outerBR, innerBR,
+                    innerBR, outerBR, outerBL, innerBL,
+                    innerBL, outerBL, outerTL, innerTL
+                }, offset, lookRotation);
+            }
+
+            return 1;
+        }
+
+        /// <summary>
+        /// Draws a wireframe sphere at 'center' with 'radius'
+        /// </summary>
+        public static ShapeModifier DrawWireSphere(Vector3 center, float radius, int numEdges = 0)
+            => _NewShapeModifierCount(BuildWireSphere(center, radius, numEdges));
+        private static int BuildWireSphere(Vector3 center, float radius, int numEdges)
+        {
+            _NewShape(center, 3);
+            _OpenCircle(Vector3.zero, radius, 360, 0, numEdges, false);
+            _OpenCircle(Vector3.zero, Quaternion.LookRotation(Vector3.up), radius, 360, 0, numEdges, false);
+            _OpenCircle(Vector3.zero, Quaternion.LookRotation(Vector3.right), radius, 360, 0, numEdges, false);
+
+            return 1;
+        }
+
+        /// <summary>
+        /// Draws an wireframe cylinder at 'center' with 'size'
+        /// </summary>
+        public static ShapeModifier DrawWireCylinder(Vector3 center, Vector2 size)
+            => _NewShapeModifierCount(BuildWireCylinder(center, size, -2));
+        private static int BuildWireCylinder(Vector3 center, Vector2 size, int numEdges)
+        {
+            size = size.Abs();
+            float half_x = size.x / 2;
+            float half_y = size.y / 2;
+
+            _NewShape(center, 3);
+            _OpenCircle(Vector3.up * half_y, Quaternion.LookRotation(Vector3.up), half_x, 360, 0, numEdges);
+            _OpenCircle(-Vector3.up * half_y, Quaternion.LookRotation(-Vector3.up), half_x, 360, 0, numEdges);
+
+            Span<Vector3> vertices = stackalloc Vector3[4 * 2];
+            for (int i = 0; i < vertices.Length; i += 2)
+            {
+                Vector3 circleVertexTop = Vector2.right.Rotate((360 * (float)i / (float)vertices.Length)) * half_x;
+                Vector3 circleVertexBottom = Vector2.right.Rotate((360 * -(float)i / (float)vertices.Length)) * half_x;
+                vertices[i] = Quaternion.LookRotation(Vector3.up) * circleVertexTop + Vector3.up * half_y;
+                vertices[i + 1] = Quaternion.LookRotation(Vector3.down) * circleVertexBottom + Vector3.down * half_y;
+            }
+
+            _Lines(vertices);
+
+            return 1;
+        }
+
+        /// <summary>
+        /// Draws an wireframe capsule at 'center' with 'size'
+        /// </summary>
+        public static ShapeModifier DrawWireCapsule(Vector3 center, Vector2 size)
+            => _NewShapeModifierCount(BuildWireCapsule(center, size));
+        //public static ShapeModifier DrawWireCapsule(Vector2 from, Vector2 to, float radius)
+        //{
+        //    Vector2 center = Vector2.Lerp(from, to, .5f);
+        //    Vector2 size = new Vector2(radius * 2, Vector2.Distance(from, to) + radius * 2);
+        //    float angle = Vector2.SignedAngle(Vector2.up, from - center);
+        //    return _NewShapeModifierCount(BuildWireCapsule(center, size));
+        //}
+        private static int BuildWireCapsule(Vector3 center, Vector2 size)
+        {
+            size = size.Abs();
+            float half_x = size.x / 2;
+            float half_y = size.y / 2;
+            float circleDist = Mathf.Max(half_y - half_x, 0);
+
+            int count = circleDist > 0 ? 3 : 2;
+            _NewShape(center, count);
+            _OpenCircle(Vector3.up * circleDist, Quaternion.LookRotation(Vector3.up), half_x, 360, 0, -2);
+            if (count == 3)
+                _OpenCircle(-Vector3.up * circleDist, Quaternion.LookRotation(-Vector3.up), half_x, 360, 0, -2);
+
+            BuildCapsuleLookRotation(center, size, Quaternion.identity, CapsuleDirection2D.Vertical, 0);
+            BuildCapsuleLookRotation(center, size, Quaternion.LookRotation(Vector3.right), CapsuleDirection2D.Vertical, 0);
+
+            return 4;
+        }
+        private static int BuildCapsuleLookRotation(Vector3 position, Vector2 size, Quaternion lookRotation, CapsuleDirection2D direction, float angle)
+        {
+            size = size.Abs();
+            float radius = direction == CapsuleDirection2D.Vertical ? size.x / 2 : size.y / 2;
+            float difference = direction == CapsuleDirection2D.Vertical ?
+                (size.y > size.x ? (size.y - size.x) / 2 : 0) :
+                (size.x > size.y ? (size.x - size.y) / 2 : 0);
+
+            float offsetAngle = (direction == CapsuleDirection2D.Vertical ? 0 : 90) + angle;
+            Vector2 curveOffsetDirection = (direction == CapsuleDirection2D.Vertical ? Vector2.up : Vector2.left).Rotate(angle);
+            Vector2 orientationSize = direction == CapsuleDirection2D.Vertical ? Vector2.up : Vector2.right;
+
+            _NewShape(position, 3);
+            bool vertical = direction == CapsuleDirection2D.Vertical;
+            _PartialOpenBox(Vector3.zero, lookRotation, (size - (radius * 2 * orientationSize)).ZeroNegatives(), angle, !vertical, !vertical, vertical, vertical);
+            _OpenCircle(curveOffsetDirection * difference, lookRotation, radius, 180, offsetAngle, -2, false);
+            _OpenCircle(-curveOffsetDirection * difference, lookRotation, radius, 180, 180 + offsetAngle, -2, false);
+
+            return 1;
+        }
+
+        /// <summary>
+        /// Draws a wireframe cone with 'origin', 'direction', 'radius' and 'distance'.
+        /// 'rotation' rotates the polygon base (circle by default) with 'numEdges' (automatically calculated if 0)
+        /// 'numLines' determines how many lines connect the origin point to the base
+        /// </summary>
+        public static ShapeModifier DrawWireCone(Vector3 origin, Vector3 direction, float radius, float distance, float rotation, int numEdges = 0, int numLines = 0)
+            => _NewShapeModifierCount(BuildWireCone(origin, direction, radius, distance, rotation, numEdges, numLines));
+        /// <summary>
+        /// Draws a wireframe cone with 'origin', 'direction', 'angle' and 'distance'.
+        /// 'rotation' rotates the polygon base (circle by default) with 'numEdges' (automatically calculated if 0)
+        /// 'numLines' determines how many lines connect the origin point to the base
+        /// </summary>
+        public static ShapeModifier DrawWireConeByAngle(Vector3 origin, Vector3 direction, float angle, float distance, float rotation, int numEdges = 0, int numLines = 0)
+        {
+            float radius = Mathf.Tan(angle * Mathf.Deg2Rad / 2) * distance;
+            return _NewShapeModifierCount(BuildWireCone(origin, direction, radius, distance, rotation, numEdges, numLines));
+        }
+        private static int BuildWireCone(Vector3 origin, Vector3 direction, float radius, float distance, float rotation, int numEdges, int numLines)
+        {
+            if (numEdges == 0 || numEdges == 1)
+                numEdges = -2;
+
+            _NewShape(origin, 2);
+            _OpenCircle(direction * distance, Quaternion.LookRotation(direction), radius, 360, rotation, numEdges);
+
+            // Get Circle Vertices
+            if (numLines == 0)
+            {
+                numLines = 4;
+
+                if (numEdges > 0 && numEdges <= 6)
+                    numLines = numEdges;
+                else if (numEdges >= 7 && numEdges <= 12)
+                {
+                    numLines = 4;
+
+                    if (numEdges % 4 == 0)
+                        numLines = 4;
+                    else if (numEdges % 3 == 0)
+                        numLines = 3;
+                    else if (numEdges % 5 == 0)
+                        numLines = 5;
+                }
+
+                Span<Vector3> vertices = stackalloc Vector3[numLines * 2];
+                for (int i = 0; i < vertices.Length; i += 2)
+                {
+                    vertices[i] = Vector2.zero;
+
+                    Vector3 circleVertex = Vector2.right.Rotate((360 * (float)i / (float)vertices.Length) + rotation) * radius;
+                    vertices[i + 1] = Quaternion.LookRotation(direction) * circleVertex + direction * distance;
+                }
+
+                _Lines(vertices);
+            }
+            else if (numLines < 0)
+            {
+                if (numEdges <= 0)
+                    numEdges = GetNumEdges(radius, 360, numEdges);
+
+                int skipIncrement = Mathf.Abs(numLines);
+
+                Span<Vector3> vertices = stackalloc Vector3[((numEdges / Mathf.Abs(numLines)) + 1) * 2];
+                int index = 0;
+                for (int i = 0; i < vertices.Length; i += 2)
+                {
+                    vertices[i] = Vector2.zero;
+
+                    Vector3 circleVertex = Vector2.right.Rotate(360 * ((float)index / (float)numEdges) + rotation) * radius;
+                    vertices[i + 1] = Quaternion.LookRotation(direction) * circleVertex + direction * distance;
+
+                    index += Mathf.Abs(numLines);
+                }
+
+                _Lines(vertices);
+            }
+            else
+            {
+                Span<Vector3> vertices = stackalloc Vector3[numLines * 2];
+                for (int i = 0; i < vertices.Length; i += 2)
+                {
+                    vertices[i] = Vector2.zero;
+
+                    Vector3 circleVertex = Vector2.right.Rotate((360 * (float)i / (float)vertices.Length) + rotation) * radius;
+                    vertices[i + 1] = Quaternion.LookRotation(direction) * circleVertex + direction * distance;
+                }
+
+                _Lines(vertices);
+            }
+
             return 1;
         }
         #endregion
@@ -3486,6 +4080,16 @@ namespace GLGizmosExtensions
             float ca = Mathf.Cos(angle);
             float sa = Mathf.Sin(angle);
             return new Vector2(ca * v.x - sa * v.y, sa * v.x + ca * v.y);
+        }
+        public static Vector3 Rotate(this Vector3 v, float angle, Vector3 axis, AngleUnits units = AngleUnits.Degrees)
+        {
+            angle = AngleUnitConversion(angle, units, AngleUnits.Degrees);
+
+            // Create a rotation object
+            Quaternion rotation = Quaternion.AngleAxis(angle, axis);
+
+            // Multiplying a Quaternion by a Vector3 rotates that vector
+            return rotation * v;
         }
 
         public static Vector2 ScaleEach(this Vector2 v, float scaleX, float scaleY) => new Vector2(v.x * scaleX, v.y * scaleY);

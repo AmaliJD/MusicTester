@@ -19,6 +19,7 @@ public class Main : MonoBehaviour
 
     TouchHandler touchHandler;
     KeyboardDraw keyboardDraw;
+    //UIDraw uiDraw;
     SynthPlayer synthPlayer;
 
     List<KeyControl> keyboardKeys = new List<KeyControl>();
@@ -80,6 +81,7 @@ public class Main : MonoBehaviour
         synthPlayer = GetComponent<SynthPlayer>();
         touchHandler = new();
         keyboardDraw = new(this, edo);
+        //uiDraw = new(this);
 
         keyboardKeys = new List<KeyControl>()
         {
@@ -184,7 +186,7 @@ public class Main : MonoBehaviour
                 {
                     float frequency = GetFrequencyFromKeyPosition(touchList.positions[i]);
                     synthPlayer.AddNote(new Note(frequency, 0, synthPlayer.GetSynth()), id);
-                    Debug.Log($"{frequency} Hz");
+                    //Debug.Log($"{frequency} Hz");
                 }
                 else if(synthPlayer.NoteIDList.Contains(id))
                 {

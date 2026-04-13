@@ -4,6 +4,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 311517
   packageName: GLGizmos - Runtime Gizmos for Visual Debugging
-  packageVersion: 2.0
+  packageVersion: 2.1
   assetPath: Assets/GLGizmos - Runtime Gizmos/Scripts/Editor/GLGizmosObjectPropertyDrawer.cs
-  uploadId: 861518
+  uploadId: 895634
