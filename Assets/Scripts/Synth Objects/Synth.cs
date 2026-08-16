@@ -49,6 +49,15 @@ public class Synth
         return value;
     }
 
+    public void IncrementWaveformSkipNoise()
+    {
+        waveform++;
+        if (waveform == Waveform.White)
+            waveform = Waveform.Sine;
+    }
+
+    public Waveform GetWaveform() => waveform;
+
     float Sine(float phase) => Mathf.Sin(2 * Mathf.PI * phase);
     float Triangle(float phase) => Mathf.Abs(phase * 4.0f - 2.0f) - 1.0f;
     float Step(float phase) => phase >= .5f ? 1 : 0; // same as square but half amplitude

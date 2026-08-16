@@ -29,7 +29,7 @@ public class SynthPlayer : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         sampleRate = AudioSettings.outputSampleRate;
         timeIncrement = 1 / sampleRate;
-        synths.Add(new(Synth.Waveform.Sine, adsr, 0, 1, 8));
+        synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(velocity: 1), 0, 1, 8));
         synths.Add(new(Synth.Waveform.Triangle, adsr.Clone(attack: .12f, sustain: 1.5f, velocity: 2f, release: .5f), 0, 3, 8));
         synths.Add(new(Synth.Waveform.Saw, adsr));
         synths.Add(new(Synth.Waveform.Saw, adsr.Clone(attack: .08f, release: .8f), -1, 5, 8));

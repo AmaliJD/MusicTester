@@ -6161,7 +6161,7 @@ MonoBehaviour:
     wordSpacing: 0
     lineSpacing: 0
     paragraphSpacing: 0
-    color: {r: 0, g: 0.44676876, b: 1, a: 1}
+    color: {r: 0, g: 0.4, b: 1, a: 1}
     inheritColor: 0
     layer: 0
     inheritLayer: 1

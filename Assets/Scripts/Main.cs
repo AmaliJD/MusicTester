@@ -74,16 +74,19 @@ public class Main : MonoBehaviour
 
     UIButton edoIncrementButton;
     UIButton edoDecrementButton;
+
     UIButton periodNIncrementButton;
     UIButton periodNDecrementButton;
     UIButton periodDIncrementButton;
     UIButton periodDDecrementButton;
+
     UIButton extendKeyboardIncrementButton;
     UIButton extendKeyboardDecrementButton;
     UIButton shiftKeyboardIncrementButton;
     UIButton shiftKeyboardDecrementButton;
 
     UIButton ResetEdoButton;
+
     UIButton WaveformButton;
 
     UIButton AIncrementButton;
@@ -94,10 +97,11 @@ public class Main : MonoBehaviour
     UIButton SDecrementButton;
     UIButton RIncrementButton;
     UIButton RDecrementButton;
-    UIButton UnisionVoiceCountIncrementButton;
-    UIButton UnisionVoiceCountDecrementButton;
-    UIButton UnisionDetuneIncrementButton;
-    UIButton UnisionDetuneDecrementButton;
+
+    UIButton UnisonVoiceCountIncrementButton;
+    UIButton UnisonVoiceCountDecrementButton;
+    UIButton UnisonDetuneIncrementButton;
+    UIButton UnisonDetuneDecrementButton;
 
     private void Awake()
     {
@@ -159,14 +163,36 @@ public class Main : MonoBehaviour
 
         //AdjustShiftRange();
 
-        edoIncrementButton = new(new Vector2(-7, 4), new Vector2(1, 1), false);
-        edoDecrementButton = new(new Vector2(-5, 4), new Vector2(1, 1), false);
+        edoIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        edoDecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
 
-        periodNIncrementButton = new(new Vector2(-7, 2), new Vector2(.9f, 1), false);
-        periodNDecrementButton = new(new Vector2(-6, 2), new Vector2(.9f, 1), false);
+        periodNIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        periodNDecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        periodDIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        periodDDecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
 
-        periodDIncrementButton = new(new Vector2(-5, 2), new Vector2(.9f, 1), false);
-        periodDDecrementButton = new(new Vector2(-4, 2), new Vector2(.9f, 1), false);
+        extendKeyboardIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        extendKeyboardDecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        shiftKeyboardIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        shiftKeyboardDecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+
+        ResetEdoButton = new(new Vector2(0, 0), new Vector2(1, 1), true);
+
+        WaveformButton = new(new Vector2(0, 0), new Vector2(1, 1), true);
+
+        AIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        ADecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        DIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        DDecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        SIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        SDecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        RIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        RDecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+
+        UnisonVoiceCountIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        UnisonVoiceCountDecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        UnisonDetuneIncrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
+        UnisonDetuneDecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false);
     }
 
     private void OnValidate()
@@ -280,6 +306,7 @@ public class Main : MonoBehaviour
         keyboardDraw.Draw(edo, keyPressPositions);
 
         DrawGizmos();
+        DrawUI();
 
         //shift = Mathf.RoundToInt(octaveShift * edo * (2 / Period));
         //shift = Mathf.RoundToInt(GetIntervalDifference(SynthPlayer.baseFrequency, SynthPlayer.baseFrequency.AddCents(1200 * drift), edo, Period));
@@ -352,6 +379,10 @@ public class Main : MonoBehaviour
     void AdjustShift()
     {
         shift = Mathf.RoundToInt(GetIntervalDifference(SynthPlayer.baseFrequency, SynthPlayer.baseFrequency.AddCents(1200 * driftSlider.value), edo, Period));
+        
+        // w/buttons
+        int maxShift = edo * 3;
+        shift = Mathf.Clamp(shift, -maxShift, maxShift);
     }
 
     void AdjustDrift()
@@ -392,10 +423,34 @@ public class Main : MonoBehaviour
     {
         UpdateButton(edoIncrementButton, touchList, IncrementEdo, true);
         UpdateButton(edoDecrementButton, touchList, DecrementEdo, true);
+
         UpdateButton(periodNIncrementButton, touchList, IncrementPeriodN, true);
         UpdateButton(periodNDecrementButton, touchList, DecrementPeriodN, true);
         UpdateButton(periodDIncrementButton, touchList, IncrementPeriodD, true);
         UpdateButton(periodDDecrementButton, touchList, DecrementPeriodD, true);
+
+        UpdateButton(extendKeyboardIncrementButton, touchList, IncrementExtend, true);
+        UpdateButton(extendKeyboardDecrementButton, touchList, DecrementExtend, true);
+        UpdateButton(shiftKeyboardIncrementButton, touchList, IncrementShift, true);
+        UpdateButton(shiftKeyboardDecrementButton, touchList, DecrementShift, true);
+
+        UpdateButton(ResetEdoButton, touchList, ResetEdoParams, true);
+
+        UpdateButton(WaveformButton, touchList, UpdateWaveform, true);
+
+        UpdateButton(AIncrementButton, touchList, IncrementA, true);
+        UpdateButton(ADecrementButton, touchList, DecrementA, true);
+        UpdateButton(DIncrementButton, touchList, IncrementD, true);
+        UpdateButton(DDecrementButton, touchList, DecrementD, true);
+        UpdateButton(SIncrementButton, touchList, IncrementS, true);
+        UpdateButton(SDecrementButton, touchList, DecrementS, true);
+        UpdateButton(RIncrementButton, touchList, IncrementR, true);
+        UpdateButton(RDecrementButton, touchList, DecrementR, true);
+
+        UpdateButton(UnisonVoiceCountIncrementButton, touchList, IncrementUnisonVoiceCount, true);
+        UpdateButton(UnisonVoiceCountDecrementButton, touchList, DecrementUnisonVoiceCount, true);
+        UpdateButton(UnisonDetuneIncrementButton, touchList, IncrementUnisonDetune, true);
+        UpdateButton(UnisonDetuneDecrementButton, touchList, DecrementUnisonDetune, true);
     }
 
     void IncrementEdo()
@@ -442,6 +497,142 @@ public class Main : MonoBehaviour
         AdjustShift();
     }
 
+    void IncrementExtend()
+    {
+        extend++;
+        ClampExtend();
+    }
+    void DecrementExtend()
+    {
+        extend--;
+        ClampExtend();
+    }
+
+    void IncrementShift()
+    {
+        shift++;
+        int maxShift = edo * 3;
+        shift = Mathf.Clamp(shift, -maxShift, maxShift);
+        AdjustDrift();
+    }
+    void DecrementShift()
+    {
+        shift--;
+        int maxShift = edo * 3;
+        shift = Mathf.Clamp(shift, -maxShift, maxShift);
+        AdjustDrift();
+    }
+
+    public void ResetEdoParams()
+    {
+        extend = 0;
+        shift = 0;
+        edo = 12;
+        driftSlider.value = 0;
+        periodN = 2;
+        periodD = 1;
+    }
+
+    void UpdateWaveform()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+        s.IncrementWaveformSkipNoise();
+    }
+
+    void IncrementA()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+
+        if (s.adsr.attack < .1)
+            s.adsr.attack = Mathf.Clamp(s.adsr.attack + .01f, .01f, 1);
+        else
+            s.adsr.attack = Mathf.Clamp(s.adsr.attack + .1f, .01f, 1);
+    }
+    void DecrementA()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+
+        if (s.adsr.attack <= .1)
+            s.adsr.attack = Mathf.Clamp(s.adsr.attack - .01f, .01f, 1);
+        else
+            s.adsr.attack = Mathf.Clamp(s.adsr.attack - .1f, .01f, 1);
+    }
+    void IncrementD()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+
+        if (s.adsr.decay < .1)
+            s.adsr.decay = Mathf.Clamp(s.adsr.decay + .01f, .01f, 1);
+        else
+            s.adsr.decay = Mathf.Clamp(s.adsr.decay + .1f, .01f, 1);
+    }
+    void DecrementD()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+
+        if (s.adsr.decay <= .1)
+            s.adsr.decay = Mathf.Clamp(s.adsr.decay - .01f, .01f, 1);
+        else
+            s.adsr.decay = Mathf.Clamp(s.adsr.decay - .1f, .01f, 1);
+    }
+    void IncrementS()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+
+        if (s.adsr.sustain < .1)
+            s.adsr.sustain = Mathf.Clamp(s.adsr.sustain + .01f, .01f, 1);
+        else
+            s.adsr.sustain = Mathf.Clamp(s.adsr.sustain + .1f, .01f, 1);
+    }
+    void DecrementS()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+
+        if (s.adsr.sustain <= .1)
+            s.adsr.sustain = Mathf.Clamp(s.adsr.sustain - .01f, .01f, 1);
+        else
+            s.adsr.sustain = Mathf.Clamp(s.adsr.sustain - .1f, .01f, 1);
+    }
+    void IncrementR()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+
+        if (s.adsr.release < .1)
+            s.adsr.release = Mathf.Clamp(s.adsr.release + .01f, .01f, 1);
+        else
+            s.adsr.release = Mathf.Clamp(s.adsr.release + .1f, .01f, 1);
+    }
+    void DecrementR()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+
+        if (s.adsr.release <= .1)
+            s.adsr.release = Mathf.Clamp(s.adsr.release - .01f, .01f, 1);
+        else
+            s.adsr.release = Mathf.Clamp(s.adsr.release - .1f, .01f, 1);
+    }
+
+    void IncrementUnisonVoiceCount()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+        s.voiceCount = Mathf.Clamp(s.voiceCount + 1, 1, 5);
+    }
+    void DecrementUnisonVoiceCount()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+        s.voiceCount = Mathf.Clamp(s.voiceCount - 1, 1, 5);
+    }
+    void IncrementUnisonDetune()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+        s.detune = Mathf.Clamp(s.detune + 1, 0, 25);
+    }
+    void DecrementUnisonDetune()
+    {
+        Synth s = synthPlayer.GetSynth(0);
+        s.detune = Mathf.Clamp(s.detune - 1, 0, 25);
+    }
+
     public void DrawGizmos()
     {
         GLGizmos.SetColor(Color.white);
@@ -457,6 +648,42 @@ public class Main : MonoBehaviour
         GLGizmos.DrawText($"{periodD}", DTextPosition, font, 4f, new TextBoxParams() { fontStyle = FontStyles.Bold });
         GLGizmos.DrawText($"{extend}", XTextPosition, font, 4f, new TextBoxParams() { fontStyle = FontStyles.Bold });
         GLGizmos.DrawText($"{shift}", ShiftTextPosition, font, 3f, new TextBoxParams() { alignment = TextAlignmentOptions.Right, positionPivot = PositionPivot.Right });
+    }
+
+    void DrawUI()
+    {
+        //Vector2 screenDimensions = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        Vector2 screenDimensions = new Vector2(2 * Camera.main.orthographicSize * (float)Screen.width / (float)Screen.height, 2 * Camera.main.orthographicSize);
+        Vector2 uiDimensions = new Vector2(screenDimensions.x, screenDimensions.y * .3f);
+        Vector2 uiPosition = new Vector2(0, screenDimensions.y * .35f);
+        float uiLeft = uiPosition.x - uiDimensions.x * .5f;
+        float uiRight = uiPosition.x + uiDimensions.x * .5f;
+        float uiTop = uiPosition.y + uiDimensions.y * .5f;
+        float uiBottom = uiPosition.y - uiDimensions.y * .5f;
+
+        Synth synth = synthPlayer.GetSynth(0);
+
+        float edgeRadius = .1f;
+        Color mainColor = new Color(0, .4f, 1);
+
+        // Debug
+        GLGizmos.DrawOpenBox(uiPosition, uiDimensions);
+
+        // Waveform Button
+        GLGizmos.SetColor(mainColor);
+        float padding = .2f;
+        Vector2 waveformButtonSize = new Vector2(1.5f, 2f);
+        Vector2 waveformButtonPosition = new Vector2(uiLeft + padding + waveformButtonSize.x * .5f, uiPosition.y);
+        GLGizmos.DrawSolidBoxEdgeRadius(waveformButtonPosition, waveformButtonSize, edgeRadius, 0, true, BorderType.Inside);
+
+        GLGizmos.SetColor(Color.white);
+        GLGizmos.DrawText("Test", waveformButtonPosition + Vector2.up * 1.25f, font, 5, new() { fontStyle = FontStyles.Bold });
+        GLGizmos.DrawWeightedCircle(waveformButtonPosition - Vector2.up * 1.25f, 1, .3f, BorderType.Inside, -2);
+        switch (synth.GetWaveform())
+        {
+            case Synth.Waveform.Sine:
+                break;
+        }
     }
 
     void OnEnable()

@@ -18,6 +18,7 @@ public class UIButton
     int currentTouchId = -1;
     public bool Activated { get; private set; }
     public int ActivateCount { get; private set; }
+    public bool Pressed => state != UIButtonState.Off;
 
     public UIButton(Vector2 position, Vector2 size, bool suppressHold)
     {
@@ -109,7 +110,7 @@ public class UIButton
 
     public void DebugDraw()
     {
-        GLGizmos.DrawSolidBox(position, size).SetColor(state == UIButtonState.Off ? Color.red : Color.green);
+        GLGizmos.DrawSolidBox(position, size).SetColor(!Pressed ? Color.red : Color.green);
     }
 }
 
