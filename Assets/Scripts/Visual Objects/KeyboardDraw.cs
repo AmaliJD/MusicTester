@@ -37,13 +37,14 @@ public class KeyboardDraw
         if (xBounds == Vector2.zero)
         {
             float x = Camera.main.orthographicSize * ((float)Screen.width / (float)Screen.height);
-            xBounds = new Vector2(-x, x);
+            float padding = .25f;
+            xBounds = new Vector2(-x + padding, x - padding);
         }
 
         if (yBounds == Vector2.zero)
         {
             float y = Camera.main.orthographicSize;
-            yBounds = new Vector2(-y, y * .45f);
+            yBounds = new Vector2(-y, y * .4f);
         }
         
         (Positions, KeySize) = GetPositionsAndSize(edo);

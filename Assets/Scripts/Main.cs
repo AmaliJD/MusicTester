@@ -1,6 +1,7 @@
 using GLDebug;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,7 +20,6 @@ public class Main : MonoBehaviour
 
     TouchHandler touchHandler;
     KeyboardDraw keyboardDraw;
-    //UIDraw uiDraw;
     SynthPlayer synthPlayer;
 
     List<KeyControl> keyboardKeys = new List<KeyControl>();
@@ -71,6 +71,33 @@ public class Main : MonoBehaviour
     Vector2 DTextPosition;
     Vector2 XTextPosition;
     Vector2 ShiftTextPosition;
+
+    UIButton edoIncrementButton;
+    UIButton edoDecrementButton;
+    UIButton periodNIncrementButton;
+    UIButton periodNDecrementButton;
+    UIButton periodDIncrementButton;
+    UIButton periodDDecrementButton;
+    UIButton extendKeyboardIncrementButton;
+    UIButton extendKeyboardDecrementButton;
+    UIButton shiftKeyboardIncrementButton;
+    UIButton shiftKeyboardDecrementButton;
+
+    UIButton ResetEdoButton;
+    UIButton WaveformButton;
+
+    UIButton AIncrementButton;
+    UIButton ADecrementButton;
+    UIButton DIncrementButton;
+    UIButton DDecrementButton;
+    UIButton SIncrementButton;
+    UIButton SDecrementButton;
+    UIButton RIncrementButton;
+    UIButton RDecrementButton;
+    UIButton UnisionVoiceCountIncrementButton;
+    UIButton UnisionVoiceCountDecrementButton;
+    UIButton UnisionDetuneIncrementButton;
+    UIButton UnisionDetuneDecrementButton;
 
     private void Awake()
     {
@@ -131,6 +158,15 @@ public class Main : MonoBehaviour
         ShiftTextPosition = Camera.main.ScreenToWorldPoint(driftSlider.transform.GetChild(0).position);
 
         //AdjustShiftRange();
+
+        edoIncrementButton = new(new Vector2(-7, 4), new Vector2(1, 1), false);
+        edoDecrementButton = new(new Vector2(-5, 4), new Vector2(1, 1), false);
+
+        periodNIncrementButton = new(new Vector2(-7, 2), new Vector2(.9f, 1), false);
+        periodNDecrementButton = new(new Vector2(-6, 2), new Vector2(.9f, 1), false);
+
+        periodDIncrementButton = new(new Vector2(-5, 2), new Vector2(.9f, 1), false);
+        periodDDecrementButton = new(new Vector2(-4, 2), new Vector2(.9f, 1), false);
     }
 
     private void OnValidate()
@@ -176,6 +212,8 @@ public class Main : MonoBehaviour
 
         // touchscreen input
         TouchList touchList = touchHandler.GetTouchList();
+
+        UpdateButtons(touchList);
 
         for (int i = 0; i < touchList.Count; i++)
         {
@@ -338,6 +376,70 @@ public class Main : MonoBehaviour
         periodDSlider.value = 1;
         periodNSlider.value = 2;
         SetPeriodN();
+    }
+
+    void UpdateButton(UIButton button, TouchList touchList, Action activateAction, bool debugDraw)
+    {
+        button.UpdateState(touchList);
+
+        if (button.Activated)
+            activateAction.Invoke();
+
+        if (debugDraw)
+            button.DebugDraw();
+    }
+    void UpdateButtons(TouchList touchList)
+    {
+        UpdateButton(edoIncrementButton, touchList, IncrementEdo, true);
+        UpdateButton(edoDecrementButton, touchList, DecrementEdo, true);
+        UpdateButton(periodNIncrementButton, touchList, IncrementPeriodN, true);
+        UpdateButton(periodNDecrementButton, touchList, DecrementPeriodN, true);
+        UpdateButton(periodDIncrementButton, touchList, IncrementPeriodD, true);
+        UpdateButton(periodDDecrementButton, touchList, DecrementPeriodD, true);
+    }
+
+    void IncrementEdo()
+    {
+        edo++;
+        ClampExtend();
+        AdjustShift();
+    }
+    void DecrementEdo()
+    {
+        edo--;
+        edo = Mathf.Max(edo, 1);
+        ClampExtend();
+        AdjustShift();
+    }
+    void ClampExtend()
+    {
+        extend = Mathf.Clamp(extend, 0, Mathf.Max(edo, 12));
+    }
+
+    void IncrementPeriodN()
+    {
+        periodN++;
+        periodD = Mathf.Clamp(periodD, 1, periodN);
+        AdjustShift();
+    }
+    void DecrementPeriodN()
+    {
+        periodN--;
+        periodN = Mathf.Max(periodN, 1);
+        periodD = Mathf.Clamp(periodD, 1, periodN);
+        AdjustShift();
+    }
+    void IncrementPeriodD()
+    {
+        periodD++;
+        periodD = Mathf.Clamp(periodD, 1, periodN);
+        AdjustShift();
+    }
+    void DecrementPeriodD()
+    {
+        periodD--;
+        periodD = Mathf.Clamp(periodD, 1, periodN);
+        AdjustShift();
     }
 
     public void DrawGizmos()

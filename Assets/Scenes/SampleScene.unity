@@ -119,6 +119,436 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &19888099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 19888100}
+  - component: {fileID: 19888101}
+  m_Layer: 0
+  m_Name: period
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &19888100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19888099}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.2, y: -0.32000017, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &19888101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19888099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.8, y: 0.5}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 2
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0.45}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 2.26, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: period N/D
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 2.77
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: '-'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: +
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
 --- !u!1 &23159874
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,6 +1103,436 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd4ad70f5af41b4f89af34bae680436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &554110074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 554110075}
+  - component: {fileID: 554110076}
+  m_Layer: 0
+  m_Name: period (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &554110075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554110074}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.2, y: -0.9300002, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &554110076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554110074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.8, y: 0.5}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 1
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0.45}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 2.26, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 2.77
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: '-'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: +
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +1786,7 @@ RectTransform:
   m_Father: {fileID: 2024857454}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.6666667, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1249,7 +2109,7 @@ RectTransform:
   m_Father: {fileID: 814077940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1291,6 +2151,436 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706797621}
   m_CullTransparentMesh: 1
+--- !u!1 &737587248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 737587249}
+  - component: {fileID: 737587250}
+  m_Layer: 0
+  m_Name: shift
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &737587249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737587248}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.94, y: -0.32, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &737587250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737587248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.8, y: 0.5}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: -12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0.45}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0, y: 0}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: shift keys
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 2.77
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: '-'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: +
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
 --- !u!1 &752300725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,7 +2753,7 @@ RectTransform:
   m_Father: {fileID: 956650630}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1538,7 +2828,7 @@ RectTransform:
   m_Father: {fileID: 1349547352}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1836,8 +3126,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1511843524}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.31428573, y: 0}
+  m_AnchorMax: {x: 0.31428573, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1897,7 +3187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &953134038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2025,6 +3315,436 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1008488050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1008488051}
+  - component: {fileID: 1008488052}
+  m_Layer: 0
+  m_Name: A (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1008488051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008488050}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.46, y: 0.35000032, z: 0}
+  m_LocalScale: {x: 1.32, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1008488052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008488050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.8, y: 0.5}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: -12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -1.28, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0, y: 0}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 'A:'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 4.71
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: '-'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: +
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
 --- !u!1 &1034535002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,8 +3777,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1892393939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.6666667, y: 0}
+  m_AnchorMax: {x: 0.6666667, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 35, y: -16}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2100,6 +3820,436 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1034535002}
   m_CullTransparentMesh: 1
+--- !u!1 &1041515558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1041515559}
+  - component: {fileID: 1041515560}
+  m_Layer: 0
+  m_Name: edo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1041515559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041515558}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.2, y: 0.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1041515560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041515558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.8, y: 0.5}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0.45}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 2.26, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: edo
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 2.77
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: '-'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: +
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
 --- !u!1 &1072946565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,7 +4322,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -842.51, y: 0}
+  m_AnchoredPosition: {x: -630.01, y: 0}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1109534496
@@ -2325,7 +4475,7 @@ RectTransform:
   m_Father: {fileID: 1305091859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2554,7 +4704,7 @@ RectTransform:
   m_Father: {fileID: 1616362149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2735,6 +4885,436 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1315332524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1315332525}
+  - component: {fileID: 1315332526}
+  m_Layer: 0
+  m_Name: A (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1315332525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315332524}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.46, y: -1.0499997, z: 0}
+  m_LocalScale: {x: 1.32, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1315332526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315332524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.8, y: 0.5}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: -12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -1.28, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0, y: 0}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 'A:'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 4.71
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: '-'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: +
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
 --- !u!1 &1349547351
 GameObject:
   m_ObjectHideFlags: 0
@@ -2982,6 +5562,436 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425514565}
   m_CullTransparentMesh: 1
+--- !u!1 &1449185361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1449185362}
+  - component: {fileID: 1449185363}
+  m_Layer: 0
+  m_Name: A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1449185362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449185361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.46, y: 1.05, z: 0}
+  m_LocalScale: {x: 1.32, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1449185363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449185361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.8, y: 0.5}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: -12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -1.28, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0, y: 0}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 'A:'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 4.71
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: '-'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: +
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
 --- !u!1 &1459261163
 GameObject:
   m_ObjectHideFlags: 0
@@ -3057,6 +6067,216 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459261163}
   m_CullTransparentMesh: 1
+--- !u!1 &1507756899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1507756900}
+  - component: {fileID: 1507756901}
+  m_Layer: 0
+  m_Name: Waveform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1507756900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507756899}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1507756901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507756899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 1
+    radius: 0.5
+    size: {x: 1.5, y: 3}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 0, g: 0.44676876, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0.58}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 1
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Tri
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 1
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 4
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: -0.4}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1.03, y: 0.96}
+    rotation: 0
+    weight: -0.14
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Tri
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 1
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
 --- !u!1 &1511843523
 GameObject:
   m_ObjectHideFlags: 0
@@ -3243,7 +6463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1545247854
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3262,8 +6482,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 403.065}
-  m_SizeDelta: {x: 0, y: -806.13}
+  m_AnchoredPosition: {x: 0, y: 390}
+  m_SizeDelta: {x: 0, y: -780}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1545247855
 MonoBehaviour:
@@ -3278,7 +6498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.007843138}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3508,6 +6728,117 @@ MonoBehaviour:
   extendSlider: {fileID: 890620942}
   shiftSlider: {fileID: 752300727}
   driftSlider: {fileID: 694008424}
+--- !u!1 &1650632406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1650632408}
+  - component: {fileID: 1650632407}
+  m_Layer: 0
+  m_Name: UI Sketch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1650632407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650632406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 1
+    radius: 0.5
+    size: {x: 18, y: 3}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 0.015686275}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+--- !u!4 &1650632408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650632406}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1731286052}
+  - {fileID: 1507756900}
+  - {fileID: 1041515559}
+  - {fileID: 19888100}
+  - {fileID: 554110075}
+  - {fileID: 1757042153}
+  - {fileID: 737587249}
+  - {fileID: 1449185362}
+  - {fileID: 1008488051}
+  - {fileID: 1790261082}
+  - {fileID: 1315332525}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1675127863
 GameObject:
   m_ObjectHideFlags: 0
@@ -3611,6 +6942,1021 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1731286051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1731286052}
+  - component: {fileID: 1731286053}
+  m_Layer: 0
+  m_Name: Label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1731286052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731286051}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1731286053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731286051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0, y: 0}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12ed(2)
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.48
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.88, y: -0.66}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0, y: 0}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 100c
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 3.47
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+--- !u!1 &1757042152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1757042153}
+  - component: {fileID: 1757042154}
+  m_Layer: 0
+  m_Name: extend
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1757042153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757042152}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.94, y: 0.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1757042154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757042152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.8, y: 0.5}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 0
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0.45}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0, y: 0}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: extend keyboard
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 2.77
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: '-'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: +
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+--- !u!1 &1790261081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1790261082}
+  - component: {fileID: 1790261083}
+  m_Layer: 0
+  m_Name: A (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1790261082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790261081}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.46, y: -0.34999967, z: 0}
+  m_LocalScale: {x: 1.32, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1650632408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1790261083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790261081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d714e6fa0c6b04b8d9ceb59ca78603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmos:
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 0}
+    fontSize: 5
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.8, y: 0.5}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: -12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 0
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 12
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 0
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: 0}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0.6, y: 0.6}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: Text
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 5
+    autoSize: 1
+    fontStyle: 0
+    showTextBox: 1
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -1.28, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 0, y: 0}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: 'A:'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 4.71
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: -0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: '-'
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
+  - gizmoType: 6
+    ObjectPosition1:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0.8, y: -0.05}
+    ObjectPosition2:
+      space: 7
+      type: 0
+      transform: {fileID: 0}
+      offset: {x: 0, y: 0}
+    scaleSizeType: 0
+    solid: 0
+    radius: 0.5
+    size: {x: 1, y: 1}
+    rotation: 0
+    weight: 0
+    borderType: 1
+    roundCorners01: 0
+    hideBox: 0
+    solidBorder: 1
+    arcAngle: 360
+    arcCloseType: 0
+    numEdges: 0
+    roundCenter: 0
+    dashed: 0
+    lineType: 0
+    roundedTips: 0
+    bezierCurve: 0.75
+    dashLength: 1
+    gapSize: 0.5
+    centerOffset: {x: 0, y: 0}
+    skew: 0
+    useToFromPositions: 0
+    capsuleDirection: 0
+    collider2D: {fileID: 0}
+    text: +
+    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    fontSize: 7.1
+    autoSize: 0
+    fontStyle: 0
+    showTextBox: 0
+    textBoxColor: {r: 0.5, g: 1, b: 0, a: 0.25}
+    textAlignment: 514
+    positionPivot: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    lineSpacing: 0
+    paragraphSpacing: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    inheritColor: 1
+    layer: 0
+    inheritLayer: 1
+    disable: 0
+    initialized: 1
 --- !u!1 &1806779554
 GameObject:
   m_ObjectHideFlags: 0
@@ -3644,7 +7990,7 @@ RectTransform:
   m_Father: {fileID: 26441104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4165,7 +8511,7 @@ RectTransform:
   m_Father: {fileID: 1072946566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.31428573, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4423,3 +8769,4 @@ SceneRoots:
   - {fileID: 1639903254}
   - {fileID: 953134041}
   - {fileID: 1234469277}
+  - {fileID: 1650632408}
