@@ -9,6 +9,7 @@ public class UIButton
     Vector2 size;
 
     UIButtonState state;
+    UIButtonState prevState;
     bool suppressHold;
 
     const float HOLD_THRESHOLD = .25f;
@@ -26,6 +27,12 @@ public class UIButton
         this.position = position;
         this.size = size;
         this.suppressHold = suppressHold;
+    }
+
+    public void SetPositionAndSize(Vector2 pos, Vector2 s)
+    {
+        position = pos;
+        size = s;
     }
 
     public void UpdateState(TouchList touchList)
@@ -93,6 +100,8 @@ public class UIButton
         Activated = timeHeld == 0 && (suppressHold ? state == UIButtonState.Pressed : state != UIButtonState.Off);
         if (Activated)
             ActivateCount++;
+
+        prevState = state;
     }
 
     bool WithinVector2Bounds(Vector2 pos)
