@@ -34,10 +34,10 @@ public class Synth
     {
         float value = waveform switch
         {
-            Waveform.Sine => Sine(phase),
-            Waveform.Square => Square(phase) * .5f,
+            Waveform.Sine => Sine(phase) * .7f,
+            Waveform.Square => Square(phase) * .2f,
             Waveform.Triangle => Triangle(phase),
-            Waveform.Saw => Saw(phase),
+            Waveform.Saw => Saw(phase) * .3f,
             Waveform.White => rand.Roll(),
             _ => Test(phase),
         };

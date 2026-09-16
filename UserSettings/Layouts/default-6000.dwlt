@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 123
+  controlID: 124
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 91
+  controlID: 69
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -345,13 +345,13 @@ MonoBehaviour:
     m_SaveData: []
     m_ContainerData: []
     m_OverlaysVisible: 1
-  progressMessageClearTime: -1
+  progressMessageClearTime: 7887.7743384000005
   notificationClearTime: -1
   timeSinceLastRotation: -1
   currentBranchAndRemoteHasUpdate: 0
   currentTrackingStatusHasUpdate: 0
   currentStatusEntriesHasUpdate: 0
-  repositoryProgressHasUpdate: 0
+  repositoryProgressHasUpdate: 1
   appManagerProgressHasUpdate: 0
   changeTab: 3
   activeTab: 3
@@ -438,8 +438,8 @@ MonoBehaviour:
     remoteBranches: []
   changesView:
     currentBranchHasUpdate: 1
-    currentStatusEntriesHasUpdate: 0
-    currentLocksHasUpdate: 0
+    currentStatusEntriesHasUpdate: 1
+    currentLocksHasUpdate: 1
     commitBody: 
     commitMessage: adsr buttons
     currentBranch: master
@@ -454,8 +454,7 @@ MonoBehaviour:
         - be4211171b093144eaf70d574fa179ff
         - 6abed89c6e170794a8b1000ce5af8a61
         - bbc78baeeb2776e4da39bffa4218acaa
-        - 0000000000000000c000000000000000
-        - 00000000000000004000000000000000
+        - 0000000000000000b000000000000000
         values:
         - path: Assets
           label: Assets
@@ -466,7 +465,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -484,7 +483,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -493,24 +492,24 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 0
-        - path: Assets\Scenes\SampleScene.unity
-          label: SampleScene.unity
+        - path: Assets\Scenes\Main.unity
+          label: Main.unity
           level: 2
           isFolder: 0
-          isContainer: 0
+          isContainer: 1
           isCollapsed: 0
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
-            path: Assets\Scenes\SampleScene.unity
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scenes\SampleScene.unity
-            projectPath: Assets\Scenes\SampleScene.unity
+            path: Assets\Scenes\Main.unity
+            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scenes\Main.unity
+            projectPath: Assets\Scenes\Main.unity
             originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
+            indexStatus: 1
+            workTreeStatus: 1
         - path: Assets\Scripts
           label: Scripts
           level: 1
@@ -520,7 +519,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -538,7 +537,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: Assets\Scripts\Main.cs
@@ -556,7 +555,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -574,7 +573,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: Assets\Scripts\Visual Objects\UIButton.cs
@@ -584,8 +583,8 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 3
-        - path: ProjectSettings\EditorSettings.asset
-          label: EditorSettings.asset
+        - path: ProjectSettings\EditorBuildSettings.asset
+          label: EditorBuildSettings.asset
           level: 1
           isFolder: 0
           isContainer: 0
@@ -593,41 +592,612 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
-            path: ProjectSettings\EditorSettings.asset
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\EditorSettings.asset
-            projectPath: ProjectSettings\EditorSettings.asset
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: ProjectSettings\ProjectSettings.asset
-          label: ProjectSettings.asset
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: ProjectSettings\ProjectSettings.asset
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\ProjectSettings.asset
-            projectPath: ProjectSettings\ProjectSettings.asset
+            path: ProjectSettings\EditorBuildSettings.asset
+            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\EditorBuildSettings.asset
+            projectPath: ProjectSettings\EditorBuildSettings.asset
             originalPath: 
             indexStatus: 0
             workTreeStatus: 3
       folders:
         keys:
+        - .utmp
+        - .utmp\RelWithDebInfo
+        - .utmp\RelWithDebInfo\1k3o6l3k
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles
+        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir
+        - .utmp\RelWithDebInfo\1k3o6l3k\prefab
+        - .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a
+        - .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab
+        - .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib
+        - .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android
+        - .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake
+        - .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\game-activity
+        - .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\games-frame-pacing
+        - .utmp\tools
+        - .utmp\tools\release
+        - .utmp\tools\release\arm64-v8a
         - Assets
         - Assets\Scenes
         - Assets\Scripts
         - Assets\Scripts\Visual Objects
         - ProjectSettings
         values:
+        - path: .utmp
+          label: .utmp
+          level: 0
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo
+          label: RelWithDebInfo
+          level: 1
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k
+          label: 1k3o6l3k
+          level: 2
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a
+          label: arm64-v8a
+          level: 3
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake
+          label: .cmake
+          level: 4
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api
+          label: api
+          level: 5
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1
+          label: v1
+          level: 6
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query
+          label: query
+          level: 7
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp
+          label: client-agp
+          level: 8
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply
+          label: reply
+          level: 7
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles
+          label: CMakeFiles
+          level: 4
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty
+          label: 3.22.1-g37088a8-dirty
+          level: 5
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC
+          label: CompilerIdC
+          level: 6
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX
+          label: CompilerIdCXX
+          level: 6
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing
+          label: FramePacing
+          level: 4
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles
+          label: CMakeFiles
+          level: 5
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir
+          label: swappywrapper.dir
+          level: 6
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity
+          label: GameActivity
+          level: 4
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles
+          label: CMakeFiles
+          level: 5
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir
+          label: game.dir
+          level: 6
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab
+          label: prefab
+          level: 3
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a
+          label: arm64-v8a
+          level: 4
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab
+          label: prefab
+          level: 5
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib
+          label: lib
+          level: 6
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android
+          label: aarch64-linux-android
+          level: 7
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake
+          label: cmake
+          level: 8
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\game-activity
+          label: game-activity
+          level: 9
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\games-frame-pacing
+          label: games-frame-pacing
+          level: 9
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\tools
+          label: tools
+          level: 1
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\tools\release
+          label: release
+          level: 2
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: .utmp\tools\release\arm64-v8a
+          label: arm64-v8a
+          level: 3
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
         - path: Assets
           label: Assets
           level: 0
@@ -637,7 +1207,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -655,7 +1225,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -673,7 +1243,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -691,7 +1261,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -709,7 +1279,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -746,6 +1316,1554 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
+      - path: .utmp
+        label: .utmp
+        level: 0
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo
+        label: RelWithDebInfo
+        level: 1
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k
+        label: 1k3o6l3k
+        level: 2
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a
+        label: arm64-v8a
+        level: 3
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake
+        label: .cmake
+        level: 4
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api
+        label: api
+        level: 5
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1
+        label: v1
+        level: 6
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query
+        label: query
+        level: 7
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp
+        label: client-agp
+        level: 8
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cache-v2
+        label: cache-v2
+        level: 9
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cache-v2
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cache-v2
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cache-v2
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cmakeFiles-v1
+        label: cmakeFiles-v1
+        level: 9
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cmakeFiles-v1
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cmakeFiles-v1
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cmakeFiles-v1
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\codemodel-v2
+        label: codemodel-v2
+        level: 9
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\codemodel-v2
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\codemodel-v2
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\codemodel-v2
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply
+        label: reply
+        level: 7
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
+        label: cache-v2-a38c8e03cebfc924ee97.json
+        level: 8
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
+        label: cmakeFiles-v1-ff68c6e2c3674aa13024.json
+        level: 8
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\codemodel-v2-e01d7d81d0540fb0cfb6.json
+        label: codemodel-v2-e01d7d81d0540fb0cfb6.json
+        level: 8
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\codemodel-v2-e01d7d81d0540fb0cfb6.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\codemodel-v2-e01d7d81d0540fb0cfb6.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\codemodel-v2-e01d7d81d0540fb0cfb6.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-.-RelWithDebInfo-d0094a50bb2071803777.json
+        label: directory-.-RelWithDebInfo-d0094a50bb2071803777.json
+        level: 8
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-.-RelWithDebInfo-d0094a50bb2071803777.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-.-RelWithDebInfo-d0094a50bb2071803777.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-.-RelWithDebInfo-d0094a50bb2071803777.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-FramePacing-RelWithDebInfo-7f9c8865fd027a154c90.json
+        label: directory-FramePacing-RelWithDebInfo-7f9c8865fd027a154c90.json
+        level: 8
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-FramePacing-RelWithDebInfo-7f9c8865fd027a154c90.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-FramePacing-RelWithDebInfo-7f9c8865fd027a154c90.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-FramePacing-RelWithDebInfo-7f9c8865fd027a154c90.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-GameActivity-RelWithDebInfo-3edf2ef9e25ca0503118.json
+        label: directory-GameActivity-RelWithDebInfo-3edf2ef9e25ca0503118.json
+        level: 8
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-GameActivity-RelWithDebInfo-3edf2ef9e25ca0503118.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-GameActivity-RelWithDebInfo-3edf2ef9e25ca0503118.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-GameActivity-RelWithDebInfo-3edf2ef9e25ca0503118.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
+        label: index-2026-08-18T00-08-25-0899.json
+        level: 8
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-game-RelWithDebInfo-7c54ac8fdf18e7c4d402.json
+        label: target-game-RelWithDebInfo-7c54ac8fdf18e7c4d402.json
+        level: 8
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-game-RelWithDebInfo-7c54ac8fdf18e7c4d402.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-game-RelWithDebInfo-7c54ac8fdf18e7c4d402.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-game-RelWithDebInfo-7c54ac8fdf18e7c4d402.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-swappywrapper-RelWithDebInfo-4cb26148084fd7793998.json
+        label: target-swappywrapper-RelWithDebInfo-4cb26148084fd7793998.json
+        level: 8
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-swappywrapper-RelWithDebInfo-4cb26148084fd7793998.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-swappywrapper-RelWithDebInfo-4cb26148084fd7793998.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-swappywrapper-RelWithDebInfo-4cb26148084fd7793998.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
+        label: .ninja_deps
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
+        label: .ninja_log
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\additional_project_files.txt
+        label: additional_project_files.txt
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\additional_project_files.txt
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\additional_project_files.txt
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\additional_project_files.txt
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build.json
+        label: android_gradle_build.json
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build_mini.json
+        label: android_gradle_build_mini.json
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build_mini.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build_mini.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build_mini.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
+        label: build.ninja
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build_file_index.txt
+        label: build_file_index.txt
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build_file_index.txt
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build_file_index.txt
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build_file_index.txt
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\cmake_install.cmake
+        label: cmake_install.cmake
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\cmake_install.cmake
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\cmake_install.cmake
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\cmake_install.cmake
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
+        label: CMakeCache.txt
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles
+        label: CMakeFiles
+        level: 4
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty
+        label: 3.22.1-g37088a8-dirty
+        level: 5
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCCompiler.cmake
+        label: CMakeCCompiler.cmake
+        level: 6
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCCompiler.cmake
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCCompiler.cmake
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCCompiler.cmake
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCXXCompiler.cmake
+        label: CMakeCXXCompiler.cmake
+        level: 6
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCXXCompiler.cmake
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCXXCompiler.cmake
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCXXCompiler.cmake
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_C.bin
+        label: CMakeDetermineCompilerABI_C.bin
+        level: 6
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_C.bin
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_C.bin
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_C.bin
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_CXX.bin
+        label: CMakeDetermineCompilerABI_CXX.bin
+        level: 6
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_CXX.bin
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_CXX.bin
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_CXX.bin
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeSystem.cmake
+        label: CMakeSystem.cmake
+        level: 6
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeSystem.cmake
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeSystem.cmake
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeSystem.cmake
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC
+        label: CompilerIdC
+        level: 6
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.c
+        label: CMakeCCompilerId.c
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.c
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.c
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.c
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.o
+        label: CMakeCCompilerId.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX
+        label: CompilerIdCXX
+        level: 6
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.cpp
+        label: CMakeCXXCompilerId.cpp
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.cpp
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.cpp
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.cpp
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.o
+        label: CMakeCXXCompilerId.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\cmake.check_cache
+        label: cmake.check_cache
+        level: 5
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\cmake.check_cache
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\cmake.check_cache
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\cmake.check_cache
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\CMakeOutput.log
+        label: CMakeOutput.log
+        level: 5
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\CMakeOutput.log
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\CMakeOutput.log
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\CMakeOutput.log
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\rules.ninja
+        label: rules.ninja
+        level: 5
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\rules.ninja
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\rules.ninja
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\rules.ninja
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\TargetDirectories.txt
+        label: TargetDirectories.txt
+        level: 5
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\TargetDirectories.txt
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\TargetDirectories.txt
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\TargetDirectories.txt
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json
+        label: compile_commands.json
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json.bin
+        label: compile_commands.json.bin
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json.bin
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json.bin
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json.bin
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
+        label: configure_fingerprint.bin
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing
+        label: FramePacing
+        level: 4
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\cmake_install.cmake
+        label: cmake_install.cmake
+        level: 5
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\cmake_install.cmake
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\cmake_install.cmake
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\cmake_install.cmake
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles
+        label: CMakeFiles
+        level: 5
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir
+        label: swappywrapper.dir
+        level: 6
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
+        label: UnitySwappyWrapper.cpp.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity
+        label: GameActivity
+        level: 4
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\cmake_install.cmake
+        label: cmake_install.cmake
+        level: 5
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\cmake_install.cmake
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\cmake_install.cmake
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\cmake_install.cmake
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles
+        label: CMakeFiles
+        level: 5
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir
+        label: game.dir
+        level: 6
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAApplication.cpp.o
+        label: UGAApplication.cpp.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAApplication.cpp.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAApplication.cpp.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAApplication.cpp.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAConfiguration.cpp.o
+        label: UGAConfiguration.cpp.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAConfiguration.cpp.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAConfiguration.cpp.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAConfiguration.cpp.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGADebug.cpp.o
+        label: UGADebug.cpp.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGADebug.cpp.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGADebug.cpp.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGADebug.cpp.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAEntry.cpp.o
+        label: UGAEntry.cpp.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAEntry.cpp.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAEntry.cpp.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAEntry.cpp.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInput.cpp.o
+        label: UGAInput.cpp.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInput.cpp.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInput.cpp.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInput.cpp.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputKeyEvent.cpp.o
+        label: UGAInputKeyEvent.cpp.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputKeyEvent.cpp.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputKeyEvent.cpp.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputKeyEvent.cpp.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputMotionEvent.cpp.o
+        label: UGAInputMotionEvent.cpp.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputMotionEvent.cpp.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputMotionEvent.cpp.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputMotionEvent.cpp.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGASoftKeyboard.cpp.o
+        label: UGASoftKeyboard.cpp.o
+        level: 7
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGASoftKeyboard.cpp.o
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGASoftKeyboard.cpp.o
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGASoftKeyboard.cpp.o
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\metadata_generation_command.txt
+        label: metadata_generation_command.txt
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\metadata_generation_command.txt
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\metadata_generation_command.txt
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\metadata_generation_command.txt
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\prefab_config.json
+        label: prefab_config.json
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\prefab_config.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\prefab_config.json
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\prefab_config.json
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\symbol_folder_index.txt
+        label: symbol_folder_index.txt
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\symbol_folder_index.txt
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\symbol_folder_index.txt
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\symbol_folder_index.txt
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\hash_key.txt
+        label: hash_key.txt
+        level: 3
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\hash_key.txt
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\hash_key.txt
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\hash_key.txt
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab
+        label: prefab
+        level: 3
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a
+        label: arm64-v8a
+        level: 4
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab
+        label: prefab
+        level: 5
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib
+        label: lib
+        level: 6
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android
+        label: aarch64-linux-android
+        level: 7
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake
+        label: cmake
+        level: 8
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\game-activity
+        label: game-activity
+        level: 9
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\game-activity\game-activityConfig.cmake
+        label: game-activityConfig.cmake
+        level: 10
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\game-activity\game-activityConfig.cmake
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\game-activity\game-activityConfig.cmake
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\game-activity\game-activityConfig.cmake
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\games-frame-pacing
+        label: games-frame-pacing
+        level: 9
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\games-frame-pacing\games-frame-pacingConfig.cmake
+        label: games-frame-pacingConfig.cmake
+        level: 10
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\games-frame-pacing\games-frame-pacingConfig.cmake
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\games-frame-pacing\games-frame-pacingConfig.cmake
+          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\games-frame-pacing\games-frame-pacingConfig.cmake
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: .utmp\tools
+        label: tools
+        level: 1
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\tools\release
+        label: release
+        level: 2
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\tools\release\arm64-v8a
+        label: arm64-v8a
+        level: 3
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: .utmp\tools\release\arm64-v8a\compile_commands.json
+        label: compile_commands.json
+        level: 4
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: .utmp\tools\release\arm64-v8a\compile_commands.json
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\tools\release\arm64-v8a\compile_commands.json
+          projectPath: .utmp\tools\release\arm64-v8a\compile_commands.json
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 3
       - path: Assets
         label: Assets
         level: 0
@@ -755,7 +2873,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -773,7 +2891,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -782,16 +2900,52 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: Assets\Scenes\SampleScene.unity
-        label: SampleScene.unity
+      - path: Assets\Scenes\Main.unity
+        label: Main.unity
         level: 2
+        isFolder: 0
+        isContainer: 1
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\Scenes\Main.unity
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scenes\Main.unity
+          projectPath: Assets\Scenes\Main.unity
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: Assets\Scenes\Main.unity.meta
+        label: Main.unity.meta
+        level: 3
         isFolder: 0
         isContainer: 0
         isCollapsed: 0
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\Scenes\Main.unity.meta
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scenes\Main.unity.meta
+          projectPath: Assets\Scenes\Main.unity.meta
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: Assets\Scenes\SampleScene.unity
+        label: SampleScene.unity
+        level: 2
+        isFolder: 0
+        isContainer: 1
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: Assets\Scenes\SampleScene.unity
@@ -799,7 +2953,25 @@ MonoBehaviour:
           projectPath: Assets\Scenes\SampleScene.unity
           originalPath: 
           indexStatus: 0
-          workTreeStatus: 3
+          workTreeStatus: 5
+      - path: Assets\Scenes\SampleScene.unity.meta
+        label: SampleScene.unity.meta
+        level: 3
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\Scenes\SampleScene.unity.meta
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scenes\SampleScene.unity.meta
+          projectPath: Assets\Scenes\SampleScene.unity.meta
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 5
       - path: Assets\Scripts
         label: Scripts
         level: 1
@@ -809,7 +2981,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -827,7 +2999,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: Assets\Scripts\Main.cs
@@ -845,7 +3017,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -863,7 +3035,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: Assets\Scripts\Visual Objects\UIButton.cs
@@ -882,7 +3054,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -891,8 +3063,8 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: ProjectSettings\EditorSettings.asset
-        label: EditorSettings.asset
+      - path: ProjectSettings\EditorBuildSettings.asset
+        label: EditorBuildSettings.asset
         level: 1
         isFolder: 0
         isContainer: 0
@@ -900,30 +3072,12 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
-          path: ProjectSettings\EditorSettings.asset
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\EditorSettings.asset
-          projectPath: ProjectSettings\EditorSettings.asset
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: ProjectSettings\ProjectSettings.asset
-        label: ProjectSettings.asset
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: ProjectSettings\ProjectSettings.asset
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\ProjectSettings.asset
-          projectPath: ProjectSettings\ProjectSettings.asset
+          path: ProjectSettings\EditorBuildSettings.asset
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\EditorBuildSettings.asset
+          projectPath: ProjectSettings\EditorBuildSettings.asset
           originalPath: 
           indexStatus: 0
           workTreeStatus: 3
@@ -947,12 +3101,360 @@ MonoBehaviour:
           indexStatus: 0
           workTreeStatus: 0
     gitStatusEntries:
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cache-v2
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cache-v2
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cache-v2
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cmakeFiles-v1
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cmakeFiles-v1
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\cmakeFiles-v1
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\codemodel-v2
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\codemodel-v2
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\query\client-agp\codemodel-v2
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\codemodel-v2-e01d7d81d0540fb0cfb6.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\codemodel-v2-e01d7d81d0540fb0cfb6.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\codemodel-v2-e01d7d81d0540fb0cfb6.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-.-RelWithDebInfo-d0094a50bb2071803777.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-.-RelWithDebInfo-d0094a50bb2071803777.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-.-RelWithDebInfo-d0094a50bb2071803777.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-FramePacing-RelWithDebInfo-7f9c8865fd027a154c90.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-FramePacing-RelWithDebInfo-7f9c8865fd027a154c90.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-FramePacing-RelWithDebInfo-7f9c8865fd027a154c90.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-GameActivity-RelWithDebInfo-3edf2ef9e25ca0503118.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-GameActivity-RelWithDebInfo-3edf2ef9e25ca0503118.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\directory-GameActivity-RelWithDebInfo-3edf2ef9e25ca0503118.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-game-RelWithDebInfo-7c54ac8fdf18e7c4d402.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-game-RelWithDebInfo-7c54ac8fdf18e7c4d402.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-game-RelWithDebInfo-7c54ac8fdf18e7c4d402.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-swappywrapper-RelWithDebInfo-4cb26148084fd7793998.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-swappywrapper-RelWithDebInfo-4cb26148084fd7793998.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\target-swappywrapper-RelWithDebInfo-4cb26148084fd7793998.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\additional_project_files.txt
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\additional_project_files.txt
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\additional_project_files.txt
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build_mini.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build_mini.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\android_gradle_build_mini.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build_file_index.txt
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build_file_index.txt
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build_file_index.txt
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\cmake_install.cmake
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\cmake_install.cmake
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\cmake_install.cmake
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCCompiler.cmake
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCCompiler.cmake
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCCompiler.cmake
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCXXCompiler.cmake
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCXXCompiler.cmake
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeCXXCompiler.cmake
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_C.bin
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_C.bin
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_C.bin
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_CXX.bin
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_CXX.bin
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeDetermineCompilerABI_CXX.bin
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeSystem.cmake
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeSystem.cmake
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CMakeSystem.cmake
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.c
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.c
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.c
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdC\CMakeCCompilerId.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.cpp
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.cpp
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.cpp
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\3.22.1-g37088a8-dirty\CompilerIdCXX\CMakeCXXCompilerId.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\cmake.check_cache
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\cmake.check_cache
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\cmake.check_cache
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\CMakeOutput.log
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\CMakeOutput.log
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\CMakeOutput.log
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\rules.ninja
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\rules.ninja
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\rules.ninja
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\TargetDirectories.txt
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\TargetDirectories.txt
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeFiles\TargetDirectories.txt
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json.bin
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json.bin
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\compile_commands.json.bin
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\cmake_install.cmake
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\cmake_install.cmake
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\cmake_install.cmake
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\cmake_install.cmake
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\cmake_install.cmake
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\cmake_install.cmake
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAApplication.cpp.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAApplication.cpp.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAApplication.cpp.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAConfiguration.cpp.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAConfiguration.cpp.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAConfiguration.cpp.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGADebug.cpp.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGADebug.cpp.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGADebug.cpp.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAEntry.cpp.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAEntry.cpp.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAEntry.cpp.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInput.cpp.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInput.cpp.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInput.cpp.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputKeyEvent.cpp.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputKeyEvent.cpp.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputKeyEvent.cpp.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputMotionEvent.cpp.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputMotionEvent.cpp.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGAInputMotionEvent.cpp.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGASoftKeyboard.cpp.o
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGASoftKeyboard.cpp.o
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\GameActivity\CMakeFiles\game.dir\UGASoftKeyboard.cpp.o
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\metadata_generation_command.txt
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\metadata_generation_command.txt
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\metadata_generation_command.txt
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\prefab_config.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\prefab_config.json
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\prefab_config.json
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\symbol_folder_index.txt
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\symbol_folder_index.txt
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\symbol_folder_index.txt
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\hash_key.txt
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\hash_key.txt
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\hash_key.txt
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\game-activity\game-activityConfig.cmake
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\game-activity\game-activityConfig.cmake
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\game-activity\game-activityConfig.cmake
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\games-frame-pacing\games-frame-pacingConfig.cmake
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\games-frame-pacing\games-frame-pacingConfig.cmake
+      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\games-frame-pacing\games-frame-pacingConfig.cmake
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: .utmp\tools\release\arm64-v8a\compile_commands.json
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\tools\release\arm64-v8a\compile_commands.json
+      projectPath: .utmp\tools\release\arm64-v8a\compile_commands.json
+      originalPath: 
+      indexStatus: 0
+      workTreeStatus: 3
+    - path: Assets\Scenes\Main.unity
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scenes\Main.unity
+      projectPath: Assets\Scenes\Main.unity
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: Assets\Scenes\Main.unity.meta
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scenes\Main.unity.meta
+      projectPath: Assets\Scenes\Main.unity.meta
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
     - path: Assets\Scenes\SampleScene.unity
       fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scenes\SampleScene.unity
       projectPath: Assets\Scenes\SampleScene.unity
       originalPath: 
       indexStatus: 0
-      workTreeStatus: 3
+      workTreeStatus: 5
+    - path: Assets\Scenes\SampleScene.unity.meta
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scenes\SampleScene.unity.meta
+      projectPath: Assets\Scenes\SampleScene.unity.meta
+      originalPath: 
+      indexStatus: 0
+      workTreeStatus: 5
     - path: Assets\Scripts\Main.cs
       fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\Main.cs
       projectPath: Assets\Scripts\Main.cs
@@ -965,19 +3467,13 @@ MonoBehaviour:
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    - path: ProjectSettings\EditorSettings.asset
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\EditorSettings.asset
-      projectPath: ProjectSettings\EditorSettings.asset
+    - path: ProjectSettings\EditorBuildSettings.asset
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\EditorBuildSettings.asset
+      projectPath: ProjectSettings\EditorBuildSettings.asset
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    - path: ProjectSettings\ProjectSettings.asset
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\ProjectSettings.asset
-      projectPath: ProjectSettings\ProjectSettings.asset
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    changedFilesText: 5 changed files
+    changedFilesText: 62 changed files
     lastCurrentBranchChangedEvent:
       updatedTimeString: 0001-01-01T00:00:00.000+00:00
       cacheType: 1
@@ -10799,13 +13295,13 @@ MonoBehaviour:
     m_Tooltip: Url of the origin remote
     m_TextWithWhitespace: "https://github.com/AmaliJD/MusicTester.git\u200B"
   lastCurrentBranchAndRemoteChangedEvent:
-    updatedTimeString: 2026-08-16T21:20:10.951-04:00
+    updatedTimeString: 2026-09-12T16:27:35.501-04:00
     cacheType: 1
   lastTrackingStatusChangedEvent:
-    updatedTimeString: 0001-01-01T00:00:00.000+00:00
+    updatedTimeString: 2026-09-12T18:37:53.443-04:00
     cacheType: 5
   lastStatusEntriesChangedEvent:
-    updatedTimeString: 0001-01-01T00:00:00.000+00:00
+    updatedTimeString: 2026-09-12T18:37:53.403-04:00
     cacheType: 6
   pullButtonContent:
     m_Text: Pull
@@ -10827,7 +13323,7 @@ MonoBehaviour:
     m_Image: {fileID: 0}
     m_Tooltip: 
     m_TextWithWhitespace: "Fetch\u200B"
-  repositoryProgressValue: 0
+  repositoryProgressValue: 0.99866664
   repositoryProgressMessage: 
   appManagerProgressValue: 1
   appManagerProgressMessage: 
@@ -11825,7 +14321,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 5ce2fffffefaffff22bb0000
+      m_ExpandedIDs: fefaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

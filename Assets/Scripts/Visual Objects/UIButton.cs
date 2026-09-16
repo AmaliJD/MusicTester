@@ -5,6 +5,8 @@ using static TouchHandler;
 
 public class UIButton
 {
+    static int selectedID;
+
     Vector2 position;
     Vector2 size;
 
@@ -21,12 +23,13 @@ public class UIButton
     public int ActivateCount { get; private set; }
     public bool Pressed => state != UIButtonState.Off;
 
-    public UIButton(Vector2 position, Vector2 size, bool suppressHold)
+    public UIButton(Vector2 position, Vector2 size, bool suppressHold, int id = -1)
     {
         state = UIButtonState.Off;
         this.position = position;
         this.size = size;
         this.suppressHold = suppressHold;
+        selectedID = id;
     }
 
     public void SetPositionAndSize(Vector2 pos, Vector2 s)

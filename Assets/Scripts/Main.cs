@@ -664,8 +664,14 @@ public class Main : MonoBehaviour
         float uiBottom = uiPosition.y - uiDimensions.y * .5f;
 
         Synth synth = synthPlayer.GetSynth(0);
+        Color white_8 = new Color(1, 1, 1, .8f);
+        Color white_3 = new Color(1, 1, 1, .3f);
+        Color white_1 = new Color(1, 1, 1, .1f);
+
+        Vector2 textOffset = new Vector2(0, -.05f);
 
         float edgeRadius = .1f;
+        float borderWidth = .1f;
 
         // Debug
         GLGizmos.DrawOpenBox(uiPosition, uiDimensions);
@@ -817,9 +823,51 @@ public class Main : MonoBehaviour
         // Reset
         //GLGizmos.DrawText("Reset\nEdo", new Vector2(unisonButtonPositionX, yPos + unisonButtonSize.y * .9f), font, 3);
 
+        // Shift
+        Vector2 shiftButtonSize = new Vector2(1.8f, .8f);
+        Vector2 shiftRightPos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiRight, uiBottom), shiftButtonSize, 0, PositionPivot.BottomRight);
+        Vector2 shiftLeftPos = shiftRightPos - Vector2.right * shiftButtonSize.x;
+
+        Vector2 shiftButtonVisualSize = new Vector2(shiftButtonSize.x, .7f);
+        Vector2 shiftRightVisualPos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiRight, uiBottom), shiftButtonVisualSize, 0, PositionPivot.BottomRight);
+        Vector2 shiftLeftVisualPos = shiftRightVisualPos - Vector2.right * shiftButtonVisualSize.x;
+        GLGizmos.SetColor(white_8);
+        GLGizmos.DrawOpenBoxEdgeRadius(shiftRightVisualPos, shiftButtonVisualSize, edgeRadius, 0, false, BorderType.Inside);
+        GLGizmos.DrawOpenBoxEdgeRadius(shiftLeftVisualPos, shiftButtonVisualSize, edgeRadius, 0, false, BorderType.Inside);
+        GLGizmos.SetColor(white_1);
+        GLGizmos.DrawSolidBoxEdgeRadius(shiftRightVisualPos, shiftButtonVisualSize, edgeRadius, 0, true, BorderType.Inside);
+        GLGizmos.DrawSolidBoxEdgeRadius(shiftLeftVisualPos, shiftButtonVisualSize, edgeRadius, 0, true, BorderType.Inside);
+
+        // Extend
+        float extendButtonPadding = .1f;
+        Vector2 extendButtonSize = new Vector2(.8f, .8f);
+        Vector2 extendIncrementPos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiRight - shiftButtonSize.x * 2 - extendButtonPadding - extendButtonSize.x * .5f, uiBottom), extendButtonSize, 0, PositionPivot.Bottom);
+        Vector2 extendDecrementPos = extendIncrementPos - Vector2.right * extendButtonSize.x;
+
+        Vector2 extendButtonVisualSize = new Vector2(.7f, .7f);
+        Vector2 extendIncrementVisualPos = GLGizmos.GetBoxPositionByPivot(extendIncrementPos - Vector2.up * extendButtonSize.y * .5f, extendButtonVisualSize, 0, PositionPivot.Bottom);
+        Vector2 extendDecrementVisualPos = GLGizmos.GetBoxPositionByPivot(extendDecrementPos - Vector2.up * extendButtonSize.y * .5f, extendButtonVisualSize, 0, PositionPivot.Bottom);
+
+        GLGizmos.SetColor(white_8);
+        GLGizmos.DrawText("+", extendIncrementVisualPos + textOffset, font, 6, new() { fontStyle = FontStyles.Bold });
+        GLGizmos.DrawText("-", extendDecrementVisualPos + textOffset, font, 7, new() { fontStyle = FontStyles.Bold });      
+        //GLGizmos.DrawSolidPlus(extendIncrementVisualPos, Vector2.one * .5f, .1f, 0);
+        //GLGizmos.DrawSolidBox(extendDecrementVisualPos, new Vector2(.5f, .1f));
+        GLGizmos.DrawOpenBoxEdgeRadius(extendIncrementVisualPos, extendButtonVisualSize, edgeRadius, 0, false, BorderType.Inside);
+        GLGizmos.DrawOpenBoxEdgeRadius(extendDecrementVisualPos, extendButtonVisualSize, edgeRadius, 0, false, BorderType.Inside);
+        GLGizmos.SetColor(white_1);
+        GLGizmos.DrawSolidBoxEdgeRadius(extendIncrementVisualPos, extendButtonVisualSize, edgeRadius, 0, true, BorderType.Inside);
+        GLGizmos.DrawSolidBoxEdgeRadius(extendDecrementVisualPos, extendButtonVisualSize, edgeRadius, 0, true, BorderType.Inside);
+
         if (!initButtons)
         {
             WaveformButton.SetPositionAndSize(waveformButtonPosition, waveformButtonSize);
+
+            shiftKeyboardIncrementButton.SetPositionAndSize(shiftRightPos, shiftButtonSize);
+            shiftKeyboardDecrementButton.SetPositionAndSize(shiftLeftPos, shiftButtonSize);
+
+            extendKeyboardIncrementButton.SetPositionAndSize(extendIncrementPos, extendButtonSize);
+            extendKeyboardDecrementButton.SetPositionAndSize(extendDecrementPos, extendButtonSize);
         }
 
         initButtons = true;
