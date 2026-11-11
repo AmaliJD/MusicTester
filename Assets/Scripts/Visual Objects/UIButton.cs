@@ -13,22 +13,29 @@ public class UIButton
     UIButtonState state;
     UIButtonState prevState;
     bool suppressHold;
+    bool releaseOnLift;
+
+    float displacement_ref_x;
+    float displacement_x;
 
     const float HOLD_THRESHOLD = .25f;
     const float HOLD_PADDING = .05f;
+    const float DISPLACEMENT_THRESHOLD = .25f;
     float timeHeld;
 
     int currentTouchId = -1;
     public bool Activated { get; private set; }
+    public bool Activated2 { get; private set; }
     public int ActivateCount { get; private set; }
     public bool Pressed => state != UIButtonState.Off;
 
-    public UIButton(Vector2 position, Vector2 size, bool suppressHold, int id = -1)
+    public UIButton(Vector2 position, Vector2 size, bool suppressHold, bool releaseOnLift, int id = -1)
     {
         state = UIButtonState.Off;
         this.position = position;
         this.size = size;
         this.suppressHold = suppressHold;
+        this.releaseOnLift = releaseOnLift;
         selectedID = id;
     }
 
@@ -45,7 +52,7 @@ public class UIButton
         if (activeIDIndex != -1)
         {
             bool withinBounds = WithinVector2Bounds(touchList.positions[activeIDIndex]);
-            if (withinBounds)
+            if (withinBounds || releaseOnLift)
             {
                 timeHeld += Time.deltaTime;
             }
@@ -78,6 +85,8 @@ public class UIButton
                     currentTouchId = id;
                     state = UIButtonState.Pressed;
                     timeHeld = 0;
+                    displacement_ref_x = touchList.positions[i].x;
+                    activeIDIndex = i;
                     break;
                 }
             }
@@ -91,18 +100,34 @@ public class UIButton
                     state = UIButtonState.Held;
                     timeHeld = 0;
                 }
+                displacement_x = touchList.positions[activeIDIndex].x;
                 break;
             case UIButtonState.Held:
                 if (timeHeld >= HOLD_PADDING)
                 {
                     timeHeld = 0;
                 }
+                displacement_x = touchList.positions[activeIDIndex].x;
                 break;
         }
 
-        Activated = timeHeld == 0 && (suppressHold ? state == UIButtonState.Pressed : state != UIButtonState.Off);
-        if (Activated)
-            ActivateCount++;
+        if (releaseOnLift)
+        {
+            Activated = displacement_x - displacement_ref_x >= DISPLACEMENT_THRESHOLD;
+            Activated2 = displacement_ref_x - displacement_x >= DISPLACEMENT_THRESHOLD;
+
+            if (Activated || Activated2)
+            {
+                displacement_ref_x = touchList.positions[activeIDIndex].x;
+                ActivateCount++;
+            }
+        }
+        else
+        {
+            Activated = timeHeld == 0 && (suppressHold ? state == UIButtonState.Pressed : state != UIButtonState.Off);
+            if (Activated)
+                ActivateCount++;
+        }
 
         prevState = state;
     }

@@ -6,6 +6,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Searcher.SearcherWindow;
 
 public class KeyboardDraw
 {
@@ -110,6 +111,21 @@ public class KeyboardDraw
                 _ => 1
             };
 
+            if (main.keyboardMode == Main.KeyboardMode.Linear)
+            {
+                //float relative_index = ((((keyIndex + main.shift) % edo) + edo) % edo);
+                //float octave = Mathf.Floor((float)(keyIndex + main.shift) / (float)edo);
+                //float octave_scale = Mathf.Pow(main.Period, octave);
+
+                //float step = (main.Period - 1) / 4;
+                frequencyRatio = main.GetFrequencyFromKeyIndex(keyIndex + main.shift) / SynthPlayer.baseFrequency;
+                //float numerator = (edo + relative_index) * octave_scale;
+                //frequencyRatio = (numerator / (float)edo) * (main.Period / 2);
+                //frequencyRatio = numerator / (float)edo;
+            }
+
+            float unscaledFrequencyRatio = frequencyRatio;
+
             bool pressed = false;
             foreach (int i in keysPressed)
             {
@@ -155,6 +171,7 @@ public class KeyboardDraw
                 continue;
             }
 
+            // ------------------------------------------ label
             float octaveAdjAmt = Mathf.Abs(Mathf.Floor(Mathf.Log(frequencyRatio, 2)));
             if (frequencyRatio > limitFrequencyRatio)
                 frequencyRatio /= Mathf.Pow(2, octaveAdjAmt);
@@ -174,7 +191,7 @@ public class KeyboardDraw
             float minJIDiff = 1200;
             int minJIIndex = -1;
 
-            for (int i = 0;  i < JIDiff.Length; i++)
+            for (int i = 0; i < JIDiff.Length; i++)
             {
                 float prevMinJIDiff = minJIDiff;
                 minJIDiff = Mathf.Min(minJIDiff, Mathf.Abs(JIDiff[i]));
@@ -205,6 +222,29 @@ public class KeyboardDraw
                 //GLGizmos.DrawText(topTxt + "\n" + bottomTxt, position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 3.25f, tbp);
                 GLGizmos.DrawText(keyString, position - (Vector2.up * ((yBounds.y - yBounds.x) / 2 - .2f)), font, 3.25f, tbp);
             }
+
+
+            // ------------------------------------------ key corner label
+            TextBoxParams tbp_index = new TextBoxParams()
+            {
+                alignment = TextAlignmentOptions.TopRight,
+                positionPivot = PositionPivot.TopRight,
+                fitTextToBox = true,
+                textBoxSize = new Vector2(KeySize.x, .2f),
+            };
+
+            GLGizmos.SetColor(new Color(1, 1, 1, .5f));
+            float keylabel = 0;
+            switch (main.keyboardMode)
+            {
+                case Main.KeyboardMode.Logarithmic:
+                    keylabel = ((((keyIndex + main.shift) % edo) + edo) % edo);
+                    break;
+                case Main.KeyboardMode.Linear:
+                    keylabel = unscaledFrequencyRatio * edo;
+                    break;
+            }
+            GLGizmos.DrawText(keylabel.ToString(), position + (Vector2.up * (KeySize.y * .5f - .1f)) + (Vector2.right * (KeySize.x * .5f - .05f)), font, 1.8f, tbp_index);
 
             keyIndex++;
         }
