@@ -6,7 +6,6 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.Searcher.SearcherWindow;
 
 public class KeyboardDraw
 {
@@ -35,14 +34,14 @@ public class KeyboardDraw
     {
         main = m;
 
-        if (xBounds == Vector2.zero)
+        if (true)//xBounds == Vector2.zero)
         {
-            float x = Camera.main.orthographicSize * ((float)Screen.width / (float)Screen.height);
+            float x = Camera.main.orthographicSize * Camera.main.aspect;
             float padding = .25f;
             xBounds = new Vector2(-x + padding, x - padding);
         }
 
-        if (yBounds == Vector2.zero)
+        if (true)//yBounds == Vector2.zero)
         {
             float y = Camera.main.orthographicSize;
             yBounds = new Vector2(-y, y * .4f);

@@ -3365,14 +3365,14 @@ namespace GLDebug
             {
                 bool vertical = direction == CapsuleDirection2D.Vertical;
                 _PartialOpenBox(Vector3.zero, (size - (radius * 2 * orientationSize)).ZeroNegatives(), angle, !vertical, !vertical, vertical, vertical);
-                _OpenCircle(curveOffsetDirection * difference, radius, 180, offsetAngle, 0, false);
-                _OpenCircle(-curveOffsetDirection * difference, radius, 180, 180 + offsetAngle, 0, false);
+                _OpenCircle(curveOffsetDirection * difference, radius, 180, offsetAngle, -2, false);
+                _OpenCircle(-curveOffsetDirection * difference, radius, 180, 180 + offsetAngle, -2, false);
             }
             else
             {
                 _SolidBox(Vector3.zero, (size - (radius * 2 * orientationSize)).ZeroNegatives(), angle);
-                _SolidCircle(curveOffsetDirection * difference, radius, 180, offsetAngle, 0);
-                _SolidCircle(-curveOffsetDirection * difference, radius, 180, 180 + offsetAngle, 0);
+                _SolidCircle(curveOffsetDirection * difference, radius, 180, offsetAngle, -2);
+                _SolidCircle(-curveOffsetDirection * difference, radius, 180, 180 + offsetAngle, -2);
             }
 
             return 1;

@@ -6715,6 +6715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partitionMode: 0
+  keyboardMode: 0
   edo: 12
   periodN: 2
   periodD: 1
@@ -6722,6 +6723,7 @@ MonoBehaviour:
   shift: 0
   cents: 0
   font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+  font2: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   edoSlider: {fileID: 1977218359}
   periodNSlider: {fileID: 1675127865}
   periodDSlider: {fileID: 1263876523}
@@ -7024,7 +7026,7 @@ MonoBehaviour:
     capsuleDirection: 0
     collider2D: {fileID: 0}
     text: 12ed(2)
-    font: {fileID: 11400000, guid: ccb511a82510e6940915e85022356524, type: 2}
+    font: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
     fontSize: 7.48
     autoSize: 0
     fontStyle: 0

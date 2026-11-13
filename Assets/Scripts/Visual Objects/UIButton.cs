@@ -20,7 +20,7 @@ public class UIButton
 
     const float HOLD_THRESHOLD = .25f;
     const float HOLD_PADDING = .05f;
-    const float DISPLACEMENT_THRESHOLD = .25f;
+    const float DISPLACEMENT_THRESHOLD = .5f;
     float timeHeld;
 
     int currentTouchId = -1;
@@ -147,7 +147,8 @@ public class UIButton
 
     public void DebugDraw()
     {
-        GLGizmos.DrawSolidBox(position, size).SetColor(!Pressed ? Color.red : Color.green);
+        //GLGizmos.DrawSolidBox(position, size).SetColor(!Pressed ? Color.red : Color.green);
+        //GLGizmos.DrawSolidBox(position, size).SetColor(!Pressed ? new Color(1, 0, 0, .05f) : new Color(0, 1, 0, .5f));
     }
 }
 
