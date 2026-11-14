@@ -68,7 +68,7 @@ public class SynthPlayer : MonoBehaviour
     float CombineNotes()
     {
         float value = 0;
-        float gain = .15f;
+        float gain = .2f;
         double k = -3;
 
         for (int i = audioBufferedNotes.Count - 1; i >= 0; i--)
@@ -128,14 +128,16 @@ public class SynthPlayer : MonoBehaviour
     private void LateUpdate()
     {
         // enable/disable AudioSource
-        if (notes.Count > 0 && !audioSource.isPlaying)
-        {
+        if (!audioSource.isPlaying)
             audioSource.Play();
-        }
-        else if (notes.Count == 0 && audioSource.isPlaying)
-        {
-            audioSource.Stop();
-        }
+        //if (notes.Count > 0 && !audioSource.isPlaying)
+        //{
+        //    audioSource.Play();
+        //}
+        //else if (notes.Count == 0 && audioSource.isPlaying)
+        //{
+        //    audioSource.Stop();
+        //}
     }
 
     public Synth GetSynth(int index) => synths[index % synths.Count];
