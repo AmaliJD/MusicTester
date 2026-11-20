@@ -199,6 +199,8 @@ public class Main : MonoBehaviour
         ADSR_DecrementButton = new(new Vector2(0, 0), new Vector2(1, 1), false, false);
 
         UnisonCycleButton = new(new Vector2(4, 4), new Vector2(1, 1), true, false);
+
+        GLGizmos.cacheText = true;
     }
 
     private void OnValidate()
@@ -316,7 +318,16 @@ public class Main : MonoBehaviour
 
         //shift = Mathf.RoundToInt(octaveShift * edo * (2 / Period));
         //shift = Mathf.RoundToInt(GetIntervalDifference(SynthPlayer.baseFrequency, SynthPlayer.baseFrequency.AddCents(1200 * drift), edo, Period));
+
+        cache_clear_time += Time.deltaTime;
+        if (cache_clear_time > 1)
+        {
+            GLGizmos.ClearOldTextCache();
+            cache_clear_time = 0;
+        }
     }
+
+    float cache_clear_time;
 
     public void NextSynth()
     {
@@ -745,7 +756,7 @@ public class Main : MonoBehaviour
     public void DrawGizmos()
     {
         GLGizmos.SetColor(Color.white);
-        GLGizmos.DrawText($"{edo}ed", new Vector2(7.5f, 4f), font, 8, new TextBoxParams() { alignment = TextAlignmentOptions.Right, positionPivot = PositionPivot.Right });
+        GLGizmos.DrawText($"{edo}ed", new Vector2(7.5f, 4f), font, 8, new TextBoxParams() { alignment = TextAlignmentOptions.Right, anchor = Anchor.Right });
 
         float period = Period;
         (string periodValue, float periodFontSize) = period == Mathf.RoundToInt(period) ? ($"{Mathf.RoundToInt(period)}", 5) : ($"{periodN}\n—\n{periodD}", 3);
@@ -756,7 +767,7 @@ public class Main : MonoBehaviour
         GLGizmos.DrawText($"{periodN}", NTextPosition, font, 4f, new TextBoxParams() { fontStyle = FontStyles.Bold });
         GLGizmos.DrawText($"{periodD}", DTextPosition, font, 4f, new TextBoxParams() { fontStyle = FontStyles.Bold });
         GLGizmos.DrawText($"{extend}", XTextPosition, font, 4f, new TextBoxParams() { fontStyle = FontStyles.Bold });
-        GLGizmos.DrawText($"{shift}", ShiftTextPosition, font, 3f, new TextBoxParams() { alignment = TextAlignmentOptions.Right, positionPivot = PositionPivot.Right });
+        GLGizmos.DrawText($"{shift}", ShiftTextPosition, font, 3f, new TextBoxParams() { alignment = TextAlignmentOptions.Right, anchor = Anchor.Right });
     }
 
     void DrawUI()
@@ -794,7 +805,7 @@ public class Main : MonoBehaviour
 
         // ----------------------------------------- Waveform Button
         Vector2 waveform_size = new Vector2(1.5f, 1.5f);
-        Vector2 waveform_pos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiLeft + padding + .2f, 4.1f), waveform_size, 0, PositionPivot.Left);
+        Vector2 waveform_pos = GLGizmos.GetBoxPositionByAnchor(new Vector2(uiLeft + padding + .2f, 4.1f), waveform_size, 0, Anchor.Left);
         if (!initButtons)
         {
             WaveformButton.SetPositionAndSize(waveform_pos, waveform_size);
@@ -842,7 +853,7 @@ public class Main : MonoBehaviour
 
         //  ----------------------------------------- Unision
         Vector2 unison_size = new Vector2(1.5f, 1f);
-        Vector2 unison_pos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiLeft + padding + .2f, 2.75f), unison_size, 0, PositionPivot.Left);
+        Vector2 unison_pos = GLGizmos.GetBoxPositionByAnchor(new Vector2(uiLeft + padding + .2f, 2.75f), unison_size, 0, Anchor.Left);
         if (!initButtons)
         {
             UnisonCycleButton.SetPositionAndSize(unison_pos, unison_size);
@@ -873,7 +884,7 @@ public class Main : MonoBehaviour
         // select
         Vector2 adsr_select_size = new Vector2(.8f, .8f);
         float adsr_select_padding = 0f;
-        Vector2 a_select_pos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiLeft + padding + 2.5f, uiPosition.y + (uiDimensions.y / 2) - .1f), adsr_select_size, 0, PositionPivot.TopLeft);
+        Vector2 a_select_pos = GLGizmos.GetBoxPositionByAnchor(new Vector2(uiLeft + padding + 2.5f, uiPosition.y + (uiDimensions.y / 2) - .1f), adsr_select_size, 0, Anchor.TopLeft);
         Vector2 d_select_pos = a_select_pos + Vector2.right * (adsr_select_size.x + adsr_select_padding);
         Vector2 s_select_pos = d_select_pos + Vector2.right * (adsr_select_size.x + adsr_select_padding);
         Vector2 r_select_pos = s_select_pos + Vector2.right * (adsr_select_size.x + adsr_select_padding);
@@ -917,7 +928,7 @@ public class Main : MonoBehaviour
             _ => 0
         };
         Vector2 bar_size = new Vector2(bar_outline_size.x * adsr_bar_value, bar_outline_size.y);
-        Vector2 bar_pos = GLGizmos.GetBoxPositionByPivot(bar_outline_pos - Vector2.right * bar_outline_size.x * .5f, bar_size, 0, PositionPivot.Left);
+        Vector2 bar_pos = GLGizmos.GetBoxPositionByAnchor(bar_outline_pos - Vector2.right * bar_outline_size.x * .5f, bar_size, 0, Anchor.Left);
         GLGizmos.SetColor(blue_5);
         GLGizmos.DrawSolidBox(bar_pos, bar_size);
         GLGizmos.SetColor(white_5);
@@ -929,7 +940,7 @@ public class Main : MonoBehaviour
             textBoxSize = bar_outline_size,
             fitTextToBox = true,
             alignment = TextAlignmentOptions.Left,
-            positionPivot = PositionPivot.Left,
+            anchor = Anchor.Left,
         };
         GLGizmos.SetColor(white);
         GLGizmos.DrawText($"{adsr_bar_value.ToString("#.##")}", bar_outline_pos - Vector2.right * (bar_outline_size.x * .5f - .1f), font2, 5, adsr_text_tbp);
@@ -937,7 +948,7 @@ public class Main : MonoBehaviour
         // increment
         float adsr_increment_padding = 0f;
         Vector2 adsr_increment_size = new Vector2((adsr_select_size.x * 2 + adsr_select_padding * 1.5f) - adsr_increment_padding * .5f, .8f);
-        Vector2 adsr_decrement_pos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiLeft + padding + 2.5f, uiPosition.y + (uiDimensions.y / 2) - 2f), adsr_increment_size, 0, PositionPivot.TopLeft);
+        Vector2 adsr_decrement_pos = GLGizmos.GetBoxPositionByAnchor(new Vector2(uiLeft + padding + 2.5f, uiPosition.y + (uiDimensions.y / 2) - 2f), adsr_increment_size, 0, Anchor.TopLeft);
         Vector2 adsr_increment_pos = adsr_decrement_pos + Vector2.right * (adsr_increment_size.x + adsr_increment_padding);
         if (!initButtons)
         {
@@ -998,7 +1009,7 @@ public class Main : MonoBehaviour
             textBoxSize = period_text_size,
             fitTextToBox = true,
             alignment = TextAlignmentOptions.BottomRight,
-            positionPivot = PositionPivot.BottomRight,
+            anchor = Anchor.BottomRight,
         };
         TextBoxParams d_swipe_tbp = new TextBoxParams()
         {
@@ -1006,7 +1017,7 @@ public class Main : MonoBehaviour
             textBoxSize = period_text_size,
             fitTextToBox = true,
             alignment = TextAlignmentOptions.TopLeft,
-            positionPivot = PositionPivot.TopLeft,
+            anchor = Anchor.TopLeft,
         };
 
         TextBoxParams header_tbp = new TextBoxParams()
@@ -1036,7 +1047,7 @@ public class Main : MonoBehaviour
         TextBoxParams edo_tbp = new TextBoxParams()
         {
             alignment = TextAlignmentOptions.Right,
-            positionPivot = PositionPivot.Right
+            anchor = Anchor.Right
         };
         Vector2 edo_pos_right = new Vector2(uiRight - padding - 1.2f, 4f);
         GLGizmos.DrawText($"{edo}ed", edo_pos_right, font, 8, edo_tbp);
@@ -1089,7 +1100,7 @@ public class Main : MonoBehaviour
 
         //  ----------------------------------------- LogType Button
         Vector2 logtype_size = new Vector2(1.6f, .4f);
-        Vector2 logtype_pos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiRight - padding - 1.24f, 3.4f), logtype_size, 0, PositionPivot.Right);
+        Vector2 logtype_pos = GLGizmos.GetBoxPositionByAnchor(new Vector2(uiRight - padding - 1.24f, 3.4f), logtype_size, 0, Anchor.Right);
         if (!initButtons)
         {
             KeyboardModeButton.SetPositionAndSize(logtype_pos, logtype_size);
@@ -1111,7 +1122,7 @@ public class Main : MonoBehaviour
         //  ----------------------------------------- Reset Button
         float reset_visual_radius = .2f;
         Vector2 reset_size = new Vector2(.6f, .6f);
-        Vector2 reset_pos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiRight - padding - 3.2f, 4f), reset_size, 0, PositionPivot.Right);
+        Vector2 reset_pos = GLGizmos.GetBoxPositionByAnchor(new Vector2(uiRight - padding - 3.2f, 4f), reset_size, 0, Anchor.Right);
         if (!initButtons)
         {
             ResetEdoButton.SetPositionAndSize(reset_pos, reset_size);
@@ -1127,11 +1138,11 @@ public class Main : MonoBehaviour
 
         //  ----------------------------------------- Shift Buttons
         Vector2 shiftButtonSize = new Vector2(1.8f, .8f);
-        Vector2 shiftRightPos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiRight, uiBottom), shiftButtonSize, 0, PositionPivot.BottomRight);
+        Vector2 shiftRightPos = GLGizmos.GetBoxPositionByAnchor(new Vector2(uiRight, uiBottom), shiftButtonSize, 0, Anchor.BottomRight);
         Vector2 shiftLeftPos = shiftRightPos - Vector2.right * shiftButtonSize.x;
 
         Vector2 shiftButtonVisualSize = new Vector2(shiftButtonSize.x, .7f);
-        Vector2 shiftRightVisualPos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiRight, uiBottom), shiftButtonVisualSize, 0, PositionPivot.BottomRight);
+        Vector2 shiftRightVisualPos = GLGizmos.GetBoxPositionByAnchor(new Vector2(uiRight, uiBottom), shiftButtonVisualSize, 0, Anchor.BottomRight);
         Vector2 shiftLeftVisualPos = shiftRightVisualPos - Vector2.right * shiftButtonVisualSize.x;
         GLGizmos.SetColor(white_02);
         GLGizmos.DrawSolidBoxEdgeRadius(shiftRightVisualPos, shiftButtonVisualSize, edgeRadius, 0, true, BorderType.Inside).SetColor(shiftKeyboardIncrementButton.Pressed ? blue : white_02);
@@ -1155,12 +1166,12 @@ public class Main : MonoBehaviour
         //  ----------------------------------------- Extend Buttons
         float extendButtonPadding = .1f;
         Vector2 extendButtonSize = new Vector2(.8f, .8f);
-        Vector2 extendIncrementPos = GLGizmos.GetBoxPositionByPivot(new Vector2(uiRight - shiftButtonSize.x * 2 - extendButtonPadding - extendButtonSize.x * .5f, uiBottom), extendButtonSize, 0, PositionPivot.Bottom);
+        Vector2 extendIncrementPos = GLGizmos.GetBoxPositionByAnchor(new Vector2(uiRight - shiftButtonSize.x * 2 - extendButtonPadding - extendButtonSize.x * .5f, uiBottom), extendButtonSize, 0, Anchor.Bottom);
         Vector2 extendDecrementPos = extendIncrementPos - Vector2.right * extendButtonSize.x;
 
         Vector2 extendButtonVisualSize = new Vector2(.7f, .7f);
-        Vector2 extendIncrementVisualPos = GLGizmos.GetBoxPositionByPivot(extendIncrementPos - Vector2.up * extendButtonSize.y * .5f, extendButtonVisualSize, 0, PositionPivot.Bottom);
-        Vector2 extendDecrementVisualPos = GLGizmos.GetBoxPositionByPivot(extendDecrementPos - Vector2.up * extendButtonSize.y * .5f, extendButtonVisualSize, 0, PositionPivot.Bottom);
+        Vector2 extendIncrementVisualPos = GLGizmos.GetBoxPositionByAnchor(extendIncrementPos - Vector2.up * extendButtonSize.y * .5f, extendButtonVisualSize, 0, Anchor.Bottom);
+        Vector2 extendDecrementVisualPos = GLGizmos.GetBoxPositionByAnchor(extendDecrementPos - Vector2.up * extendButtonSize.y * .5f, extendButtonVisualSize, 0, Anchor.Bottom);
 
         GLGizmos.SetColor(white_02);
         GLGizmos.DrawSolidBoxEdgeRadius(extendIncrementVisualPos, extendButtonVisualSize, edgeRadius, 0, true, BorderType.Inside).SetColor(extendKeyboardIncrementButton.Pressed ? blue : white_02);

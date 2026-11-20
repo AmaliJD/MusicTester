@@ -102,7 +102,7 @@ namespace GLDebug
         public bool showTextBox;
         public Color textBoxColor;
         public TextAlignmentOptions textAlignment;
-        public PositionPivot positionPivot;
+        public Anchor anchor;
 
         public float characterSpacing;
         public float wordSpacing;

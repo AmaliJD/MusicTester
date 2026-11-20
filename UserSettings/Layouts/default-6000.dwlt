@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 820.8
   m_ShowMode: 4
-  m_Title: Git for Unity
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -117,10 +117,10 @@ MonoBehaviour:
     y: 36
     width: 1536
     height: 764.8
-  m_MinSize: {x: 300, y: 100}
+  m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 139
+  controlID: 16
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -143,7 +143,7 @@ MonoBehaviour:
     y: 0
     width: 773.6
     height: 764.8
-  m_MinSize: {x: 100, y: 100}
+  m_MinSize: {x: 100, y: 112}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
   controlID: 17
@@ -166,7 +166,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 773.6
-    height: 360
+    height: 546.4
   m_MinSize: {x: 201, y: 226}
   m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 16}
@@ -185,26 +185,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: RecorderWindow
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 360
+    y: 546.4
     width: 773.6
-    height: 404.8
-  m_MinSize: {x: 561, y: 226}
+    height: 218.39996
+  m_MinSize: {x: 101, y: 126}
   m_MaxSize: {x: 4001, y: 4026}
-  m_ActualView: {fileID: 14}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
   - {fileID: 14}
   - {fileID: 19}
   - {fileID: 20}
   - {fileID: 21}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -226,10 +226,10 @@ MonoBehaviour:
     y: 0
     width: 410.40002
     height: 764.8
-  m_MinSize: {x: 100, y: 100}
+  m_MinSize: {x: 100, y: 112}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 100
+  controlID: 77
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Window
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -302,14 +302,14 @@ MonoBehaviour:
     y: 0
     width: 352
     height: 764.8
-  m_MinSize: {x: 51, y: 76}
+  m_MinSize: {x: 276, y: 76}
   m_MaxSize: {x: 4001, y: 4026}
-  m_ActualView: {fileID: 15}
+  m_ActualView: {fileID: 24}
   m_Panes:
   - {fileID: 24}
   - {fileID: 15}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -598,9 +598,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 384
+    y: 625.60004
     width: 772.6
-    height: 378.8
+    height: 192.39996
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -635,8 +635,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Git for Unity\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1185
-    y: 24
+    x: 1184
+    y: 79.200005
     width: 351
     height: 738.8
   m_SerializedDataModeController:
@@ -652,14 +652,14 @@ MonoBehaviour:
     m_DynamicPanelContainerData: []
     m_OverlaysVisible: 1
     m_DynamicPanelBehavior: 0
-  progressMessageClearTime: 81.713627
+  progressMessageClearTime: -1
   notificationClearTime: -1
   timeSinceLastRotation: -1
   currentBranchAndRemoteHasUpdate: 0
   currentTrackingStatusHasUpdate: 0
   currentStatusEntriesHasUpdate: 0
   repositoryProgressHasUpdate: 0
-  appManagerProgressHasUpdate: 0
+  appManagerProgressHasUpdate: 1
   changeTab: 3
   activeTab: 3
   initProjectView:
@@ -748,24 +748,27 @@ MonoBehaviour:
     currentStatusEntriesHasUpdate: 1
     currentLocksHasUpdate: 1
     commitBody: 
-    commitMessage: 
+    commitMessage: 1.0 android release
     currentBranch: master
     treeScroll: {x: 0, y: 0}
     treeChanges:
       assets:
         keys:
         - 00000000000000001000000000000000
-        - 5baa630b2c6f3fb4381ff9b6bcb77673
-        - fb9d428ca7720ae45bf84d3fb174f8ff
-        - 7780c61dbd1cc8b479a8ba0c0e74d376
-        - e94d16d9143549c4c80ddc48c4281bef
-        - d03c1e0aaec769349b52e971179a22ba
-        - b978bd1cc79ae4144be4dee0ef48b826
-        - ed6da074472095a48b2bd6ee3dee1c27
+        - 0603a653e8673e948a7719bc68ce92f8
+        - 48ced61f136018247813df213813d36a
+        - 3cd4ad70f5af41b4f89af34bae680436
+        - 17d714e6fa0c6b04b8d9ceb59ca78603
+        - 63406482ab0c69840a7aad65d474c35e
         - f8dcd92b5a3874a47bba08a58a06a8de
-        - 49ad8f12eebf66f40945713dd88a695f
-        - 00000000000000005100000000000000
-        - 00000000000000004000000000000000
+        - be4211171b093144eaf70d574fa179ff
+        - 6abed89c6e170794a8b1000ce5af8a61
+        - 2ac730a28146c324c908e13043903a95
+        - f54d1bd14bd3ca042bd867b519fee8cc
+        - 243e06394e614e5d99fab26083b707fa
+        - 731f1baa9d144a9897cb1d341c2092b8
+        - 2e498d1c8094910479dc3e1b768306a4
+        - 0000000000000000c000000000000000
         values:
         - path: Assets
           label: Assets
@@ -776,7 +779,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -785,8 +788,8 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 0
-        - path: Assets\Images
-          label: Images
+        - path: Assets\GLGizmos - Runtime Gizmos
+          label: GLGizmos - Runtime Gizmos
           level: 1
           isFolder: 1
           isContainer: 0
@@ -794,7 +797,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -803,114 +806,81 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 0
-        - path: Assets\Images\icon.af
-          label: icon.af
+        - path: Assets\GLGizmos - Runtime Gizmos\Scripts
+          label: Scripts
           level: 2
-          isFolder: 0
-          isContainer: 1
+          isFolder: 1
+          isContainer: 0
           isCollapsed: 0
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
-            path: Assets\Images\icon.af
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon.af
-            projectPath: Assets\Images\icon.af
+            path: 
+            fullPath: 
+            projectPath: 
             originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_app.png
-          label: icon_app.png
-          level: 2
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmos.cs
+          label: GLGizmos.cs
+          level: 3
           isFolder: 0
-          isContainer: 1
+          isContainer: 0
           isCollapsed: 0
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
-            path: Assets\Images\icon_app.png
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_app.png
-            projectPath: Assets\Images\icon_app.png
+            path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmos.cs
+            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\GLGizmos -
+              Runtime Gizmos\Scripts\GLGizmos.cs
+            projectPath: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmos.cs
             originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_bg.png
-          label: icon_bg.png
-          level: 2
+            indexStatus: 0
+            workTreeStatus: 3
+        - path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosComponent.cs
+          label: GLGizmosComponent.cs
+          level: 3
           isFolder: 0
-          isContainer: 1
+          isContainer: 0
           isCollapsed: 0
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
-            path: Assets\Images\icon_bg.png
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_bg.png
-            projectPath: Assets\Images\icon_bg.png
+            path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosComponent.cs
+            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\GLGizmos -
+              Runtime Gizmos\Scripts\GLGizmosComponent.cs
+            projectPath: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosComponent.cs
             originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_fg.png
-          label: icon_fg.png
-          level: 2
+            indexStatus: 0
+            workTreeStatus: 3
+        - path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosObject.cs
+          label: GLGizmosObject.cs
+          level: 3
           isFolder: 0
-          isContainer: 1
+          isContainer: 0
           isCollapsed: 0
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
-            path: Assets\Images\icon_fg.png
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_fg.png
-            projectPath: Assets\Images\icon_fg.png
+            path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosObject.cs
+            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\GLGizmos -
+              Runtime Gizmos\Scripts\GLGizmosObject.cs
+            projectPath: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosObject.cs
             originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_full.png
-          label: icon_full.png
-          level: 2
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_full.png
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_full.png
-            projectPath: Assets\Images\icon_full.png
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_win.png
-          label: icon_win.png
-          level: 2
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_win.png
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_win.png
-            projectPath: Assets\Images\icon_win.png
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
+            indexStatus: 0
+            workTreeStatus: 3
         - path: Assets\Scripts
           label: Scripts
           level: 1
@@ -920,7 +890,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -929,8 +899,8 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 0
-        - path: Assets\Scripts\SynthPlayer.cs
-          label: SynthPlayer.cs
+        - path: Assets\Scripts\Main.cs
+          label: Main.cs
           level: 2
           isFolder: 0
           isContainer: 0
@@ -938,110 +908,17 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
-            path: Assets\Scripts\SynthPlayer.cs
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\SynthPlayer.cs
-            projectPath: Assets\Scripts\SynthPlayer.cs
+            path: Assets\Scripts\Main.cs
+            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\Main.cs
+            projectPath: Assets\Scripts\Main.cs
             originalPath: 
             indexStatus: 0
             workTreeStatus: 3
-        - path: ProjectSettings\Physics2DSettings.asset
-          label: Physics2DSettings.asset
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: ProjectSettings\Physics2DSettings.asset
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\Physics2DSettings.asset
-            projectPath: ProjectSettings\Physics2DSettings.asset
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: ProjectSettings\ProjectSettings.asset
-          label: ProjectSettings.asset
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: ProjectSettings\ProjectSettings.asset
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\ProjectSettings.asset
-            projectPath: ProjectSettings\ProjectSettings.asset
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-      folders:
-        keys:
-        - .utmp
-        - .utmp\RelWithDebInfo
-        - .utmp\RelWithDebInfo\1k3o6l3k
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir
-        - Assets
-        - Assets\Images
-        - Assets\Scripts
-        - Packages
-        - ProjectSettings
-        - UserSettings
-        - UserSettings\Layouts
-        values:
-        - path: .utmp
-          label: .utmp
-          level: 0
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: .utmp\RelWithDebInfo
-          label: RelWithDebInfo
-          level: 1
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: .utmp\RelWithDebInfo\1k3o6l3k
-          label: 1k3o6l3k
+        - path: Assets\Scripts\Visual Objects
+          label: Visual Objects
           level: 2
           isFolder: 1
           isContainer: 0
@@ -1049,7 +926,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -1058,8 +935,63 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 0
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a
-          label: arm64-v8a
+        - path: Assets\Scripts\Visual Objects\KeyboardDraw.cs
+          label: KeyboardDraw.cs
+          level: 3
+          isFolder: 0
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\Scripts\Visual Objects\KeyboardDraw.cs
+            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\Visual
+              Objects\KeyboardDraw.cs
+            projectPath: Assets\Scripts\Visual Objects\KeyboardDraw.cs
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 3
+        - path: Assets\TextMesh Pro
+          label: TextMesh Pro
+          level: 1
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: Assets\TextMesh Pro\Resources
+          label: Resources
+          level: 2
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: Assets\TextMesh Pro\Resources\Fonts & Materials
+          label: Fonts & Materials
           level: 3
           isFolder: 1
           isContainer: 0
@@ -1067,7 +999,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -1076,132 +1008,60 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 0
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake
-          label: .cmake
+        - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF
+            - Fallback.asset
+          label: LiberationSans SDF - Fallback.asset
           level: 4
-          isFolder: 1
+          isFolder: 0
           isContainer: 0
           isCollapsed: 0
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
+            path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans
+              SDF - Fallback.asset
+            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\TextMesh Pro\Resources\Fonts
+              & Materials\LiberationSans SDF - Fallback.asset
+            projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans
+              SDF - Fallback.asset
             originalPath: 
             indexStatus: 0
-            workTreeStatus: 0
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api
-          label: api
-          level: 5
-          isFolder: 1
+            workTreeStatus: 3
+        - path: ProjectSettings\EditorSettings.asset
+          label: EditorSettings.asset
+          level: 1
+          isFolder: 0
           isContainer: 0
           isCollapsed: 0
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
+            path: ProjectSettings\EditorSettings.asset
+            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\EditorSettings.asset
+            projectPath: ProjectSettings\EditorSettings.asset
             originalPath: 
             indexStatus: 0
-            workTreeStatus: 0
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1
-          label: v1
-          level: 6
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply
-          label: reply
-          level: 7
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing
-          label: FramePacing
-          level: 4
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles
-          label: CMakeFiles
-          level: 5
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir
-          label: swappywrapper.dir
-          level: 6
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
+            workTreeStatus: 3
+      folders:
+        keys:
+        - Assets
+        - Assets\GLGizmos - Runtime Gizmos
+        - Assets\GLGizmos - Runtime Gizmos\Scripts
+        - Assets\Scripts
+        - Assets\Scripts\Visual Objects
+        - Assets\TextMesh Pro
+        - Assets\TextMesh Pro\Resources
+        - Assets\TextMesh Pro\Resources\Fonts & Materials
+        - ProjectSettings
+        - UserSettings
+        - UserSettings\Layouts
+        values:
         - path: Assets
           label: Assets
           level: 0
@@ -1211,7 +1071,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -1220,8 +1080,8 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 0
-        - path: Assets\Images
-          label: Images
+        - path: Assets\GLGizmos - Runtime Gizmos
+          label: GLGizmos - Runtime Gizmos
           level: 1
           isFolder: 1
           isContainer: 0
@@ -1229,7 +1089,25 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: Assets\GLGizmos - Runtime Gizmos\Scripts
+          label: Scripts
+          level: 2
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -1247,7 +1125,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -1256,16 +1134,70 @@ MonoBehaviour:
             originalPath: 
             indexStatus: 0
             workTreeStatus: 0
-        - path: Packages
-          label: Packages
-          level: 0
+        - path: Assets\Scripts\Visual Objects
+          label: Visual Objects
+          level: 2
           isFolder: 1
           isContainer: 0
           isCollapsed: 0
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: Assets\TextMesh Pro
+          label: TextMesh Pro
+          level: 1
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: Assets\TextMesh Pro\Resources
+          label: Resources
+          level: 2
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: Assets\TextMesh Pro\Resources\Fonts & Materials
+          label: Fonts & Materials
+          level: 3
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -1283,7 +1215,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -1301,7 +1233,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -1319,7 +1251,7 @@ MonoBehaviour:
           isHidden: 0
           isActive: 0
           treeIsCheckable: 1
-          checkState: 1
+          checkState: 0
           isLocked: 0
           gitStatusEntry:
             path: 
@@ -1329,616 +1261,8 @@ MonoBehaviour:
             indexStatus: 0
             workTreeStatus: 0
       checkedFileNodes:
-        keys:
-        - .gitignore
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-        - .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-        - Assets\Images\icon.af
-        - Assets\Images\icon.af.meta
-        - Assets\Images\icon.af~lock~
-        - Assets\Images\icon_app.png
-        - Assets\Images\icon_app.png.meta
-        - Assets\Images\icon_bg.png
-        - Assets\Images\icon_bg.png.meta
-        - Assets\Images\icon_fg.png
-        - Assets\Images\icon_fg.png.meta
-        - Assets\Images\icon_full.png
-        - Assets\Images\icon_full.png.meta
-        - Assets\Images\icon_win.png
-        - Assets\Images\icon_win.png.meta
-        - Assets\Scripts\SynthPlayer.cs
-        - Packages\manifest.json
-        - Packages\packages-lock.json
-        - ProjectSettings\Physics2DSettings.asset
-        - ProjectSettings\ProjectSettings.asset
-        - UserSettings\Layouts\default-6000.dwlt
-        values:
-        - path: .gitignore
-          label: .gitignore
-          level: 0
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .gitignore
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.gitignore
-            projectPath: .gitignore
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-          label: cache-v2-89201901284831ae0ce6.json
-          level: 8
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-          label: cache-v2-a38c8e03cebfc924ee97.json
-          level: 8
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 5
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-          label: cmakeFiles-v1-47e53eebe54bd7f9a240.json
-          level: 8
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-          label: cmakeFiles-v1-ff68c6e2c3674aa13024.json
-          level: 8
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 5
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-          label: index-2026-08-18T00-08-25-0899.json
-          level: 8
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 5
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-          label: index-2026-11-14T03-20-49-0651.json
-          level: 8
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-          label: .ninja_deps
-          level: 4
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-          label: .ninja_log
-          level: 4
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-          label: build.ninja
-          level: 4
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-          label: CMakeCache.txt
-          level: 4
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-          label: configure_fingerprint.bin
-          level: 4
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-          label: UnitySwappyWrapper.cpp.o
-          level: 7
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-            projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: Assets\Images\icon.af
-          label: icon.af
-          level: 2
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon.af
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon.af
-            projectPath: Assets\Images\icon.af
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon.af.meta
-          label: icon.af.meta
-          level: 3
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon.af.meta
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon.af.meta
-            projectPath: Assets\Images\icon.af.meta
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon.af~lock~
-          label: icon.af~lock~
-          level: 2
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon.af~lock~
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon.af~lock~
-            projectPath: Assets\Images\icon.af~lock~
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_app.png
-          label: icon_app.png
-          level: 2
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_app.png
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_app.png
-            projectPath: Assets\Images\icon_app.png
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_app.png.meta
-          label: icon_app.png.meta
-          level: 3
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_app.png.meta
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_app.png.meta
-            projectPath: Assets\Images\icon_app.png.meta
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_bg.png
-          label: icon_bg.png
-          level: 2
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_bg.png
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_bg.png
-            projectPath: Assets\Images\icon_bg.png
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_bg.png.meta
-          label: icon_bg.png.meta
-          level: 3
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_bg.png.meta
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_bg.png.meta
-            projectPath: Assets\Images\icon_bg.png.meta
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_fg.png
-          label: icon_fg.png
-          level: 2
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_fg.png
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_fg.png
-            projectPath: Assets\Images\icon_fg.png
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_fg.png.meta
-          label: icon_fg.png.meta
-          level: 3
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_fg.png.meta
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_fg.png.meta
-            projectPath: Assets\Images\icon_fg.png.meta
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_full.png
-          label: icon_full.png
-          level: 2
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_full.png
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_full.png
-            projectPath: Assets\Images\icon_full.png
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_full.png.meta
-          label: icon_full.png.meta
-          level: 3
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_full.png.meta
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_full.png.meta
-            projectPath: Assets\Images\icon_full.png.meta
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_win.png
-          label: icon_win.png
-          level: 2
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_win.png
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_win.png
-            projectPath: Assets\Images\icon_win.png
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Images\icon_win.png.meta
-          label: icon_win.png.meta
-          level: 3
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Images\icon_win.png.meta
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_win.png.meta
-            projectPath: Assets\Images\icon_win.png.meta
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Scripts\SynthPlayer.cs
-          label: SynthPlayer.cs
-          level: 2
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Scripts\SynthPlayer.cs
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\SynthPlayer.cs
-            projectPath: Assets\Scripts\SynthPlayer.cs
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: Packages\manifest.json
-          label: manifest.json
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Packages\manifest.json
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Packages\manifest.json
-            projectPath: Packages\manifest.json
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: Packages\packages-lock.json
-          label: packages-lock.json
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: Packages\packages-lock.json
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Packages\packages-lock.json
-            projectPath: Packages\packages-lock.json
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: ProjectSettings\Physics2DSettings.asset
-          label: Physics2DSettings.asset
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: ProjectSettings\Physics2DSettings.asset
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\Physics2DSettings.asset
-            projectPath: ProjectSettings\Physics2DSettings.asset
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: ProjectSettings\ProjectSettings.asset
-          label: ProjectSettings.asset
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: ProjectSettings\ProjectSettings.asset
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\ProjectSettings.asset
-            projectPath: ProjectSettings\ProjectSettings.asset
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: UserSettings\Layouts\default-6000.dwlt
-          label: default-6000.dwlt
-          level: 2
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 1
-          isLocked: 0
-          gitStatusEntry:
-            path: UserSettings\Layouts\default-6000.dwlt
-            fullPath: C:\Users\jioje\Projects\Unity\MusicTester\UserSettings\Layouts\default-6000.dwlt
-            projectPath: UserSettings\Layouts\default-6000.dwlt
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
+        keys: []
+        values: []
       title: 
       pathSeparator: \
       displayRootNode: 0
@@ -1955,7 +1279,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -1964,438 +1288,6 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: .gitignore
-        label: .gitignore
-        level: 0
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .gitignore
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.gitignore
-          projectPath: .gitignore
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: .utmp
-        label: .utmp
-        level: 0
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo
-        label: RelWithDebInfo
-        level: 1
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo\1k3o6l3k
-        label: 1k3o6l3k
-        level: 2
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a
-        label: arm64-v8a
-        level: 3
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake
-        label: .cmake
-        level: 4
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api
-        label: api
-        level: 5
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1
-        label: v1
-        level: 6
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply
-        label: reply
-        level: 7
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-        label: cache-v2-89201901284831ae0ce6.json
-        level: 8
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-        label: cache-v2-a38c8e03cebfc924ee97.json
-        level: 8
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 5
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-        label: cmakeFiles-v1-47e53eebe54bd7f9a240.json
-        level: 8
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-        label: cmakeFiles-v1-ff68c6e2c3674aa13024.json
-        level: 8
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 5
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-        label: index-2026-08-18T00-08-25-0899.json
-        level: 8
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 5
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-        label: index-2026-11-14T03-20-49-0651.json
-        level: 8
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-        label: .ninja_deps
-        level: 4
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-        label: .ninja_log
-        level: 4
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-        label: build.ninja
-        level: 4
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-        label: CMakeCache.txt
-        level: 4
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-        label: configure_fingerprint.bin
-        level: 4
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing
-        label: FramePacing
-        level: 4
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles
-        label: CMakeFiles
-        level: 5
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir
-        label: swappywrapper.dir
-        level: 6
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-        label: UnitySwappyWrapper.cpp.o
-        level: 7
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-          projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
       - path: Assets
         label: Assets
         level: 0
@@ -2405,7 +1297,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -2414,8 +1306,8 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: Assets\Images
-        label: Images
+      - path: Assets\GLGizmos - Runtime Gizmos
+        label: GLGizmos - Runtime Gizmos
         level: 1
         isFolder: 1
         isContainer: 0
@@ -2423,7 +1315,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -2432,26 +1324,26 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: Assets\Images\icon.af
-        label: icon.af
+      - path: Assets\GLGizmos - Runtime Gizmos\Scripts
+        label: Scripts
         level: 2
-        isFolder: 0
-        isContainer: 1
+        isFolder: 1
+        isContainer: 0
         isCollapsed: 0
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
-          path: Assets\Images\icon.af
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon.af
-          projectPath: Assets\Images\icon.af
+          path: 
+          fullPath: 
+          projectPath: 
           originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon.af.meta
-        label: icon.af.meta
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmos.cs
+        label: GLGizmos.cs
         level: 3
         isFolder: 0
         isContainer: 0
@@ -2459,53 +1351,18 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
-          path: Assets\Images\icon.af.meta
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon.af.meta
-          projectPath: Assets\Images\icon.af.meta
+          path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmos.cs
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\GLGizmos - Runtime
+            Gizmos\Scripts\GLGizmos.cs
+          projectPath: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmos.cs
           originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon.af~lock~
-        label: icon.af~lock~
-        level: 2
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Images\icon.af~lock~
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon.af~lock~
-          projectPath: Assets\Images\icon.af~lock~
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon_app.png
-        label: icon_app.png
-        level: 2
-        isFolder: 0
-        isContainer: 1
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Images\icon_app.png
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_app.png
-          projectPath: Assets\Images\icon_app.png
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon_app.png.meta
-        label: icon_app.png.meta
+          indexStatus: 0
+          workTreeStatus: 3
+      - path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosComponent.cs
+        label: GLGizmosComponent.cs
         level: 3
         isFolder: 0
         isContainer: 0
@@ -2513,35 +1370,18 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
-          path: Assets\Images\icon_app.png.meta
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_app.png.meta
-          projectPath: Assets\Images\icon_app.png.meta
+          path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosComponent.cs
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\GLGizmos - Runtime
+            Gizmos\Scripts\GLGizmosComponent.cs
+          projectPath: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosComponent.cs
           originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon_bg.png
-        label: icon_bg.png
-        level: 2
-        isFolder: 0
-        isContainer: 1
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Images\icon_bg.png
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_bg.png
-          projectPath: Assets\Images\icon_bg.png
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon_bg.png.meta
-        label: icon_bg.png.meta
+          indexStatus: 0
+          workTreeStatus: 3
+      - path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosObject.cs
+        label: GLGizmosObject.cs
         level: 3
         isFolder: 0
         isContainer: 0
@@ -2549,123 +1389,16 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
-          path: Assets\Images\icon_bg.png.meta
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_bg.png.meta
-          projectPath: Assets\Images\icon_bg.png.meta
+          path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosObject.cs
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\GLGizmos - Runtime
+            Gizmos\Scripts\GLGizmosObject.cs
+          projectPath: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosObject.cs
           originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon_fg.png
-        label: icon_fg.png
-        level: 2
-        isFolder: 0
-        isContainer: 1
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Images\icon_fg.png
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_fg.png
-          projectPath: Assets\Images\icon_fg.png
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon_fg.png.meta
-        label: icon_fg.png.meta
-        level: 3
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Images\icon_fg.png.meta
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_fg.png.meta
-          projectPath: Assets\Images\icon_fg.png.meta
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon_full.png
-        label: icon_full.png
-        level: 2
-        isFolder: 0
-        isContainer: 1
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Images\icon_full.png
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_full.png
-          projectPath: Assets\Images\icon_full.png
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon_full.png.meta
-        label: icon_full.png.meta
-        level: 3
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Images\icon_full.png.meta
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_full.png.meta
-          projectPath: Assets\Images\icon_full.png.meta
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon_win.png
-        label: icon_win.png
-        level: 2
-        isFolder: 0
-        isContainer: 1
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Images\icon_win.png
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_win.png
-          projectPath: Assets\Images\icon_win.png
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Images\icon_win.png.meta
-        label: icon_win.png.meta
-        level: 3
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Images\icon_win.png.meta
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_win.png.meta
-          projectPath: Assets\Images\icon_win.png.meta
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
+          indexStatus: 0
+          workTreeStatus: 3
       - path: Assets\Scripts
         label: Scripts
         level: 1
@@ -2675,7 +1408,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -2684,8 +1417,8 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: Assets\Scripts\SynthPlayer.cs
-        label: SynthPlayer.cs
+      - path: Assets\Scripts\Main.cs
+        label: Main.cs
         level: 2
         isFolder: 0
         isContainer: 0
@@ -2693,25 +1426,25 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
-          path: Assets\Scripts\SynthPlayer.cs
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\SynthPlayer.cs
-          projectPath: Assets\Scripts\SynthPlayer.cs
+          path: Assets\Scripts\Main.cs
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\Main.cs
+          projectPath: Assets\Scripts\Main.cs
           originalPath: 
           indexStatus: 0
           workTreeStatus: 3
-      - path: Packages
-        label: Packages
-        level: 0
+      - path: Assets\Scripts\Visual Objects
+        label: Visual Objects
+        level: 2
         isFolder: 1
         isContainer: 0
         isCollapsed: 0
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -2720,39 +1453,98 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: Packages\manifest.json
-        label: manifest.json
-        level: 1
+      - path: Assets\Scripts\Visual Objects\KeyboardDraw.cs
+        label: KeyboardDraw.cs
+        level: 3
         isFolder: 0
         isContainer: 0
         isCollapsed: 0
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
-          path: Packages\manifest.json
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Packages\manifest.json
-          projectPath: Packages\manifest.json
+          path: Assets\Scripts\Visual Objects\KeyboardDraw.cs
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\Visual
+            Objects\KeyboardDraw.cs
+          projectPath: Assets\Scripts\Visual Objects\KeyboardDraw.cs
           originalPath: 
           indexStatus: 0
           workTreeStatus: 3
-      - path: Packages\packages-lock.json
-        label: packages-lock.json
+      - path: Assets\TextMesh Pro
+        label: TextMesh Pro
         level: 1
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: Assets\TextMesh Pro\Resources
+        label: Resources
+        level: 2
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: Assets\TextMesh Pro\Resources\Fonts & Materials
+        label: Fonts & Materials
+        level: 3
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 0
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF
+          - Fallback.asset
+        label: LiberationSans SDF - Fallback.asset
+        level: 4
         isFolder: 0
         isContainer: 0
         isCollapsed: 0
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
-          path: Packages\packages-lock.json
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Packages\packages-lock.json
-          projectPath: Packages\packages-lock.json
+          path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF
+            - Fallback.asset
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\TextMesh Pro\Resources\Fonts
+            & Materials\LiberationSans SDF - Fallback.asset
+          projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans
+            SDF - Fallback.asset
           originalPath: 
           indexStatus: 0
           workTreeStatus: 3
@@ -2765,7 +1557,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -2774,8 +1566,8 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: ProjectSettings\Physics2DSettings.asset
-        label: Physics2DSettings.asset
+      - path: ProjectSettings\EditorSettings.asset
+        label: EditorSettings.asset
         level: 1
         isFolder: 0
         isContainer: 0
@@ -2783,30 +1575,12 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
-          path: ProjectSettings\Physics2DSettings.asset
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\Physics2DSettings.asset
-          projectPath: ProjectSettings\Physics2DSettings.asset
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: ProjectSettings\ProjectSettings.asset
-        label: ProjectSettings.asset
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 1
-        isLocked: 0
-        gitStatusEntry:
-          path: ProjectSettings\ProjectSettings.asset
-          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\ProjectSettings.asset
-          projectPath: ProjectSettings\ProjectSettings.asset
+          path: ProjectSettings\EditorSettings.asset
+          fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\EditorSettings.asset
+          projectPath: ProjectSettings\EditorSettings.asset
           originalPath: 
           indexStatus: 0
           workTreeStatus: 3
@@ -2819,7 +1593,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -2837,7 +1611,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -2855,7 +1629,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 1
+        checkState: 0
         isLocked: 0
         gitStatusEntry:
           path: UserSettings\Layouts\default-6000.dwlt
@@ -2884,189 +1658,51 @@ MonoBehaviour:
           indexStatus: 0
           workTreeStatus: 0
     gitStatusEntries:
-    - path: .gitignore
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.gitignore
-      projectPath: .gitignore
+    - path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmos.cs
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\GLGizmos - Runtime
+        Gizmos\Scripts\GLGizmos.cs
+      projectPath: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmos.cs
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-89201901284831ae0ce6.json
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cache-v2-a38c8e03cebfc924ee97.json
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 5
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-47e53eebe54bd7f9a240.json
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\cmakeFiles-v1-ff68c6e2c3674aa13024.json
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 5
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-08-18T00-08-25-0899.json
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 5
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.cmake\api\v1\reply\index-2026-11-14T03-20-49-0651.json
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_deps
+    - path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosComponent.cs
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\GLGizmos - Runtime
+        Gizmos\Scripts\GLGizmosComponent.cs
+      projectPath: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosComponent.cs
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\.ninja_log
+    - path: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosObject.cs
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\GLGizmos - Runtime
+        Gizmos\Scripts\GLGizmosObject.cs
+      projectPath: Assets\GLGizmos - Runtime Gizmos\Scripts\GLGizmosObject.cs
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\build.ninja
+    - path: Assets\Scripts\Main.cs
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\Main.cs
+      projectPath: Assets\Scripts\Main.cs
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\CMakeCache.txt
+    - path: Assets\Scripts\Visual Objects\KeyboardDraw.cs
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\Visual Objects\KeyboardDraw.cs
+      projectPath: Assets\Scripts\Visual Objects\KeyboardDraw.cs
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\configure_fingerprint.bin
+    - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF -
+        Fallback.asset
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\TextMesh Pro\Resources\Fonts
+        & Materials\LiberationSans SDF - Fallback.asset
+      projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans
+        SDF - Fallback.asset
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    - path: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\.utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-      projectPath: .utmp\RelWithDebInfo\1k3o6l3k\arm64-v8a\FramePacing\CMakeFiles\swappywrapper.dir\UnitySwappyWrapper.cpp.o
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    - path: Assets\Images\icon.af
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon.af
-      projectPath: Assets\Images\icon.af
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon.af.meta
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon.af.meta
-      projectPath: Assets\Images\icon.af.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon.af~lock~
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon.af~lock~
-      projectPath: Assets\Images\icon.af~lock~
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon_app.png
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_app.png
-      projectPath: Assets\Images\icon_app.png
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon_app.png.meta
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_app.png.meta
-      projectPath: Assets\Images\icon_app.png.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon_bg.png
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_bg.png
-      projectPath: Assets\Images\icon_bg.png
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon_bg.png.meta
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_bg.png.meta
-      projectPath: Assets\Images\icon_bg.png.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon_fg.png
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_fg.png
-      projectPath: Assets\Images\icon_fg.png
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon_fg.png.meta
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_fg.png.meta
-      projectPath: Assets\Images\icon_fg.png.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon_full.png
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_full.png
-      projectPath: Assets\Images\icon_full.png
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon_full.png.meta
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_full.png.meta
-      projectPath: Assets\Images\icon_full.png.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon_win.png
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_win.png
-      projectPath: Assets\Images\icon_win.png
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Images\icon_win.png.meta
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Images\icon_win.png.meta
-      projectPath: Assets\Images\icon_win.png.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Scripts\SynthPlayer.cs
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Assets\Scripts\SynthPlayer.cs
-      projectPath: Assets\Scripts\SynthPlayer.cs
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    - path: Packages\manifest.json
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Packages\manifest.json
-      projectPath: Packages\manifest.json
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    - path: Packages\packages-lock.json
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\Packages\packages-lock.json
-      projectPath: Packages\packages-lock.json
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    - path: ProjectSettings\Physics2DSettings.asset
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\Physics2DSettings.asset
-      projectPath: ProjectSettings\Physics2DSettings.asset
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    - path: ProjectSettings\ProjectSettings.asset
-      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\ProjectSettings.asset
-      projectPath: ProjectSettings\ProjectSettings.asset
+    - path: ProjectSettings\EditorSettings.asset
+      fullPath: C:\Users\jioje\Projects\Unity\MusicTester\ProjectSettings\EditorSettings.asset
+      projectPath: ProjectSettings\EditorSettings.asset
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
@@ -3076,7 +1712,7 @@ MonoBehaviour:
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    changedFilesText: 32 changed files
+    changedFilesText: 8 changed files
     lastCurrentBranchChangedEvent:
       updatedTimeString: 0001-01-01T00:00:00.000+00:00
       cacheType: 1
@@ -12898,13 +11534,13 @@ MonoBehaviour:
     m_Tooltip: Url of the origin remote
     m_TextWithWhitespace: "https://github.com/AmaliJD/MusicTester.git\u200B"
   lastCurrentBranchAndRemoteChangedEvent:
-    updatedTimeString: 2026-11-14T15:15:22.935-05:00
+    updatedTimeString: 2026-11-19T18:09:28.502-05:00
     cacheType: 1
   lastTrackingStatusChangedEvent:
-    updatedTimeString: 2026-11-14T15:15:23.491-05:00
+    updatedTimeString: 2026-11-19T18:09:28.528-05:00
     cacheType: 5
   lastStatusEntriesChangedEvent:
-    updatedTimeString: 2026-11-14T15:15:23.469-05:00
+    updatedTimeString: 2026-11-19T18:20:42.001-05:00
     cacheType: 6
   pullButtonContent:
     m_Text: Pull
@@ -12926,9 +11562,9 @@ MonoBehaviour:
     m_Image: {fileID: 0}
     m_Tooltip: 
     m_TextWithWhitespace: "Fetch\u200B"
-  repositoryProgressValue: 0.99649125
+  repositoryProgressValue: 0
   repositoryProgressMessage: 
-  appManagerProgressValue: 0.875
+  appManagerProgressValue: 1
   appManagerProgressMessage: 
   primaryConnectionUsername: 
 --- !u!114 &16
@@ -12955,7 +11591,7 @@ MonoBehaviour:
     x: 0
     y: 24
     width: 772.6
-    height: 334
+    height: 520.4
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -12975,7 +11611,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1024, y: 500}
+  m_TargetSize: {x: 2560, y: 1440}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -12990,10 +11626,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -409.6
-    m_HBaseRangeMax: 409.6
-    m_VBaseRangeMin: -200
-    m_VBaseRangeMax: 200
+    m_HBaseRangeMin: -1024
+    m_HBaseRangeMax: 1024
+    m_VBaseRangeMin: -576
+    m_VBaseRangeMax: 576
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -13012,22 +11648,22 @@ MonoBehaviour:
       x: 0
       y: 21
       width: 772.6
-      height: 313
-    m_Scale: {x: 0.7825, y: 0.7825}
-    m_Translation: {x: 386.3, y: 156.5}
+      height: 499.40002
+    m_Scale: {x: 0.37724608, y: 0.37724608}
+    m_Translation: {x: 386.3, y: 249.70001}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -493.6741
-      y: -200
-      width: 987.3482
-      height: 400
+      x: -1024
+      y: -661.9022
+      width: 2048
+      height: 1323.8044
     m_MinimalGUI: 1
-  m_defaultScale: 0.7825
-  m_LastWindowPixelSize: {x: 772.6, y: 334}
+  m_defaultScale: 0.37724608
+  m_LastWindowPixelSize: {x: 772.6, y: 520.4}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -13753,9 +12389,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 576.8
+    y: 570.4
     width: 772.6
-    height: 241.19998
+    height: 192.39996
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -13948,7 +12584,11 @@ MonoBehaviour:
       m_SelectedIDs: []
       m_LastClickedID:
         m_Data: 0
-      m_ExpandedIDs: []
+      m_ExpandedIDs:
+      - m_Data: -72272
+      - m_Data: -72022
+      - m_Data: -71266
+      - m_Data: -1390
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -14044,11 +12684,11 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 55048
-    - m_Data: 55968
-    - m_Data: 58134
-    - m_Data: 58780
-    - m_Data: 61804
+    - m_Data: 52386
+    - m_Data: 52388
+    - m_Data: 52390
+    - m_Data: 52392
+    - m_Data: 52394
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -14081,11 +12721,11 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 55048
-    - m_Data: 55968
-    - m_Data: 58134
-    - m_Data: 58780
-    - m_Data: 61804
+    - m_Data: 52386
+    - m_Data: 52388
+    - m_Data: 52390
+    - m_Data: 52392
+    - m_Data: 52394
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -14166,8 +12806,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1184
-    y: 79.200005
+    x: 1185
+    y: 24
     width: 351
     height: 738.8
   m_SerializedDataModeController:

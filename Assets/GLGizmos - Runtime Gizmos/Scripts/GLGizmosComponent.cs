@@ -389,7 +389,7 @@ namespace GLDebug
                         rotation = angle,
                         textBoxSize = size,
                         alignment = gizmo.textAlignment,
-                        positionPivot = gizmo.positionPivot,
+                        anchor = gizmo.anchor,
 
                         characterSpacing = gizmo.characterSpacing,
                         wordSpacing = gizmo.wordSpacing,
@@ -400,7 +400,7 @@ namespace GLDebug
                     GLGizmos.DrawText(gizmo.text, position, gizmo.font, gizmo.fontSize, textBoxParams);
 
                     if (gizmo.showTextBox)
-                        GLGizmos.DrawOpenBox(GLGizmos.GetBoxPositionByPivot(position, size, angle, gizmo.positionPivot), size, angle).SetColor(gizmo.textBoxColor);
+                        GLGizmos.DrawOpenBox(GLGizmos.GetBoxPositionByAnchor(position, size, angle, gizmo.anchor), size, angle).SetColor(gizmo.textBoxColor);
                 }
             }
         }

@@ -11,7 +11,7 @@ namespace GLDebug
     #region ### Public Structs
     public enum ArcCloseType { None, Flat, Center, Edge }
     public enum BorderType { Centered, Outside, Inside }
-    public enum PositionPivot
+    public enum Anchor
     {
         Center, Left, Right,
         Top, TopLeft, TopRight,
@@ -33,7 +33,7 @@ namespace GLDebug
         public float paragraphSpacing;
 
         public TextAlignmentOptions? alignment;
-        public PositionPivot positionPivot;
+        public Anchor anchor;
         public bool fitTextToBox;
     }
 
@@ -265,6 +265,71 @@ namespace GLDebug
         }
         #endregion
 
+        #region Text Cahce
+        struct TextSignature : IEquatable<TextSignature>
+        {
+            public string text;
+            public TMP_FontAsset font;
+            public float fontSize;
+            public FontStyles fontStyle;
+            public Vector2 textBoxSize;
+            public TextWrappingModes textWrappingMode;
+            public TextAlignmentOptions alignment;
+            public bool fitTextToBox;
+            public Color color;
+
+            public float characterSpacing;
+            public float wordSpacing;
+            public float lineSpacing;
+            public float paragraphSpacing;
+
+            public bool Equals(TextSignature o) =>
+                string.Equals(text, o.text) &&
+                ReferenceEquals(font, o.font) &&
+                fontSize == o.fontSize &&
+                fontStyle == o.fontStyle &&
+                textBoxSize == o.textBoxSize &&
+                alignment == o.alignment &&
+                fitTextToBox == o.fitTextToBox &&
+                color == o.color &&
+                characterSpacing == o.characterSpacing &&
+                wordSpacing == o.wordSpacing &&
+                lineSpacing == o.lineSpacing &&
+                paragraphSpacing == o.paragraphSpacing;
+
+            public override bool Equals(object o) => o is TextSignature k && Equals(k);
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    int h = text != null ? text.GetHashCode() : 0;
+                    h = h * 31 + fontSize.GetHashCode();
+                    h = h * 31 + textBoxSize.GetHashCode();
+                    h = h * 31 + (int)fontStyle;
+                    h = h * 31 + (int)alignment;
+                    h = h * 31 + color.GetHashCode();
+                    h = h * 31 + (fitTextToBox ? 1 : 0);
+                    h = h * 31 + characterSpacing.GetHashCode();
+                    h = h * 31 + wordSpacing.GetHashCode();
+                    h = h * 31 + lineSpacing.GetHashCode();
+                    h = h * 31 + paragraphSpacing.GetHashCode();
+                    return h;
+                }
+            }
+        }
+
+        class TextData
+        {
+            public Mesh mesh;
+            public Material mat;
+            public int lastFrame;
+        }
+
+        private static Dictionary<TextSignature, TextData> textCache = new();
+        private static readonly List<TextSignature> expiredTextCache = new();
+        #endregion
+
         private static Material GLmat;
         private static TextMeshPro tmp;
 
@@ -286,6 +351,10 @@ namespace GLDebug
         // horrible experiement gone wrong, do not use batching!
         private static bool batchDrawCalls = false;
 
+        // set cacheText to true in Awake(), it's good!
+        // clearing old cache must be done manually: ClearOldTextCache()
+        public static bool cacheText = false;
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ResetStatics()
         {
@@ -294,6 +363,7 @@ namespace GLDebug
             verticesList.Clear();
             textList.Clear();
             GLGizmoComponents.Clear();
+            ClearTextCache();
 
             color = Color.white;
             drawLayer = 0;
@@ -304,6 +374,7 @@ namespace GLDebug
             GLmat = null;
             tmp = null;
             batchDrawCalls = false;
+            cacheText = false;
         }
 
         private void OnEnable()
@@ -319,9 +390,11 @@ namespace GLDebug
         {
             RenderPipelineManager.endCameraRendering -= RenderPipelineManager_endCameraRendering;
             RenderPipelineManager.beginCameraRendering += RenderPipelineManager_beginCameraRendering;
+            ClearTextCache();
             DestroyGLMaterial();
             ClearLists();
             batchDrawCalls = false;
+            cacheText = false;
         }
 
         private void RenderPipelineManager_endCameraRendering(ScriptableRenderContext context, Camera camera)
@@ -411,6 +484,40 @@ namespace GLDebug
             shapeDefinitionList.Clear();
             verticesList.Clear();
             textList.Clear();
+        }
+        private static void ClearTextCache()
+        {
+            foreach (var kv in textCache)
+            {
+                Mesh m = kv.Value.mesh;
+                if (m == null) continue;
+                if (Application.isPlaying) Destroy(m);
+                else DestroyImmediate(m);
+            }
+            textCache.Clear();
+            expiredTextCache.Clear();
+        }
+        /// <summary>
+        /// Destroys cached text mesh data that hasn't been updated in 'maxAgeFrames' frames
+        /// </summary>
+        public static void ClearOldTextCache(int maxAgeFrames = 1)
+        {
+            int now = Time.frameCount;
+            foreach (var kv in textCache)
+                if (now - kv.Value.lastFrame > maxAgeFrames || kv.Value.mesh == null)
+                    expiredTextCache.Add(kv.Key);
+
+            foreach (var k in expiredTextCache)
+            {
+                Mesh m = textCache[k].mesh;
+                if (m != null)
+                {
+                    if (Application.isPlaying) Destroy(m);
+                    else DestroyImmediate(m);
+                }
+                textCache.Remove(k);
+            }
+            expiredTextCache.Clear();
         }
         public static void AddGLGizmoComponent(GLGizmosComponent glgc)
         {
@@ -574,7 +681,7 @@ namespace GLDebug
 
             int definitionIndex = 0;
             int vertexIndex = 0;
-            for(int i = 0; i < shapeSettingsList.Count; i++)
+            for (int i = 0; i < shapeSettingsList.Count; i++)
             {
                 ShapeSettings settings = shapeSettingsList[i];
 
@@ -584,7 +691,7 @@ namespace GLDebug
                 for (int j = 0; j < settings.numberOfDefinitions; j++)
                 {
                     ShapeDefinition definition = shapeDefinitionList[settings.definitionListIndex + j];
-                    
+
                     for (int k = 0; k < definition.numberOfVertices; k++)
                     {
                         verticesList.Add(verticesList[definition.vertexListIndex + k]);
@@ -629,7 +736,84 @@ namespace GLDebug
             Vector2 scale = definition.textBoxParams.scale ?? Vector2.one;
             TextAlignmentOptions alignment = definition.textBoxParams.alignment ?? TextAlignmentOptions.Center;
 
-            //tmp.enabled = true;
+            Mesh mesh;
+            Material mat;
+
+            if (!cacheText)
+            {
+                SetTMPMesh(settings, definition, alignment);
+                mesh = tmp.mesh;
+                mat = tmp.fontSharedMaterial;
+            }
+            else
+            {
+                TextSignature textSig = new TextSignature
+                {
+                    text = definition.text,
+                    font = definition.font,
+                    fontSize = definition.fontSize,
+                    fontStyle = definition.textBoxParams.fontStyle,
+                    textBoxSize = definition.textBoxParams.textBoxSize,
+                    alignment = alignment,
+                    fitTextToBox = definition.textBoxParams.fitTextToBox,
+                    color = settings.color,
+
+                    characterSpacing = definition.textBoxParams.characterSpacing,
+                    wordSpacing = definition.textBoxParams.wordSpacing,
+                    lineSpacing = definition.textBoxParams.lineSpacing,
+                    paragraphSpacing = definition.textBoxParams.paragraphSpacing,
+                };
+
+                if (!textCache.TryGetValue(textSig, out TextData textData) || textData.mesh == null)
+                {
+                    SetTMPMesh(settings, definition, alignment);
+
+                    textData = new TextData
+                    {
+                        mesh = Instantiate(tmp.mesh),
+                        mat = tmp.fontSharedMaterial,
+                    };
+
+
+                    textCache.Add(textSig, textData);
+                }
+
+                textData.lastFrame = Time.frameCount;
+
+                mesh = textData.mesh;
+                mat = textData.mat;
+            }
+
+            Vector2 RotatedTextBox(Vector2 textBox) => (Vector2.right * textBox.x).Rotate(definition.textBoxParams.rotation) + (Vector2.up * textBox.y).Rotate(definition.textBoxParams.rotation);
+            Vector3 pos = definition.textBoxParams.anchor switch
+            {
+                Anchor.TopLeft => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(.5f, -.5f)),
+                Anchor.TopRight => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(-.5f, -.5f)),
+                Anchor.BottomLeft => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(.5f, .5f)),
+                Anchor.BottomRight => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(-.5f, .5f)),
+
+                Anchor.Top => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(0, -.5f)),
+                Anchor.Bottom => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(0, .5f)),
+                Anchor.Left => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(.5f, 0)),
+                Anchor.Right => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(-.5f, 0)),
+
+                _ => settings.origin
+            };
+
+            Quaternion rot = Quaternion.Euler(0, 0, definition.textBoxParams.rotation);
+            Vector2 scl = new Vector3(scale.x, scale.y, 1);
+
+            mat.SetPass(0);
+            Graphics.DrawMeshNow(
+                mesh,
+                Matrix4x4.TRS(pos, rot, scl)
+            );
+
+            GLmat.SetPass(0);
+        }
+
+        private static void SetTMPMesh(ShapeSettings settings, TextDefinition definition, TextAlignmentOptions alignment)
+        {
             tmp.SetText(definition.text);
             tmp.font = definition.font;
             tmp.fontSize = definition.fontSize;
@@ -647,35 +831,6 @@ namespace GLDebug
             tmp.paragraphSpacing = definition.textBoxParams.paragraphSpacing;
 
             tmp.ForceMeshUpdate();
-
-            Vector2 RotatedTextBox(Vector2 textBox) => (Vector2.right * textBox.x).Rotate(definition.textBoxParams.rotation) + (Vector2.up * textBox.y).Rotate(definition.textBoxParams.rotation);
-            Vector3 pos = definition.textBoxParams.positionPivot switch
-            {
-                PositionPivot.TopLeft => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(.5f, -.5f)),
-                PositionPivot.TopRight => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(-.5f, -.5f)),
-                PositionPivot.BottomLeft => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(.5f, .5f)),
-                PositionPivot.BottomRight => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(-.5f, .5f)),
-
-                PositionPivot.Top => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(0, -.5f)),
-                PositionPivot.Bottom => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(0, .5f)),
-                PositionPivot.Left => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(.5f, 0)),
-                PositionPivot.Right => settings.origin + (Vector3)RotatedTextBox((definition.textBoxParams.textBoxSize * scale).ScaleEach(-.5f, 0)),
-
-                _ => settings.origin
-            };
-
-            Quaternion rot = Quaternion.Euler(0, 0, definition.textBoxParams.rotation);
-            Vector2 scl = new Vector3(scale.x, scale.y, 1);
-
-            Mesh mesh = tmp.mesh;
-            Material mat = tmp.fontSharedMaterial;
-            mat.SetPass(0);
-            Graphics.DrawMeshNow(
-                mesh,
-                Matrix4x4.TRS(pos, rot, scl)
-            );
-
-            GLmat.SetPass(0);
         }
 
         private static void _NewShape(Vector3 origin, int definitionCount)
@@ -730,7 +885,7 @@ namespace GLDebug
         #region ### Basic Shape Definitions
         private static void _OpenBox(Vector3 offset, Vector2 size, float rotation, Color? overrideColor = null)
             => _OpenBox(offset, Quaternion.identity, size, rotation, overrideColor);
-        private static void _OpenBox(Vector3 offset, Quaternion lookRotation, Vector2 size, float rotation, Color ? overrideColor = null)
+        private static void _OpenBox(Vector3 offset, Quaternion lookRotation, Vector2 size, float rotation, Color? overrideColor = null)
         {
             // definition
             int vertexListIndex = verticesList.Count;
@@ -767,7 +922,7 @@ namespace GLDebug
         }
         public static void _SolidBox(Vector3 offset, Vector2 size, float rotation, Color? overrideColor = null)
             => _SolidBox(offset, Quaternion.identity, size, rotation, overrideColor);
-        public static void _SolidBox(Vector3 offset, Quaternion lookRotation, Vector2 size, float rotation, Color ? overrideColor = null)
+        public static void _SolidBox(Vector3 offset, Quaternion lookRotation, Vector2 size, float rotation, Color? overrideColor = null)
         {
             // definition
             int vertexListIndex = verticesList.Count;
@@ -804,7 +959,7 @@ namespace GLDebug
         }
         private static void _PartialOpenBox(Vector3 offset, Vector2 size, float rotation, bool top, bool bottom, bool left, bool right, Color? overrideColor = null)
             => _PartialOpenBox(offset, Quaternion.identity, size, rotation, top, bottom, left, right, overrideColor);
-        private static void _PartialOpenBox(Vector3 offset, Quaternion lookRotation, Vector2 size, float rotation, bool top, bool bottom, bool left, bool right, Color ? overrideColor = null)
+        private static void _PartialOpenBox(Vector3 offset, Quaternion lookRotation, Vector2 size, float rotation, bool top, bool bottom, bool left, bool right, Color? overrideColor = null)
         {
             int count = 0;
             if (top) count += 2;
@@ -3320,35 +3475,35 @@ namespace GLDebug
         /// Draws an open capsule at 'position' based on box size and capsule direction
         /// </summary>
         public static ShapeModifier DrawOpenCapsule(Vector3 position, Vector2 size, CapsuleDirection2D direction, float angle = 0)
-            => _NewShapeModifierCount(BuildCapsule(position, size, direction, angle, false));
+            => _NewShapeModifierCount(BuildCapsule(position, size, direction, angle, false, -2));
 
         /// <summary>
         /// Draws an open capsule starting at 'from' ending at 'to' with 'radius'
         /// </summary>
         public static ShapeModifier DrawOpenCapsule(Vector2 from, Vector2 to, float radius)
-            => _NewShapeModifierCount(BuildCapsule(from, to, radius, false));
+            => _NewShapeModifierCount(BuildCapsule(from, to, radius, false, -2));
 
         /// <summary>
         /// Draws a solid capsule at 'position' based on box size and capsule direction
         /// </summary>
         public static ShapeModifier DrawSolidCapsule(Vector3 position, Vector2 size, CapsuleDirection2D direction, float angle = 0)
-            => _NewShapeModifierCount(BuildCapsule(position, size, direction, angle, true));
+            => _NewShapeModifierCount(BuildCapsule(position, size, direction, angle, true, -2));
 
         /// <summary>
         /// Draws a solid capsule starting at 'from' ending at 'to' with 'radius'
         /// </summary>
         public static ShapeModifier DrawSolidCapsule(Vector2 from, Vector2 to, float radius)
-                => _NewShapeModifierCount(BuildCapsule(from, to, radius, true));
+                => _NewShapeModifierCount(BuildCapsule(from, to, radius, true, -2));
 
-        private static int BuildCapsule(Vector2 from, Vector2 to, float radius, bool solid)
+        private static int BuildCapsule(Vector2 from, Vector2 to, float radius, bool solid, int numEdges)
         {
             Vector2 center = Vector2.Lerp(from, to, .5f);
             Vector2 size = new Vector2(radius * 2, Vector2.Distance(from, to) + radius * 2);
             float angle = Vector2.SignedAngle(Vector2.up, from - center);
 
-            return BuildCapsule(center, size, CapsuleDirection2D.Vertical, angle, solid);
+            return BuildCapsule(center, size, CapsuleDirection2D.Vertical, angle, solid, numEdges);
         }
-        private static int BuildCapsule(Vector3 position, Vector2 size, CapsuleDirection2D direction, float angle, bool solid)
+        private static int BuildCapsule(Vector3 position, Vector2 size, CapsuleDirection2D direction, float angle, bool solid, int numEdges)
         {
             size = size.Abs();
             float radius = direction == CapsuleDirection2D.Vertical ? size.x / 2 : size.y / 2;
@@ -3365,14 +3520,14 @@ namespace GLDebug
             {
                 bool vertical = direction == CapsuleDirection2D.Vertical;
                 _PartialOpenBox(Vector3.zero, (size - (radius * 2 * orientationSize)).ZeroNegatives(), angle, !vertical, !vertical, vertical, vertical);
-                _OpenCircle(curveOffsetDirection * difference, radius, 180, offsetAngle, -2, false);
-                _OpenCircle(-curveOffsetDirection * difference, radius, 180, 180 + offsetAngle, -2, false);
+                _OpenCircle(curveOffsetDirection * difference, radius, 180, offsetAngle, numEdges, false);
+                _OpenCircle(-curveOffsetDirection * difference, radius, 180, 180 + offsetAngle, numEdges, false);
             }
             else
             {
                 _SolidBox(Vector3.zero, (size - (radius * 2 * orientationSize)).ZeroNegatives(), angle);
-                _SolidCircle(curveOffsetDirection * difference, radius, 180, offsetAngle, -2);
-                _SolidCircle(-curveOffsetDirection * difference, radius, 180, 180 + offsetAngle, -2);
+                _SolidCircle(curveOffsetDirection * difference, radius, 180, offsetAngle, numEdges);
+                _SolidCircle(-curveOffsetDirection * difference, radius, 180, 180 + offsetAngle, numEdges);
             }
 
             return 1;
@@ -3428,7 +3583,7 @@ namespace GLDebug
         private static int BuildWeightedCapsule(Vector3 position, Vector2 size, CapsuleDirection2D direction, float angle, float borderWidth, BorderType borderType)
         {
             if (borderWidth == 0)
-                return BuildCapsule(position, size, direction, angle, false);
+                return BuildCapsule(position, size, direction, angle, false, -2);
 
             size = size.Abs();
             float radius = direction == CapsuleDirection2D.Vertical ? size.x / 2 : size.y / 2;
@@ -3476,10 +3631,10 @@ namespace GLDebug
                 {
                     case BorderType.Outside:
                     case BorderType.Inside:
-                        numShapes += BuildCapsule(position, size, direction, angle, true);
+                        numShapes += BuildCapsule(position, size, direction, angle, true, -2);
                         break;
                     case BorderType.Centered:
-                        numShapes += BuildCapsule(position, size + Vector2.one * borderWidth, direction, angle, true);
+                        numShapes += BuildCapsule(position, size + Vector2.one * borderWidth, direction, angle, true, -2);
                         break;
                 }
             }
@@ -3512,7 +3667,7 @@ namespace GLDebug
         {
             int numShapes = 0;
             for (int i = 1; i < points.Length; i++)
-                numShapes += BuildCapsule(points[i - 1], points[i], thickness / 2, true);
+                numShapes += BuildCapsule(points[i - 1], points[i], thickness / 2, true, -2);
 
             return numShapes;
         }
@@ -3643,23 +3798,23 @@ namespace GLDebug
 
         #region ### Text
         /// <summary>
-        /// Returns the center position of a box given an anchor position, size, rotation, and position pivot type
+        /// Returns the center position of a box given an anchor position, size, rotation, and position anchor type
         /// </summary>
-        public static Vector2 GetBoxPositionByPivot(Vector2 anchorPosition, Vector2 size, float rotation, PositionPivot positionPivot)
+        public static Vector2 GetBoxPositionByAnchor(Vector2 anchorPosition, Vector2 size, float rotation, Anchor anchor)
         {
             size = size.Abs();
             Vector2 RotatedTextBox(Vector2 textBox) => (Vector2.right * textBox.x).Rotate(rotation) + (Vector2.up * textBox.y).Rotate(rotation);
-            Vector2 pos = positionPivot switch
+            Vector2 pos = anchor switch
             {
-                PositionPivot.TopLeft => anchorPosition + RotatedTextBox(size.ScaleEach(.5f, -.5f)),
-                PositionPivot.TopRight => anchorPosition + RotatedTextBox(size.ScaleEach(-.5f, -.5f)),
-                PositionPivot.BottomLeft => anchorPosition + RotatedTextBox(size.ScaleEach(.5f, .5f)),
-                PositionPivot.BottomRight => anchorPosition + RotatedTextBox(size.ScaleEach(-.5f, .5f)),
+                Anchor.TopLeft => anchorPosition + RotatedTextBox(size.ScaleEach(.5f, -.5f)),
+                Anchor.TopRight => anchorPosition + RotatedTextBox(size.ScaleEach(-.5f, -.5f)),
+                Anchor.BottomLeft => anchorPosition + RotatedTextBox(size.ScaleEach(.5f, .5f)),
+                Anchor.BottomRight => anchorPosition + RotatedTextBox(size.ScaleEach(-.5f, .5f)),
 
-                PositionPivot.Top => anchorPosition + RotatedTextBox(size.ScaleEach(0, -.5f)),
-                PositionPivot.Bottom => anchorPosition + RotatedTextBox(size.ScaleEach(0, .5f)),
-                PositionPivot.Left => anchorPosition + RotatedTextBox(size.ScaleEach(.5f, 0)),
-                PositionPivot.Right => anchorPosition + RotatedTextBox(size.ScaleEach(-.5f, 0)),
+                Anchor.Top => anchorPosition + RotatedTextBox(size.ScaleEach(0, -.5f)),
+                Anchor.Bottom => anchorPosition + RotatedTextBox(size.ScaleEach(0, .5f)),
+                Anchor.Left => anchorPosition + RotatedTextBox(size.ScaleEach(.5f, 0)),
+                Anchor.Right => anchorPosition + RotatedTextBox(size.ScaleEach(-.5f, 0)),
 
                 _ => anchorPosition
             };

@@ -155,7 +155,7 @@ public class KeyboardDraw
             GLGizmos.SetColor(new Color(keyBorderColor, keyBorderColor, keyBorderColor));
             GLGizmos.DrawWeightedBox(position, KeySize, .02f, BorderType.Inside);
 
-            TextBoxParams tbp = new TextBoxParams() { alignment = TextAlignmentOptions.Bottom, positionPivot = PositionPivot.Bottom, fitTextToBox = true, textBoxSize = Vector2.one * XInterval * .9f, lineSpacing = 20 };
+            TextBoxParams tbp = new TextBoxParams() { alignment = TextAlignmentOptions.Bottom, anchor = Anchor.Bottom, fitTextToBox = true, textBoxSize = Vector2.one * XInterval * .9f, lineSpacing = 20 };
             GLGizmos.SetLayer(1);
             void DrawNullKey()
             {
@@ -227,7 +227,7 @@ public class KeyboardDraw
             TextBoxParams tbp_index = new TextBoxParams()
             {
                 alignment = TextAlignmentOptions.TopRight,
-                positionPivot = PositionPivot.TopRight,
+                anchor = Anchor.TopRight,
                 fitTextToBox = true,
                 textBoxSize = new Vector2(KeySize.x, .2f),
             };
